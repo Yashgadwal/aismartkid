@@ -1,0 +1,13 @@
+{
+  "name": "ai-smart-kids",
+  "version": "1.0.0",
+  "description": "AI Smart Kids Institute - Node.js Backend & Vanilla Static Frontend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smart Kids Hub | Digital Business Card & Resources</title>
+  <meta name="description" content="Instant QR Digital Hub for AI Smart Kids Ujjain. Access student portals, pay fees, book free demos, and download AI resources instantly.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Premium QR Hub CSS Variables & Design Style */
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+      
+      --color-primary: #2563EB;
+      --color-secondary: #7C3AED;
+      --color-accent-orange: #FF8A00;
+      --color-success-green: #22C55E;
+      --color-card-bg: #F8FAFC;
+      --color-text-dark: #111827;
+      --color-text-gray: #4B5563;
+      --color-border: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: var(--color-text-dark);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      line-height: 1.5;
+      padding-bottom: 80px; /* Spacer for bottom nav bar */
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.04) 0%, transparent 60%),
+                  radial-gradient(circle at 100% 60%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px; /* Centered mobile-width container */
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02),
+                  0 1px 1px 0 rgba(255, 255, 255, 0.8) inset;
+      border-radius: 20px;
+      padding: 20px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .glass-card:active {
+      transform: scale(0.98);
+      border-color: rgba(37, 99, 235, 0.2);
+    }
+
+    /* Typography helpers */
+    .text-gradient {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 1. HERO SECTION */
+    .hero-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(248, 250, 252, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.04);
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .logo-badge svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .hero-card h1 {
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    .hero-card p {
+      font-size: 12px;
+      color: var(--color-text-gray);
+      max-width: 320px;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-orange {
+      background: var(--color-accent-orange);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: var(--color-text-dark);
+    }
+
+    /* 2. MAIN NAVIGATION CARDS GRID */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .nav-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(37, 99, 235, 0.06);
+      color: var(--color-primary);
+    }
+
+    .nav-card:nth-child(even) .nav-icon {
+      background: rgba(124, 58, 237, 0.06);
+      color: var(--color-secondary);
+    }
+
+    .nav-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+
+    .nav-card p {
+      font-size: 10px;
+      color: #94A3B8;
+      line-height: 1.3;
+    }
+
+    .card-full-width {
+      grid-column: span 2;
+    }
+
+    /* 3. COUNTDOWN & PROGRESS CARD */
+    .upcoming-batch-card {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(124, 58, 237, 0.03) 100%);
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .batch-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .batch-title-row h3 {
+      font-size: 15px;
+      color: var(--color-text-dark);
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .timer-unit {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      min-width: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+    }
+
+    .timer-unit span {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--color-primary);
+      display: block;
+    }
+
+    .timer-unit font {
+      font-size: 7px;
+      color: #94A3B8;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background-color: #E2E8F0;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      border-radius: 99px;
+      width: 80%; /* Seed progress */
+    }
+
+    /* 4. FOUNDER BIO */
+    .founder-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .founder-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .founder-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .founder-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .founder-header h3 {
+      font-size: 15px;
+      color: var(--color-text-dark);
+    }
+
+    .founder-header p {
+      font-size: 10px;
+      color: var(--color-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .founder-card p {
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* 5. HORIZONTAL PROJECTS CAROUSEL */
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      margin-top: 24px;
+    }
+
+    .carousel-wrap {
+      overflow-x: auto;
+      display: flex;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .carousel-card {
+      flex-shrink: 0;
+      width: 220px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+    }
+
+    .carousel-image {
+      height: 110px;
+      background-color: #E2E8F0;
+    }
+
+    .carousel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-info {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .carousel-info h4 {
+      font-size: 11px;
+      color: var(--color-text-dark);
+    }
+
+    .carousel-info p {
+      font-size: 9px;
+      color: #94A3B8;
+    }
+
+    /* 6. MASONRY GALLERY */
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .gallery-photo {
+      height: 120px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-photo:nth-child(3n) {
+      height: 180px;
+      grid-row: span 2;
+    }
+
+    .gallery-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+      color: white;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    /* 7. MODALS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-header-row h3 {
+      font-size: 15px;
+      color: var(--color-text-dark);
+    }
+
+    .modal-close-btn {
+      border: none;
+      background: #F1F5F9;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 10px;
+    }
+
+    /* 8. LIST STYLINGS FOR TOOLS/RESOURCES */
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .item-row:last-child {
+      border-bottom: none;
+    }
+
+    .item-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .item-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(37,99,235,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .item-info h5 {
+      font-size: 11px;
+      color: var(--color-text-dark);
+    }
+
+    .item-info p {
+      font-size: 9px;
+      color: #94A3B8;
+    }
+
+    .item-btn {
+      padding: 6px 12px;
+      font-size: 9px;
+    }
+
+    /* 9. PORTAL MOCKS LAYOUT */
+    .portal-info-box {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .portal-stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .portal-stat-row span {
+      color: var(--color-text-gray);
+    }
+
+    .portal-stat-row font {
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+
+    /* 10. FIXED STICKY MOBILE NAVIGATION */
+    .sticky-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--color-border);
+      box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.03);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 8px;
+      z-index: 1500;
+    }
+
+    .sticky-nav-btn {
+      background: transparent;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--color-text-gray);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .sticky-nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .sticky-nav-btn span {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .sticky-nav-btn:hover, .sticky-nav-btn:active {
+      color: var(--color-primary);
+    }
+
+    /* Floating call button */
+    .floating-call {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+      z-index: 1400;
+      text-decoration: none;
+    }
+
+    .floating-call svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 24px 0 12px 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .footer-socials a {
+      color: #94A3B8;
+      transition: color 0.2s ease;
+    }
+
+    .footer-socials a:hover {
+      color: var(--color-primary);
+    }
+
+    footer p {
+      font-size: 10px;
+      color: #94A3B8;
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 540px) {
+      body {
+        background-color: #F1F5F9;
+      }
+      .container {
+        background-color: #FFFFFF;
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.05);
+        border-radius: 32px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.02);
+      }
+      .sticky-nav-bar {
+        max-width: 540px;
+        margin: 0 auto;
+        border-radius: 20px 20px 0 0;
+        border-left: 1px solid var(--color-border);
+        border-right: 1px solid var(--color-border);
+      }
+      .floating-call {
+        right: calc(50vw - 270px + 16px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- HERO SECTION -->
+    <div class="glass-card hero-card">
+      <div class="logo-badge">
+        <i data-lucide="bot"></i>
+      </div>
+      <div>
+        <h1>AI Smart Kids</h1>
+        <p class="text-gradient" style="font-weight:700; margin-top:2px;">UJJAIN'S FIRST AI INSTITUTE FOR KIDS</p>
+      </div>
+      <p>Preparing children aged 9–16 for the AI-powered future through 100% practical, project-based learning.</p>
+      
+      <img src="/images/hero_ai_hologram.png" alt="Friendly robot illustration" class="hero-illustration">
+
+      <div class="hero-actions">
+        <a href="#booking-section" class="btn btn-orange" onclick="openDemoModal()">Book Free Demo</a>
+        <a href="https://wa.me/919826012345?text=Hello%2520AI%2520Smart%2520Kids%252C%2520I%2520scanned%2520your%2520QR%2520code%2520and%2520would%2520like%2520to%2520enquire%2520about%2520batches." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <i data-lucide="message-square" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- UPCOMING BATCH COUNTDOWN -->
+    <div class="glass-card upcoming-batch-card">
+      <div class="batch-title-row">
+        <h3>Upcoming Cohort Countdown</h3>
+        <span class="badge-tag badge-tag-secondary" style="background:rgba(37,99,235,0.08); color:var(--color-primary); font-size:8px; padding:2px 8px;" id="batch-seats-label">2 Seats Left</span>
+      </div>
+      
+      <div class="countdown-timer" id="countdown">
+        <div class="timer-unit"><span id="days">00</span><font>Days</font></div>
+        <div class="timer-unit"><span id="hours">00</span><font>Hrs</font></div>
+        <div class="timer-unit"><span id="minutes">00</span><font>Mins</font></div>
+        <div class="timer-unit"><span id="seconds">00</span><font>Secs</font></div>
+      </div>
+      
+      <div>
+        <div class="progress-bar-label" style="display:flex; justify-content:space-between; font-size:9px; font-weight:700; color:var(--color-text-gray); margin-bottom:4px;">
+          <span>Allocated Cohort Seats</span>
+          <span>10 / 12 Seats Taken</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION CARD GRID -->
+    <div class="section-title">Navigation Hub</div>
+    <div class="nav-grid">
+      <!-- Card 1: Book Free Demo -->
+      <div class="glass-card nav-card" onclick="openDemoModal()">
+        <div class="nav-icon"><i data-lucide="graduation-cap"></i></div>
+        <h3>Book Free Demo</h3>
+        <p>Reserve a trial slot</p>
+      </div>
+
+      <!-- Card 2: Download Brochure -->
+      <div class="glass-card nav-card" onclick="openBrochureModal()">
+        <div class="nav-icon"><i data-lucide="download"></i></div>
+        <h3>Brochure</h3>
+        <p>Curriculum brochure</p>
+      </div>
+
+      <!-- Card 3: Pay Fees -->
+      <div class="glass-card nav-card" onclick="openFeesModal()">
+        <div class="nav-icon"><i data-lucide="credit-card"></i></div>
+        <h3>Pay Fees</h3>
+        <p>UPI, cards deposit</p>
+      </div>
+
+      <!-- Card 4: Projects -->
+      <a href="#projects-header" class="glass-card nav-card">
+        <div class="nav-icon"><i data-lucide="play"></i></div>
+        <h3>Student Work</h3>
+        <p>View visual projects</p>
+      </a>
+
+      <!-- Card 5: AI Tools Library -->
+      <div class="glass-card nav-card" onclick="openToolsModal()">
+        <div class="nav-icon"><i data-lucide="cpu"></i></div>
+        <h3>AI Tools Library</h3>
+        <p>ChatGPT, Gemini</p>
+      </div>
+
+      <!-- Card 6: Free AI Resources -->
+      <div class="glass-card nav-card" onclick="openResourcesModal()">
+        <div class="nav-icon"><i data-lucide="sparkles"></i></div>
+        <h3>Free Resources</h3>
+        <p>Prompt cheat sheets</p>
+      </div>
+
+      <!-- Card 7: Student Portal -->
+      <div class="glass-card nav-card" onclick="openPortalModal('student')">
+        <div class="nav-icon"><i data-lucide="user"></i></div>
+        <h3>Student Login</h3>
+        <p>Check homework logs</p>
+      </div>
+
+      <!-- Card 8: Parent Portal -->
+      <div class="glass-card nav-card" onclick="openPortalModal('parent')">
+        <div class="nav-icon"><i data-lucide="users"></i></div>
+        <h3>Parent Login</h3>
+        <p>Check progress stats</p>
+      </div>
+    </div>
+
+    <!-- FOUNDER CARD -->
+    <div class="section-title">Academic Leadership</div>
+    <div class="glass-card founder-card">
+      <div class="founder-header">
+        <div class="founder-photo">
+          <img src="/images/founder_avatar.png" alt="Mr. Yash G.">
+        </div>
+        <div>
+          <h3>Mr. Yash G.</h3>
+          <p>FOUNDER & LEAD MENTOR</p>
+        </div>
+      </div>
+      <p>Having completed his Engineering and MBA corporate pedigree, Mr. Yash G. established <strong>AI Smart Kids</strong> in Freeganj to prepare Ujjain's kids with coding, creative prompts engineering, and web development skills.</p>
+    </div>
+
+    <!-- STUDENT PROJECTS -->
+    <div class="section-title" id="projects-header">Student Masterpieces</div>
+    <div class="carousel-wrap">
+      <!-- Proj 1 -->
+      <div class="carousel-card">
+        <div class="carousel-image"><img src="/images/student_project_ai_art.png" alt="AI Art"></div>
+        <div class="carousel-info">
+          <h4>Cyber-Tiger Generative Art</h4>
+          <p>By Kabir R. (Age 12)</p>
+        </div>
+      </div>
+      <!-- Proj 2 -->
+      <div class="carousel-card">
+        <div class="carousel-image"><img src="/images/student_project_web.png" alt="Weather Dashboard"></div>
+        <div class="carousel-info">
+          <h4>Weather Web Dashboard</h4>
+          <p>By Rohan G. (Age 13)</p>
+        </div>
+      </div>
+      <!-- Proj 3 -->
+      <div class="carousel-card">
+        <div class="carousel-image"><img src="/images/student_project_vr_coding.png" alt="Robotics prompt"></div>
+        <div class="carousel-info">
+          <h4>Robotics Prompt Program</h4>
+          <p>By Isha A. (Age 15)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASONRY GALLERY -->
+    <div class="section-title">Studio Activities</div>
+    <div class="gallery-masonry" id="gallery-wrap">
+      <div class="gallery-photo"><img src="/images/classroom_3d.png" alt="Classroom"><div class="gallery-caption">Futuristic Ujjain Studio</div></div>
+      <div class="gallery-photo"><img src="/images/classroom_lab_creative.png" alt="Activites"><div class="gallery-caption">Collaborative Workspace</div></div>
+      <div class="gallery-photo"><img src="/images/student_project_ai_art.png" alt="Carnival"><div class="gallery-caption">Creative Arts Lab</div></div>
+    </div>
+
+    <!-- GOOGLE REVIEWS -->
+    <div class="section-title">Parent Feedback</div>
+    <div class="glass-card" style="margin-bottom:24px; text-align:center; display:flex; flex-direction:column; gap:10px;">
+      <h3 style="font-size:32px;">4.9 <font style="font-size:16px; color:#94A3B8;">/ 5.0</font></h3>
+      <div style="color:var(--color-accent-orange); font-size:18px;">⭐⭐⭐⭐⭐</div>
+      <p style="font-size:11px; font-style:italic; line-height:1.6; max-width:320px; margin:0 auto;">"Highly impressed by the mentor. The small batch size of 12 ensures Dev gets individual attention." - Meera Patel (Parent)</p>
+      <a href="https://maps.google.com" target="_blank" class="btn btn-secondary" style="align-self:center; margin-top:8px;">Write a Review</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-socials">
+        <a href="https://instagram.com" target="_blank"><i data-lucide="instagram"></i></a>
+        <a href="https://youtube.com" target="_blank"><i data-lucide="youtube"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i data-lucide="linkedin"></i></a>
+      </div>
+      <p>&copy; 2026 AI Smart Kids. Coded by Nexora Scale.</p>
+    </footer>
+
+  </div>
+
+  <!-- FIXED STICKY MOBILE NAVIGATION -->
+  <div class="sticky-nav-bar">
+    <a href="#" class="sticky-nav-btn">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <button class="sticky-nav-btn" onclick="openDemoModal()">
+      <i data-lucide="graduation-cap"></i>
+      <span>Demo</span>
+    </button>
+    <a href="https://wa.me/919826012345?text=Hello%2520AI%2520Smart%2520Kids%252C%2520I%2520would%2520like%2520to%2520enquire." target="_blank" class="sticky-nav-btn">
+      <i data-lucide="message-square"></i>
+      <span>WhatsApp</span>
+    </a>
+    <a href="tel:+919826012345" class="sticky-nav-btn">
+      <i data-lucide="phone"></i>
+      <span>Call</span>
+    </a>
+    <a href="https://maps.google.com" target="_blank" class="sticky-nav-btn">
+      <i data-lucide="map-pin"></i>
+      <span>Map</span>
+    </a>
+  </div>
+
+  <!-- Floating Call widget -->
+  <a href="tel:+919826012345" class="floating-call" aria-label="Call Us">
+    <i data-lucide="phone"></i>
+  </a>
+
+  <!-- ----------------------------------------
+       MODALS CONTAINERS
+       ---------------------------------------- -->
+
+  <!-- 1. BOOK DEMO MODAL -->
+  <div class="modal-overlay" id="demo-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3>Book Free Trial Class</h3>
+        <button class="modal-close-btn" onclick="closeModal('demo-modal')">✕</button>
+      </div>
+      <form onsubmit="submitQuickInquiry(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Parent Full Name *</label>
+          <input type="text" id="qr-parent-name" placeholder="Rajesh Sharma" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label>WhatsApp Phone Number *</label>
+          <input type="tel" id="qr-phone" placeholder="10-digit number" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Child Age *</label>
+          <input type="number" id="qr-age" placeholder="e.g. 11" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Preferred Batch</label>
+          <select id="qr-batch">
+            <option value="Junior Creators (4:00 PM)">Junior Creators (Ages 9-12)</option>
+            <option value="Senior Innovators (6:00 PM)">Senior Innovators (Ages 13-16)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-orange" style="margin-top:8px;">Request Free Spot</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. PAY FEES MODAL -->
+  <div class="modal-overlay" id="fees-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3>Tuition Fee Payment</h3>
+        <button class="modal-close-btn" onclick="closeModal('fees-modal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px; font-size:12px;">
+        <p>You can pay the cohort fee securely via UPI or Bank Transfer:</p>
+        
+        <!-- Scan QR code box -->
+        <div style="background:var(--color-card-bg); border:1px solid var(--color-border); padding:16px; border-radius:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <h4 style="font-size:13px; color:var(--color-primary);">UPI scan pay</h4>
+          <p style="font-size:9px; color:#94A3B8;">Scan or transfer to UPI ID below:</p>
+          <div style="background:#E2E8F0; width:120px; height:120px; display:flex; align-items:center; justify-content:center; border-radius:8px; font-weight:700; color:var(--color-text-gray);">
+            MOCK QR CODE
+          </div>
+          <span style="font-weight:700; font-size:11px; margin-top:4px;">aismartkids@upi</span>
+        </div>
+
+        <div style="background:var(--color-card-bg); border:1px solid var(--color-border); padding:16px; border-radius:12px; display:flex; flex-direction:column; gap:6px;">
+          <h4 style="font-size:13px; color:var(--color-secondary); margin-bottom:4px;">Direct Bank Transfer</h4>
+          <p><strong>Bank:</strong> HDFC Bank Ltd.</p>
+          <p><strong>Account Name:</strong> AI Smart Kids Academy</p>
+          <p><strong>Account Number:</strong> 50200088776655</p>
+          <p><strong>IFSC Code:</strong> HDFC0001234</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. BROCHURE MODAL -->
+  <div class="modal-overlay" id="brochure-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3>Download Syllabus Brochure</h3>
+        <button class="modal-close-btn" onclick="closeModal('brochure-modal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; font-size:12px; text-align:center;">
+        <p>Get the detailed class curriculum structure PDFs for all batches.</p>
+        <div style="background:var(--color-card-bg); border:1px solid var(--color-border); padding:16px; border-radius:12px; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="text-align:left;">
+              <h5 style="font-weight:700;">Junior Creators (9-12 Yrs)</h5>
+              <p style="font-size:9px; color:#94A3B8;">Syllabus outline.pdf (2.4 MB)</p>
+            </div>
+            <button class="btn btn-primary item-btn" style="flex:0; padding:6px 12px;" onclick="simulateDownload('Junior_Creators_Syllabus.pdf')">Download</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--color-border); padding-top:8px;">
+            <div style="text-align:left;">
+              <h5 style="font-weight:700;">Senior Innovators (13-16 Yrs)</h5>
+              <p style="font-size:9px; color:#94A3B8;">Full Stack & AI.pdf (3.1 MB)</p>
+            </div>
+            <button class="btn btn-primary item-btn" style="flex:0; padding:6px 12px;" onclick="simulateDownload('Senior_Innovators_Syllabus.pdf')">Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. PORTALS LOGIN MODAL -->
+  <div class="modal-overlay" id="portal-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3 id="portal-modal-title">Student Portal</h3>
+        <button class="modal-close-btn" onclick="closeModal('portal-modal')">✕</button>
+      </div>
+      
+      <!-- Mock Form -->
+      <form id="portal-login-form" onsubmit="handlePortalMockLogin(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label id="portal-username-label">Student ID / Roll Number</label>
+          <input type="text" id="portal-username" placeholder="e.g. std_1" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Password</label>
+          <input type="password" id="portal-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-orange" style="margin-top:8px;">Login to Portal</button>
+      </form>
+
+      <!-- Mock Result Screen -->
+      <div id="portal-mock-dashboard" style="display:none; font-size:12px;">
+        <p style="color:var(--color-success-green); font-weight:700; text-align:center;">✓ Verified Session Connected</p>
+        <div class="portal-info-box" id="portal-info-box-content">
+          <!-- Rendered dynamically -->
+        </div>
+        <button class="btn btn-secondary" style="width:100%; margin-top:16px;" onclick="closeModal('portal-modal')">Close Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TOOLS LIBRARY MODAL -->
+  <div class="modal-overlay" id="tools-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3>AI Tools Library</h3>
+        <button class="modal-close-btn" onclick="closeModal('tools-modal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; max-height:60vh; overflow-y:auto; padding-right:4px;">
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar" style="background:#ECECF1; color:#101214;">💬</div><div class="item-info"><h5>ChatGPT</h5><p>Text generation & coding support</p></div></div>
+          <a href="https://chatgpt.com" target="_blank" class="btn btn-secondary item-btn" style="flex:0;">Visit</a>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar" style="background:#EBF3FF; color:#1A73E8;">♊</div><div class="item-info"><h5>Gemini</h5><p>Google's advanced conversational model</p></div></div>
+          <a href="https://gemini.google.com" target="_blank" class="btn btn-secondary item-btn" style="flex:0;">Visit</a>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar" style="background:#FAF0E6; color:#D2691E;">🎨</div><div class="item-info"><h5>Claude</h5><p>Anthropic's analytical coding helper</p></div></div>
+          <a href="https://claude.ai" target="_blank" class="btn btn-secondary item-btn" style="flex:0;">Visit</a>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar" style="background:#EEF8FF; color:#00C4CC;">🖌️</div><div class="item-info"><h5>Canva AI</h5><p>Magic graphic design prompts creator</p></div></div>
+          <a href="https://canva.com" target="_blank" class="btn btn-secondary item-btn" style="flex:0;">Visit</a>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar" style="background:#F2F2F2; color:#111;">💻</div><div class="item-info"><h5>Cursor AI</h5><p>The code editor children code in</p></div></div>
+          <a href="https://cursor.com" target="_blank" class="btn btn-secondary item-btn" style="flex:0;">Visit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. RESOURCES MODAL -->
+  <div class="modal-overlay" id="resources-modal">
+    <div class="modal-content">
+      <div class="modal-header-row">
+        <h3>Free AI Resource Packs</h3>
+        <button class="modal-close-btn" onclick="closeModal('resources-modal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; max-height:60vh; overflow-y:auto; padding-right:4px;">
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar">📝</div><div class="item-info"><h5>AI Prompts Cheat Sheet</h5><p>Top prompts for school homework tasks</p></div></div>
+          <button class="btn btn-primary item-btn" style="flex:0;" onclick="simulateDownload('AI_Prompts_Sheet.pdf')">PDF</button>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar">📚</div><div class="item-info"><h5>Beginner's AI Guide</h5><p>Core AI concepts explained simply</p></div></div>
+          <button class="btn btn-primary item-btn" style="flex:0;" onclick="simulateDownload('AI_Beginners_Guide.pdf')">PDF</button>
+        </div>
+        <div class="item-row">
+          <div class="item-profile"><div class="item-avatar">💻</div><div class="item-info"><h5>Practice HTML Files</h5><p>Boilerplate codes to design basic grids</p></div></div>
+          <button class="btn btn-primary item-btn" style="flex:0;" onclick="simulateDownload('HTML_Practice_Templates.zip')">ZIP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CDN scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Countdown Timer logic
+    const nextCohortDate = new Date();
+    nextCohortDate.setDate(nextCohortDate.getDate() + 5); // Seed next cohort 5 days from today
+    nextCohortDate.setHours(16, 0, 0, 0); // Cohort time 4:00 PM
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = nextCohortDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = "<div style='font-weight:700; color:var(--color-primary);'>Batch Starting Today!</div>";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ----------------------------------------
+    // MODALS CONTROLS
+    // ----------------------------------------
+    function openDemoModal() {
+      document.getElementById('demo-modal').classList.add('active');
+    }
+
+    function openFeesModal() {
+      document.getElementById('fees-modal').classList.add('active');
+    }
+
+    function openBrochureModal() {
+      document.getElementById('brochure-modal').classList.add('active');
+    }
+
+    function openToolsModal() {
+      document.getElementById('tools-modal').classList.add('active');
+    }
+
+    document.getElementById('tools-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'tools-modal') closeModal('tools-modal');
+    });
+    
+    document.getElementById('demo-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'demo-modal') closeModal('demo-modal');
+    });
+
+    document.getElementById('fees-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'fees-modal') closeModal('fees-modal');
+    });
+
+    document.getElementById('brochure-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'brochure-modal') closeModal('brochure-modal');
+    });
+
+    function openResourcesModal() {
+      document.getElementById('resources-modal').classList.add('active');
+    }
+
+    document.getElementById('resources-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'resources-modal') closeModal('resources-modal');
+    });
+
+    let currentPortalType = 'student';
+
+    function openPortalModal(type) {
+      currentPortalType = type;
+      const title = document.getElementById('portal-modal-title');
+      const label = document.getElementById('portal-username-label');
+      const usernameInput = document.getElementById('portal-username');
+      
+      title.innerText = type === 'student' ? 'Student Workspace Login' : 'Parent Workspace Login';
+      label.innerText = type === 'student' ? 'Student ID / Roll Number' : 'Registered Phone Number';
+      usernameInput.placeholder = type === 'student' ? 'e.g. std_1' : 'e.g. 9826012345';
+      
+      // Reset layout views
+      document.getElementById('portal-login-form').style.display = 'flex';
+      document.getElementById('portal-mock-dashboard').style.display = 'none';
+      document.getElementById('portal-login-form').reset();
+
+      document.getElementById('portal-modal').classList.add('active');
+    }
+
+    document.getElementById('portal-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'portal-modal') closeModal('portal-modal');
+    });
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // ----------------------------------------
+    // API FORMS ACTIONS
+    // ----------------------------------------
+    async function submitQuickInquiry(event) {
+      event.preventDefault();
+      const parentName = document.getElementById('qr-parent-name').value.trim();
+      const phone = document.getElementById('qr-phone').value.trim();
+      const age = document.getElementById('qr-age').value;
+      const preferredBatch = document.getElementById('qr-batch').value;
+
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            parentName,
+            childName: 'Inquirer Student',
+            age,
+            phone,
+            preferredBatch,
+            message: 'Inquiry booked via mobile QR hub portal.'
+          })
+        });
+
+        if (res.ok) {
+          // Trigger confetti
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+          }
+          alert('Demo class requested successfully! We will text you shortly.');
+          closeModal('demo-modal');
+        } else {
+          alert('Submission error. Please check values.');
+        }
+      } catch (err) {
+        console.error("QR Lead submit error:", err);
+      }
+    }
+
+    function simulateDownload(filename) {
+      alert(`Preparing ${filename} packing... mock dispatch completed!`);
+    }
+
+    // Portal logins simulations
+    function handlePortalMockLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('portal-username').value.trim();
+      const infoBox = document.getElementById('portal-info-box-content');
+      
+      document.getElementById('portal-login-form').style.display = 'none';
+      document.getElementById('portal-mock-dashboard').style.display = 'block';
+
+      if (currentPortalType === 'student') {
+        infoBox.innerHTML = `
+          <div class="portal-stat-row"><span>Student Name:</span><font>Kabir Rathore</font></div>
+          <div class="portal-stat-row"><span>Roll Number:</span><font>${username}</font></div>
+          <div class="portal-stat-row"><span>Cohort Batch:</span><font>Junior Creators</font></div>
+          <div class="portal-stat-row"><span>Pending Assignments:</span><font style="color:var(--color-accent-orange);">1 Homework</font></div>
+          <div class="portal-stat-row"><span>Attendance:</span><font style="color:var(--color-success-green);">92%</font></div>
+          <div class="portal-stat-row"><span>Earned Badges:</span><font>AI Storyboard, Midjourney Basics</font></div>
+        `;
+      } else {
+        infoBox.innerHTML = `
+          <div class="portal-stat-row"><span>Parent Account:</span><font>Vikram Rathore</font></div>
+          <div class="portal-stat-row"><span>Child Profile:</span><font>Kabir Rathore</font></div>
+          <div class="portal-stat-row"><span>Fee status:</span><font style="color:var(--color-accent-orange);">₹6,000 paid (₹6,000 pending)</font></div>
+          <div class="portal-stat-row"><span>Last Attendance:</span><font>Present (yesterday)</font></div>
+          <div class="portal-stat-row"><span>Announcements:</span><font>AI Tech Expo on July 10!</font></div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

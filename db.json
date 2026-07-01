@@ -1,0 +1,463 @@
+{
+  "leads": [
+    {
+      "id": "lead_1782548979715",
+      "parentName": "yash gadwar",
+      "childName": "test child",
+      "age": 5,
+      "school": "kvs",
+      "class": "1",
+      "phone": "09575131552",
+      "email": "yashgadwar@gmail.com",
+      "preferredBatch": "Junior Creators (4:00 PM - 5:30 PM)",
+      "status": "New",
+      "notes": "",
+      "followUpDate": "",
+      "createdAt": "2026-06-27T08:29:39.715Z"
+    },
+    {
+      "id": "lead_1",
+      "parentName": "Rajesh Sharma",
+      "childName": "Aarav Sharma",
+      "age": 10,
+      "school": "St. Paul's Higher Secondary School",
+      "class": "5th Standard",
+      "phone": "9876543210",
+      "email": "rajesh.sharma@example.com",
+      "preferredBatch": "Junior Creators (4:00 PM - 5:30 PM)",
+      "status": "Demo Scheduled",
+      "notes": "Interested in AI Art and Game coding. Scheduled demo for next Monday.",
+      "followUpDate": "2026-06-29",
+      "createdAt": "2026-06-25T10:30:00.000Z"
+    },
+    {
+      "id": "lead_2",
+      "parentName": "Priyanka Joshi",
+      "childName": "Ananya Joshi",
+      "age": 14,
+      "school": "Daly College",
+      "class": "9th Standard",
+      "phone": "9123456789",
+      "email": "priyanka.j@example.com",
+      "preferredBatch": "Senior Innovators (6:00 PM - 7:30 PM)",
+      "status": "New",
+      "notes": "Wants to learn Web Development and ChatGPT automation. Found us through Instagram.",
+      "followUpDate": "2026-06-28",
+      "createdAt": "2026-06-27T08:15:00.000Z"
+    },
+    {
+      "id": "lead_3",
+      "parentName": "Vikram Rathore",
+      "childName": "Kabir Rathore",
+      "age": 12,
+      "school": "Delhi Public School Ujjain",
+      "class": "7th Standard",
+      "phone": "9826012345",
+      "email": "rathore.vikram@example.com",
+      "preferredBatch": "Junior Creators (4:00 PM - 5:30 PM)",
+      "status": "Joined",
+      "notes": "Paid initial fee deposit. Eager to start animations batch.",
+      "followUpDate": "2026-07-01",
+      "createdAt": "2026-06-24T14:20:00.000Z"
+    },
+    {
+      "id": "lead_4",
+      "parentName": "Sunita Verma",
+      "childName": "Meera Verma",
+      "age": 15,
+      "school": "Carmel Convent School Ujjain",
+      "class": "10th Standard",
+      "phone": "8877665544",
+      "email": "sunita.verma@example.com",
+      "preferredBatch": "Senior Innovators (6:00 PM - 7:30 PM)",
+      "status": "Interested",
+      "notes": "Enquired about Prompt Engineering and Cursor AI. Requested pricing brochure.",
+      "followUpDate": "2026-06-28",
+      "createdAt": "2026-06-26T11:45:00.000Z"
+    },
+    {
+      "id": "lead_5",
+      "parentName": "Amit Patel",
+      "childName": "Dev Patel",
+      "age": 11,
+      "school": "Sharda Vihar School Ujjain",
+      "class": "6th Standard",
+      "phone": "9988776655",
+      "email": "amit.patel@example.com",
+      "preferredBatch": "Junior Creators (4:00 PM - 5:30 PM)",
+      "status": "Rejected",
+      "notes": "Batch timing clashes with swimming class. Might join next term.",
+      "followUpDate": "",
+      "createdAt": "2026-06-22T09:00:00.000Z"
+    }
+  ],
+  "students": [
+    {
+      "id": "std_1",
+      "name": "Kabir Rathore",
+      "parentName": "Vikram Rathore",
+      "age": 12,
+      "school": "Delhi Public School Ujjain",
+      "phone": "9826012345",
+      "email": "rathore.vikram@example.com",
+      "enrolledBatchId": "batch_junior",
+      "feesPaid": 6000,
+      "feesTotal": 12000,
+      "status": "Active",
+      "projectsCount": 2,
+      "certificates": [
+        "AI Art Basics"
+      ],
+      "attendance": 50
+    },
+    {
+      "id": "std_2",
+      "name": "Rohan Gupta",
+      "parentName": "Suresh Gupta",
+      "age": 13,
+      "school": "Lokmanya Tilak School",
+      "phone": "9425098765",
+      "email": "suresh.gupta@example.com",
+      "enrolledBatchId": "batch_senior",
+      "feesPaid": 15000,
+      "feesTotal": 15000,
+      "status": "Active",
+      "projectsCount": 4,
+      "certificates": [
+        "Prompt Engineering Certified",
+        "React Kids Level 1"
+      ],
+      "attendance": 0
+    },
+    {
+      "id": "std_3",
+      "name": "Isha Agrawal",
+      "parentName": "Deepak Agrawal",
+      "age": 15,
+      "school": "St. Mary's School",
+      "phone": "9827055443",
+      "email": "deepak.agrawal@example.com",
+      "enrolledBatchId": "batch_senior",
+      "feesPaid": 8000,
+      "feesTotal": 15000,
+      "status": "Active",
+      "projectsCount": 3,
+      "certificates": [
+        "AI Automation Master"
+      ],
+      "attendance": 100
+    },
+    {
+      "id": "std_4",
+      "name": "Kavya Vyas",
+      "parentName": "Nitin Vyas",
+      "age": 9,
+      "school": "Daly College",
+      "phone": "9893011223",
+      "email": "nitin.vyas@example.com",
+      "enrolledBatchId": "batch_junior",
+      "feesPaid": 12000,
+      "feesTotal": 12000,
+      "status": "Active",
+      "projectsCount": 1,
+      "certificates": [],
+      "attendance": 100
+    }
+  ],
+  "batches": [
+    {
+      "id": "batch_junior",
+      "name": "Junior Creators",
+      "ageGroup": "9–12",
+      "timing": "4:00 PM - 5:30 PM",
+      "teacher": "Mr. Yash G.",
+      "capacity": 12,
+      "seatsFilled": 8,
+      "waitingListCount": 0,
+      "status": "Active"
+    },
+    {
+      "id": "batch_senior",
+      "name": "Senior Innovators",
+      "ageGroup": "13–16",
+      "timing": "6:00 PM - 7:30 PM",
+      "teacher": "Mr. Yash G.",
+      "capacity": 12,
+      "seatsFilled": 10,
+      "waitingListCount": 2,
+      "status": "Active"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog_1",
+      "title": "Why Kids Need to Learn Prompt Engineering in 2026",
+      "content": "Prompt engineering is not just for software engineers anymore. In today's AI-centric world, the ability to clearly direct artificial intelligence is becoming a core literacy skill. At AI Smart Kids, we teach children how to write structured prompts, iterate on AI responses, and break down complex projects into granular tasks.\n\n### Why it matters:\n1. **Critical Thinking**: To guide an AI, a student must first understand what they want to achieve and how to describe it logicially.\n2. **Immediate Feedback**: Testing prompts provides instant results, encouraging exploration and learning from failure.\n3. **Empowerment**: Kids transition from being consumers of technology to creators who leverage AI to bring their imaginations to life.",
+      "excerpt": "Discover why prompt engineering is the new fundamental skill for the modern generation and how children in Ujjain are learning to co-create with AI.",
+      "category": "Education",
+      "featuredImage": "/images/blog_prompt.jpg",
+      "seoTitle": "Learn Prompt Engineering for Kids | AI Smart Kids Ujjain",
+      "seoDescription": "Prompt engineering is a critical future literacy. Find out how children age 9-16 learn to command ChatGPT, Claude, and Midjourney to build cool projects.",
+      "status": "Published",
+      "publishedAt": "2026-06-20T12:00:00.000Z"
+    },
+    {
+      "id": "blog_2",
+      "title": "Introducing Ujjain's First Dedicated AI Institute for Kids",
+      "content": "Ujjain is a city of heritage, and now it becomes a hub for futuristic learning! AI Smart Kids is officially open in the heart of Ujjain, offering kids a direct gateway to cutting-edge tools like ChatGPT, Midjourney, Cursor, and Canva.\n\nOur classroom features futuristic 3D workspaces, small batch sizes capped at 12 students, and a 100% practical, project-based curriculum where kids build actual websites, write code, create generative art, and compile their own portfolios.",
+      "excerpt": "We are proud to announce the launch of AI Smart Kids in Ujjain. Read about our mission to equip children with essential AI and tech skills.",
+      "category": "Announcement",
+      "featuredImage": "/images/blog_launch.jpg",
+      "seoTitle": "First AI Institute for Kids in Ujjain | AI Smart Kids",
+      "seoDescription": "AI Smart Kids opens in Ujjain! We provide premium, practical, project-based AI training for kids aged 9-16. Join us for a free demo session.",
+      "status": "Published",
+      "publishedAt": "2026-06-25T09:00:00.000Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "tst_1",
+      "name": "Dr. Sameer Vyas",
+      "role": "Parent of Kavya (9)",
+      "reviewText": "AI Smart Kids is exactly what the education system was missing! My daughter Kavya was always glued to video games. Now, she is using Claude and Canva to design her own educational puzzle games! The project-based approach has built immense confidence in her.",
+      "rating": 5,
+      "category": "Parent",
+      "image": "/images/avatar_parent1.jpg",
+      "videoUrl": ""
+    },
+    {
+      "id": "tst_2",
+      "name": "Rohan Gupta",
+      "role": "Senior Batch Student (13)",
+      "reviewText": "The classes here are amazing. Instead of memorizing codes, we learn how to use Cursor AI and prompt engineering to design actual working websites. I built a fully functional weather app in just three classes!",
+      "rating": 5,
+      "category": "Student",
+      "image": "/images/avatar_student1.jpg",
+      "videoUrl": ""
+    },
+    {
+      "id": "tst_3",
+      "name": "Meera Patel",
+      "role": "Parent of Dev (11)",
+      "reviewText": "Highly impressed by the mentor. The small batch size of 12 ensures that my son gets individual attention. The syllabus goes way beyond normal computer coaching—they are learning genuine future-ready AI automations.",
+      "rating": 5,
+      "category": "Parent",
+      "image": "/images/avatar_parent2.jpg",
+      "videoUrl": ""
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal_1",
+      "category": "Classroom",
+      "imageUrl": "/images/classroom_3d.png",
+      "caption": "Futuristic premium collaborative classroom in Ujjain.",
+      "createdAt": "2026-06-26T10:00:00.000Z"
+    },
+    {
+      "id": "gal_2",
+      "category": "Activities",
+      "imageUrl": "/images/student_project_ai_art.png",
+      "caption": "Students brainstorming and commanding AI models to generate interactive stories.",
+      "createdAt": "2026-06-26T11:00:00.000Z"
+    },
+    {
+      "id": "gal_3",
+      "category": "Workshops",
+      "imageUrl": "/images/student_project_web.png",
+      "caption": "Ujjain AI Tech Carnival - Kids showcasing their prompt engineering projects.",
+      "createdAt": "2026-06-27T07:00:00.000Z"
+    },
+    {
+      "id": "gal_4",
+      "category": "Activities",
+      "imageUrl": "/images/student_project_vr_coding.png",
+      "caption": "Kids engineering dynamic prompt scripts to program robots.",
+      "createdAt": "2026-06-27T07:30:00.000Z"
+    },
+    {
+      "id": "gal_5",
+      "category": "Classroom",
+      "imageUrl": "/images/classroom_lab_creative.png",
+      "caption": "Collaborative workstations inspiring kids to co-create with artificial intelligence.",
+      "createdAt": "2026-06-27T08:00:00.000Z"
+    }
+  ],
+  "settings": {
+    "instituteName": "AI Smart Kids",
+    "tagline": "Ujjain's First AI Institute for Kids",
+    "phone": "+91 98260 12345",
+    "whatsapp": "+919826012345",
+    "email": "admissions@aismartkids.in",
+    "address": "102, Premium Tower, Freeganj, Ujjain, Madhya Pradesh 456010",
+    "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.653456885375!2d75.7830386!3d23.1820468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963746654261775%3A0xea8412674e2d2745!2sFreeganj%2C%20Ujjain%2C%20Madhya%20Pradesh%20456010!5e0!3m2!1sen!2sin!4v1719472300000!5m2!1sen!2sin",
+    "analyticsActive": true,
+    "whatsappNotificationActive": true,
+    "emailNotificationActive": true,
+    "razorpayActive": false
+  },
+  "analytics": {
+    "dailyVisits": [
+      {
+        "date": "2026-06-21",
+        "visits": 120,
+        "leads": 2
+      },
+      {
+        "date": "2026-06-22",
+        "visits": 145,
+        "leads": 1
+      },
+      {
+        "date": "2026-06-23",
+        "visits": 160,
+        "leads": 0
+      },
+      {
+        "date": "2026-06-24",
+        "visits": 185,
+        "leads": 3
+      },
+      {
+        "date": "2026-06-25",
+        "visits": 210,
+        "leads": 2
+      },
+      {
+        "date": "2026-06-26",
+        "visits": 245,
+        "leads": 1
+      },
+      {
+        "date": "2026-06-27",
+        "visits": 308,
+        "leads": 3
+      },
+      {
+        "date": "2026-07-01",
+        "visits": 6,
+        "leads": 0
+      }
+    ],
+    "trafficSources": [
+      {
+        "source": "Google Search",
+        "count": 480
+      },
+      {
+        "source": "Instagram Ads",
+        "count": 390
+      },
+      {
+        "source": "WhatsApp Share",
+        "count": 210
+      },
+      {
+        "source": "Direct Traffic",
+        "count": 173
+      },
+      {
+        "source": "Local News / Flyer",
+        "count": 90
+      },
+      {
+        "source": "localhost",
+        "count": 1
+      }
+    ],
+    "deviceTypes": [
+      {
+        "device": "Mobile",
+        "count": 820
+      },
+      {
+        "device": "Desktop",
+        "count": 444
+      },
+      {
+        "device": "Tablet",
+        "count": 80
+      }
+    ],
+    "pageViews": [
+      {
+        "page": "/",
+        "views": 1914
+      },
+      {
+        "page": "/#courses",
+        "views": 750
+      },
+      {
+        "page": "/#projects",
+        "views": 490
+      },
+      {
+        "page": "/#about",
+        "views": 420
+      },
+      {
+        "page": "/admin",
+        "views": 150
+      }
+    ]
+  },
+  "attendance": [
+    {
+      "id": "att_1782899954719_49dv8",
+      "studentId": "std_1",
+      "batchId": "batch_junior",
+      "date": "2026-07-01",
+      "status": "Absent"
+    },
+    {
+      "id": "att_1782899954719_fphff",
+      "studentId": "std_4",
+      "batchId": "batch_junior",
+      "date": "2026-07-01",
+      "status": "Present"
+    },
+    {
+      "id": "att_1782900024187_mzrsq",
+      "studentId": "std_2",
+      "batchId": "batch_senior",
+      "date": "2026-07-01",
+      "status": "Absent"
+    },
+    {
+      "id": "att_1782900024187_0jx9v",
+      "studentId": "std_3",
+      "batchId": "batch_senior",
+      "date": "2026-07-01",
+      "status": "Late"
+    },
+    {
+      "id": "att_1782900032540_z3j9e",
+      "studentId": "std_2",
+      "batchId": "batch_senior",
+      "date": "2026-06-30",
+      "status": "Absent"
+    },
+    {
+      "id": "att_1782900032540_4vk2s",
+      "studentId": "std_3",
+      "batchId": "batch_senior",
+      "date": "2026-06-30",
+      "status": "Present"
+    },
+    {
+      "id": "att_1782900036249_qw9y8",
+      "studentId": "std_1",
+      "batchId": "batch_junior",
+      "date": "2026-06-30",
+      "status": "Present"
+    },
+    {
+      "id": "att_1782900036249_u3p4b",
+      "studentId": "std_4",
+      "batchId": "batch_junior",
+      "date": "2026-06-30",
+      "status": "Present"
+    }
+  ]
+}
