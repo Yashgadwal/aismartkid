@@ -287,9 +287,10 @@ nav a:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   border-top: 1px solid var(--color-border);
-  padding-top: 24px;
+  padding: 24px 16px 0 16px;
   width: 100%;
   max-width: 450px;
+  box-sizing: border-box;
 }
 
 .stat-item h4 {
@@ -1764,6 +1765,10 @@ footer p {
   }
   .hero-content h2 {
     font-size: 64px;
+  }
+  .hero-stats {
+    padding-left: 0;
+    padding-right: 0;
   }
   .chat-window {
     width: 360px;
