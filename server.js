@@ -864,6 +864,35 @@ function parseMarkdown(text) {
 
   const parsedContent = parseMarkdown(post.content);
   
+  // Calculate recommended interlinked next articles
+  const publishedPosts = db.blogs.filter(b => b.status === 'Published');
+  const currentIndex = publishedPosts.findIndex(b => b.slug === post.slug);
+  
+  const recsHtml = [];
+  if (publishedPosts.length > 1) {
+    const next1 = publishedPosts[(currentIndex + 1) % publishedPosts.length];
+    recsHtml.push(next1);
+    
+    if (publishedPosts.length > 2) {
+      const next2 = publishedPosts[(currentIndex + 2) % publishedPosts.length];
+      recsHtml.push(next2);
+    }
+  }
+  
+  const recommendedHtmlStr = recsHtml.map(r => {
+    return `
+      <a class="mini-blog-card" href="/blog/${r.slug}">
+        <div class="mini-blog-image">
+          <img loading="lazy" src="${r.featuredImage || '/images/blog_default.jpg'}" alt="${r.title}">
+        </div>
+        <div class="mini-blog-info">
+          <span class="badge-tag" style="font-size: 8px; padding: 2px 6px; background: rgba(37,99,235,0.06); color: var(--color-primary); width: fit-content; border-radius: 6px; font-weight: 700;">${r.category}</span>
+          <h4 class="mini-blog-title">${r.title}</h4>
+        </div>
+      </a>
+    `;
+  }).join('\n');
+  
   html = html.replace(/{{SEO_TITLE}}/g, post.seoTitle || `${post.title} | AI Smart Kids Ujjain`);
   html = html.replace(/{{SEO_DESCRIPTION}}/g, post.seoDescription || post.excerpt);
   html = html.replace(/{{BLOG_TITLE}}/g, post.title);
@@ -871,6 +900,7 @@ function parseMarkdown(text) {
   html = html.replace(/{{BLOG_DATE}}/g, dateStr);
   html = html.replace(/{{BLOG_IMAGE}}/g, post.featuredImage || '/images/blog_default.jpg');
   html = html.replace(/{{BLOG_CONTENT}}/g, parsedContent);
+  html = html.replace(/{{RECOMMENDED_ARTICLES}}/g, recommendedHtmlStr);
   
   res.send(html);
 });
