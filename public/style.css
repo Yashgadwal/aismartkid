@@ -2402,3 +2402,83 @@ footer p {
   width: 60%;
   border-radius: 6px;
 }
+
+/* Instagram-Style Carousel for Student Projects */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 4px;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track .project-card {
+  flex: 0 0 calc(33.333% - 16px);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 991px) {
+  .carousel-track .project-card {
+    flex: 0 0 calc(50% - 12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-track .project-card {
+    flex: 0 0 100%;
+  }
+}
+
+/* Nav arrows style */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  color: var(--color-text-dark);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.carousel-nav-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.carousel-nav-btn.prev {
+  left: -20px;
+}
+
+.carousel-nav-btn.next {
+  right: -20px;
+}
+
+/* Hide navigation buttons on mobile if native swipe is preferred */
+@media (max-width: 767px) {
+  .carousel-nav-btn {
+    display: none !important;
+  }
+}

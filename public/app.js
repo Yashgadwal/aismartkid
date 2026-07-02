@@ -966,3 +966,13 @@ function initCustomCursor() {
     isClick = false;
   });
 }
+
+// Instagram-style projects carousel scrolling handler
+function scrollCarousel(button, direction) {
+  const track = button.parentElement.querySelector('.carousel-track');
+  if (!track) return;
+  const card = track.querySelector('.project-card');
+  if (!card) return;
+  const scrollAmount = (card.offsetWidth + 24) * direction; // card width + CSS gap
+  track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
