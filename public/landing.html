@@ -10,12 +10,73 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <!-- SEO Keywords -->
+  <meta name="keywords" content="AI Smart Kids, AI Institute Ujjain, Kids Coding Ujjain, AI classes Ujjain, prompt engineering kids, Saurabh Singhal Ujjain, computer classes Ujjain, AI Smart Kids Ujjain, coding classes for kids in Ujjain">
+
+  <!-- Preload Critical Above-The-Fold Images -->
+  <link rel="preload" as="image" href="/images/logoai.jpeg">
+  <link rel="preload" as="image" href="/images/hero_ai_hologram.jpg">
+
   <!-- CSS -->
   <link rel="stylesheet" href="/style.css?v=4">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aismartkid.vercel.app/">
+  <meta property="og:title" content="AI Smart Kids | Ujjain's First AI Institute for Kids">
+  <meta property="og:description" content="AI Smart Kids is Ujjain's premium AI training institute for kids aged 9-16. Learn prompt engineering, generative art, coding, and web design with 100% practical lab projects.">
+  <meta property="og:image" content="https://aismartkid.vercel.app/images/logoai.jpeg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aismartkid.vercel.app/">
+  <meta property="twitter:title" content="AI Smart Kids | Ujjain's First AI Institute for Kids">
+  <meta property="twitter:description" content="AI Smart Kids is Ujjain's premium AI training institute for kids aged 9-16. Learn prompt engineering, generative art, coding, and web design with 100% practical lab projects.">
+  <meta property="twitter:image" content="https://aismartkid.vercel.app/images/logoai.jpeg">
+
+  <!-- Google Local Business Schema Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AI Smart Kids",
+    "image": "https://aismartkid.vercel.app/images/logoai.jpeg",
+    "description": "Ujjain's first dedicated AI training institute for kids aged 9-16. Specializing in prompt engineering, coding, generative art, and creative thinking.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cosmos Mall, Nanakheda",
+      "addressLocality": "Ujjain",
+      "addressRegion": "MP",
+      "postalCode": "456010",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "23.1504",
+      "longitude": "75.7873"
+    },
+    "telephone": "+918308507820",
+    "url": "https://aismartkid.vercel.app/",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "11:00",
+        "closes": "20:00"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="mesh-glow">
 
@@ -141,7 +202,7 @@
     </div>
     
     <div class="hero-image-wrap">
-      <img src="/images/hero_ai_hologram.png" alt="Indian kids using futuristic AI holograms" class="hero-illustration">
+      <img src="/images/hero_ai_hologram.jpg" alt="Indian kids using futuristic AI holograms" class="hero-illustration">
     </div>
   </section>
 
@@ -176,7 +237,7 @@
         <!-- Card 1 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
           <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
-            <img src="/images/core_problem_solving.png" alt="Problem Solving" style="width: 100%; height: 100%; object-fit: cover;">
+            <img loading="lazy" src="/images/core_problem_solving.jpg" alt="Problem Solving" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Problem Solving</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">Kids learn to break big challenges into steps and <em>direct</em> AI to solve them — instead of just asking it for answers. This is the skill that separates creators from consumers.</p>
@@ -185,7 +246,7 @@
         <!-- Card 2 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
           <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
-            <img src="/images/core_analytical_thinking.png" alt="Analytical Thinking" style="width: 100%; height: 100%; object-fit: cover;">
+            <img loading="lazy" src="/images/core_analytical_thinking.jpg" alt="Analytical Thinking" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Analytical Thinking</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">In a world full of AI-generated content, kids learn to question, verify, and judge what's actually true and useful. Clear thinking is becoming the new literacy.</p>
@@ -194,7 +255,7 @@
         <!-- Card 3 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
           <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
-            <img src="/images/core_creative_thinking.png" alt="Creative Thinking" style="width: 100%; height: 100%; object-fit: cover;">
+            <img loading="lazy" src="/images/core_creative_thinking.jpg" alt="Creative Thinking" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Creative Thinking</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">AI can generate, but the ideas and vision come from your child. We help them imagine, combine, and create what doesn't exist yet — the one skill AI can't replace.</p>
@@ -214,7 +275,7 @@
     <div class="container about-grid">
       <div class="about-avatar-wrap">
         <div class="avatar-circle">
-          <img src="/images/founder_avatar.png" alt="Founder Saurabh Singhal">
+          <img loading="lazy" src="/images/founder_avatar.jpg" alt="Founder Saurabh Singhal">
         </div>
       </div>
       
@@ -403,7 +464,7 @@
             <div class="project-card" onclick="openProjectModal('art')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/images/student_project_ai_art.png" alt="Generative Art">
+                <img loading="lazy" src="/images/student_project_ai_art.jpg" alt="Generative Art">
               </div>
               <div class="project-info">
                 <h4>Cyber-Tiger Generative Canvas</h4>
@@ -415,7 +476,7 @@
             <div class="project-card" onclick="openProjectModal('j1')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_1.jpeg" alt="Space Station">
+                <img loading="lazy" src="/student-projects/project_junior_1.jpeg" alt="Space Station">
               </div>
               <div class="project-info">
                 <h4>Space Station Concept Illustration</h4>
@@ -427,7 +488,7 @@
             <div class="project-card" onclick="openProjectModal('j2')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_2.jpeg" alt="Future City">
+                <img loading="lazy" src="/student-projects/project_junior_2.jpeg" alt="Future City">
               </div>
               <div class="project-info">
                 <h4>Future City Skylines Concept</h4>
@@ -439,7 +500,7 @@
             <div class="project-card" onclick="openProjectModal('j3')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_3.jpeg" alt="Ancient Temple">
+                <img loading="lazy" src="/student-projects/project_junior_3.jpeg" alt="Ancient Temple">
               </div>
               <div class="project-info">
                 <h4>Mythological Temple Reconstruction</h4>
@@ -451,7 +512,7 @@
             <div class="project-card" onclick="openProjectModal('j4')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_4.jpeg" alt="Steampunk Airship">
+                <img loading="lazy" src="/student-projects/project_junior_4.jpeg" alt="Steampunk Airship">
               </div>
               <div class="project-info">
                 <h4>Steampunk Airship Mechanics</h4>
@@ -463,7 +524,7 @@
             <div class="project-card" onclick="openProjectModal('j5')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_5.jpeg" alt="Rainforest Biome">
+                <img loading="lazy" src="/student-projects/project_junior_5.jpeg" alt="Rainforest Biome">
               </div>
               <div class="project-info">
                 <h4>Cybernetic Rainforest Biome</h4>
@@ -475,7 +536,7 @@
             <div class="project-card" onclick="openProjectModal('j6')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_6.jpeg" alt="Galactic Voyage">
+                <img loading="lazy" src="/student-projects/project_junior_6.jpeg" alt="Galactic Voyage">
               </div>
               <div class="project-info">
                 <h4>Galactic Voyage Concept Art</h4>
@@ -487,7 +548,7 @@
             <div class="project-card" onclick="openProjectModal('j7')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_7.jpeg" alt="Submarine Atlantis">
+                <img loading="lazy" src="/student-projects/project_junior_7.jpeg" alt="Submarine Atlantis">
               </div>
               <div class="project-info">
                 <h4>Deep Sea Atlantis Exploration</h4>
@@ -499,7 +560,7 @@
             <div class="project-card" onclick="openProjectModal('j8')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_8.jpeg" alt="Neon Samurai">
+                <img loading="lazy" src="/student-projects/project_junior_8.jpeg" alt="Neon Samurai">
               </div>
               <div class="project-info">
                 <h4>Neon Samurai Knight Canvas</h4>
@@ -511,7 +572,7 @@
             <div class="project-card" onclick="openProjectModal('j9')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Art</span>
-                <img src="/student-projects/project_junior_9.jpeg" alt="Solar Cruiser">
+                <img loading="lazy" src="/student-projects/project_junior_9.jpeg" alt="Solar Cruiser">
               </div>
               <div class="project-info">
                 <h4>Eco-Friendly Solar Cruiser</h4>
@@ -621,7 +682,7 @@
             <div class="project-card" onclick="openProjectModal('web')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI Analytics</span>
-                <img src="/images/student_project_web.png" alt="Weather Station Web Dashboard">
+                <img loading="lazy" src="/images/student_project_web.jpg" alt="Weather Station Web Dashboard">
               </div>
               <div class="project-info">
                 <h4>Global Weather Tracker Dashboard</h4>
@@ -632,7 +693,7 @@
             <div class="project-card" onclick="openProjectModal('vr')" style="max-width: 320px;">
               <div class="project-image">
                 <span class="project-category">AI & VR</span>
-                <img src="/images/student_project_vr_coding.png" alt="VR coding">
+                <img loading="lazy" src="/images/student_project_vr_coding.jpg" alt="VR coding">
               </div>
               <div class="project-info">
                 <h4>Virtual Universe Coding Concept</h4>
@@ -1255,7 +1316,7 @@
     <div class="modal-content">
       <button class="modal-close" onclick="closeProjectModal()">✕</button>
       <div class="modal-hero">
-        <img id="modal-img" src="" alt="Project illustration" style="display: block; width: 100%; height: 100%; object-fit: cover;">
+        <img loading="lazy" id="modal-img" src="" alt="Project illustration" style="display: block; width: 100%; height: 100%; object-fit: cover;">
         <video id="modal-video" src="" controls style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
       </div>
       <div class="modal-body">
@@ -1271,7 +1332,7 @@
     <div class="modal-content" style="max-width: 500px; padding: 0; overflow: hidden; border-radius: 24px;">
       <button class="modal-close" onclick="closeBlogReaderModal()" style="position: absolute; top: 16px; right: 16px; z-index: 10; background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">✕</button>
       <div class="modal-hero" style="height: 200px; background: #E2E8F0; position: relative;">
-        <img id="blog-modal-img" src="" alt="Blog cover image" style="width: 100%; height: 100%; object-fit: cover;">
+        <img loading="lazy" id="blog-modal-img" src="" alt="Blog cover image" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
       <div class="modal-body" style="padding: 24px; display: flex; flex-direction: column; gap: 12px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
