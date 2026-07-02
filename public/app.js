@@ -110,6 +110,7 @@ const projectData = {
 // On Page Load Initialization
 // ----------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
+  initPageLoader();
   trackVisit();
   loadGlobalSettings();
   loadTestimonials();
@@ -121,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBgSpotlight();
   initCustomCursor();
   initCarouselPagination();
+  initScrollReveal();
 });
 
 // ----------------------------------------
@@ -1115,5 +1117,110 @@ function initCarouselPagination() {
         }
       });
     });
+  });
+}
+
+// 3D Page Loader Initializer
+function initPageLoader() {
+  const loader = document.getElementById('global-3d-loader');
+  const fill = document.getElementById('loader-fill');
+  const text = document.getElementById('loader-text');
+  if (!loader || !fill || !text) return;
+  
+  let progress = 0;
+  const interval = setInterval(() => {
+    if (progress < 40) {
+      progress += Math.floor(Math.random() * 12) + 4;
+    } else if (progress < 85) {
+      progress += Math.floor(Math.random() * 6) + 1;
+    } else if (progress < 99) {
+      progress += 1;
+    }
+    
+    if (progress > 99) progress = 99;
+    
+    fill.style.width = `${progress}%`;
+    text.innerText = `${progress}%`;
+  }, 35);
+  
+  // Fade out loader on window load
+  window.addEventListener('load', () => {
+    clearInterval(interval);
+    fill.style.width = '100%';
+    text.innerText = '100%';
+    
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      document.body.classList.add('loaded');
+    }, 600);
+  });
+
+  // Fallback in case window load takes too long (e.g. 5 seconds)
+  setTimeout(() => {
+    clearInterval(interval);
+    fill.style.width = '100%';
+    text.innerText = '100%';
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      document.body.classList.add('loaded');
+    }, 400);
+  }, 5000);
+}
+
+// Automatically add scroll reveal classes to key layout blocks
+function prepareScrollReveal() {
+  // Add reveal-up to all section headers
+  document.querySelectorAll('.section-header').forEach(el => {
+    el.classList.add('reveal-up');
+  });
+
+  // Grids selectors list
+  const grids = [
+    '.skills-grid',
+    '.courses-grid',
+    '.projects-grid',
+    '.why-grid',
+    '.tools-split-grid',
+    '.testimonials-grid',
+    '.studio-grid',
+    '.admission-timeline',
+    '.blogs-grid',
+    '#faq-accordion',
+    '.contact-items'
+  ];
+
+  grids.forEach(gridSelector => {
+    document.querySelectorAll(gridSelector).forEach(grid => {
+      const cards = grid.children;
+      Array.from(cards).forEach((card, index) => {
+        card.classList.add('reveal-up');
+        // Stagger delays
+        if (index > 0 && index <= 5) {
+          card.classList.add(`reveal-delay-${index}`);
+        }
+      });
+    });
+  });
+}
+
+// Scroll Reveal Observer
+function initScrollReveal() {
+  prepareScrollReveal();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -40px 0px'
+  });
+  
+  document.querySelectorAll('.reveal-up').forEach(el => {
+    observer.observe(el);
   });
 }
