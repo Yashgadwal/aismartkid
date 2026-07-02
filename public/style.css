@@ -235,9 +235,11 @@ nav a:hover {
 .hero-section {
   padding: 80px 0;
   display: grid;
-  grid-template-cols: 1.2fr 0.8fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 60px;
   align-items: center;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.035) 0%, rgba(255, 255, 255, 0) 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .hero-content {
@@ -337,7 +339,7 @@ nav a:hover {
 
 /* Founder / About */
 .about-section {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.015) 0%, rgba(124, 58, 237, 0.015) 100%);
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -563,10 +565,18 @@ nav a:hover {
 
 /* Portfolio Projects */
 .projects-section {
-  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
+}
+
+.gallery-subsection {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
 .projects-grid {
@@ -579,7 +589,7 @@ nav a:hover {
 
 .project-card {
   background: white;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
@@ -729,7 +739,7 @@ nav a:hover {
 /* Why Us */
 .why-section {
   padding: 96px 0;
-  background: #F8FAFC;
+  background: #FFFFFF;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -781,7 +791,7 @@ nav a:hover {
 
 /* AI Tools */
 .tools-section {
-  background-color: #FFFFFF;
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -829,7 +839,7 @@ nav a:hover {
 /* Testimonials */
 .testimonials-section {
   padding: 96px 0;
-  background: #F8FAFC;
+  background: #FFFFFF;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -906,7 +916,7 @@ nav a:hover {
 
 /* Classroom Studio */
 .studio-section {
-  background-color: #FFFFFF;
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -1024,7 +1034,7 @@ nav a:hover {
 
 /* Registration Form Section */
 .enroll-section {
-  background-color: var(--color-card-bg);
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   padding: 64px 0 24px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -2151,7 +2161,7 @@ footer p {
    ---------------------------------------- */
 .blog-section {
   padding: 96px 0;
-  background: #F8FAFC;
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -2248,7 +2258,7 @@ footer p {
 /* 3 Core Skills Section */
 .core-skills-section {
   padding: 96px 0;
-  background: #F8FAFC;
+  background: #FFFFFF;
   position: relative;
 }
 
