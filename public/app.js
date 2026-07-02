@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadGallery();
   loadBlogsLanding();
   initStickyCta();
+  init3DTilt();
+  init3DBackground();
 });
 
 // ----------------------------------------
@@ -655,4 +657,119 @@ function closeBlogReaderModalOuter(event) {
   if (event.target.id === 'blog-reader-modal') {
     closeBlogReaderModal();
   }
+}
+
+// Interactive 3D tilt effects
+function init3DTilt() {
+  const cards = document.querySelectorAll('.course-card, .skill-card, .project-card, .why-card');
+  cards.forEach(card => {
+    card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+    card.style.transformStyle = 'preserve-3d';
+    
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      
+      const angleX = (yc - y) / 16;
+      const angleY = (x - xc) / 16;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.015, 1.015, 1.015)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+}
+
+// 3D Animated Canvas Background
+function init3DBackground() {
+  const canvas = document.getElementById('hero-3d-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  let width = canvas.offsetWidth;
+  let height = canvas.offsetHeight;
+  canvas.width = width;
+  canvas.height = height;
+  
+  window.addEventListener('resize', () => {
+    if (!canvas) return;
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    canvas.width = width;
+    canvas.height = height;
+  });
+
+  const particles = [];
+  const particleCount = 20;
+  const colors = [
+    { r: 37, g: 99, b: 235 },  // Primary Blue
+    { r: 124, g: 58, b: 237 }, // Secondary Purple
+    { r: 255, g: 138, b: 0 }    // Accent Orange
+  ];
+  
+  class Sphere {
+    constructor() {
+      this.reset();
+    }
+    
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.z = Math.random() * 0.8 + 0.2; // depth factor
+      this.size = (Math.random() * 40 + 20) * this.z;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.vx = (Math.random() * 0.4 - 0.2) * this.z;
+      this.vy = (Math.random() * 0.4 - 0.2) * this.z;
+      this.alpha = (Math.random() * 0.2 + 0.1) * this.z;
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      if (this.x < -100 || this.x > width + 100 || this.y < -100 || this.y > height + 100) {
+        this.reset();
+      }
+    }
+    
+    draw() {
+      const gradient = ctx.createRadialGradient(
+        this.x - this.size * 0.3,
+        this.y - this.size * 0.3,
+        this.size * 0.05,
+        this.x,
+        this.y,
+        this.size
+      );
+      gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha * 1.5})`);
+      gradient.addColorStop(0.2, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha})`);
+      gradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Sphere());
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
 }

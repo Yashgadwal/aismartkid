@@ -244,6 +244,8 @@ nav a:hover {
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .badge-tag {
@@ -305,6 +307,7 @@ nav a:hover {
   position: relative;
   display: flex;
   justify-content: center;
+  z-index: 1;
 }
 
 .hero-image-wrap::before {
