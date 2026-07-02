@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights & Future Tech Resources | AI Smart Kids Ujjain</title>
+  <meta name="description" content="Stay up to date with the latest trends in child tech literacy, AI prompts engineering, and class announcements in Ujjain.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=4">
+  <style>
+    .blog-section-wrapper {
+      padding: 140px 16px 80px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .blog-header h2 {
+      font-size: 36px;
+      font-family: var(--font-display);
+      color: var(--color-text-dark);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .blog-header p {
+      color: var(--color-text-gray);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .blogs-grid-seo {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    .blog-card {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(37, 99, 235, 0.15);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
+    }
+    .blog-image {
+      height: 200px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .blog-card:hover .blog-image img {
+      transform: scale(1.05);
+    }
+    .blog-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .blog-card-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
+      color: var(--color-text-dark);
+      margin: 0;
+    }
+    .blog-card-excerpt {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--color-text-gray);
+      margin: 0;
+    }
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0,0,0,0.03);
+      font-size: 10px;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+
+    /* Single Article Styles */
+    .article-detail-view {
+      display: none;
+    }
+    .article-card {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+      overflow: hidden;
+      padding: 40px;
+    }
+    .article-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+    .article-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--color-text-dark);
+      margin: 0 0 28px 0;
+    }
+    .article-hero-image {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: #f1f5f9;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .article-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-body {
+      color: var(--color-text-gray);
+      line-height: 1.85;
+      font-size: 14.5px;
+    }
+    .blog-paragraph {
+      margin-bottom: 20px;
+    }
+    .blog-subheading {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--color-text-dark);
+      margin-top: 36px;
+      margin-bottom: 14px;
+    }
+    .back-to-blogs {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 24px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .back-to-blogs:hover {
+      transform: translateX(-4px);
+    }
+    @media (max-width: 768px) {
+      .blogs-grid-seo {
+        grid-template-columns: 1fr;
+      }
+      .article-card {
+        padding: 24px;
+      }
+      .article-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+      .article-hero-image {
+        height: 220px;
+        margin-bottom: 24px;
+      }
+    }
+  </style>
+</head>
+<body class="mesh-glow">
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-container">
+      <a href="/" class="logo-block">
+        <img loading="lazy" src="/images/logoai.jpeg" alt="AI Smart Kids Logo" style="height: 38px; width: auto; border-radius: 8px; object-fit: contain;">
+        <div class="logo-text">
+          <h1>AI SMART KIDS</h1>
+          <span>UJJAIN'S FIRST AI INSTITUTE</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog.html">Blog</a>
+        <a href="tel:+918308507820" class="btn btn-orange" style="padding: 8px 16px; font-size:12px;">Call Mentor</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT CONTAINER -->
+  <div class="blog-section-wrapper">
+    
+    <!-- A. DIRECTORY LIST VIEW -->
+    <div id="blog-list-view" class="blog-directory-view">
+      <div class="blog-header">
+        <h2>Insights & Resource Library</h2>
+        <p>Empowering children and teenagers in Ujjain to command AI models, master programming logic, and innovate creatively.</p>
+      </div>
+      <div class="blogs-grid-seo" id="blogs-grid-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- B. INDIVIDUAL ARTICLE VIEW -->
+    <div id="blog-detail-view" class="article-detail-view">
+      <div class="back-to-blogs" onclick="showBlogList()">← Back to Articles</div>
+      <article class="article-card">
+        <div class="article-meta-row">
+          <span class="badge-tag" id="article-category" style="margin: 0; background: rgba(37,99,235,0.06); color: var(--color-primary);">Category</span>
+          <span>&bull;</span>
+          <span id="article-date">Date</span>
+        </div>
+        <h1 class="article-title" id="article-title">Title</h1>
+        <div class="article-hero-image">
+          <img id="article-image" src="" alt="Cover Image">
+        </div>
+        <div class="article-body" id="article-body">
+          <!-- Content -->
+        </div>
+      </article>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-container">
+      <div class="footer-logo">
+        <img loading="lazy" src="/images/logoai.jpeg" alt="AI Smart Kids Logo" style="height: 24px; width: auto; border-radius: 4px; object-fit: contain;">
+        <span>AI SMART KIDS</span>
+      </div>
+      <div style="text-align: center;">
+        <p style="margin: 0;">&copy; 2026 AI Smart Kids, Ujjain. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+
+    // Client-side Blog logic (Fail-Safe router)
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      
+      if (postId) {
+        loadArticleDetail(postId);
+      } else {
+        loadBlogList();
+      }
+    };
+
+    function showBlogList() {
+      // Update browser URL query
+      window.history.pushState({}, '', '/blog.html');
+      document.getElementById('blog-detail-view').style.display = 'none';
+      document.getElementById('blog-list-view').style.display = 'block';
+      loadBlogList();
+    }
+
+    async function loadBlogList() {
+      const grid = document.getElementById('blogs-grid-container');
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px 0;">Loading articles...</div>';
+      
+      try {
+        const res = await fetch('/api/blog');
+        if (res.ok) {
+          const posts = await res.json();
+          grid.innerHTML = '';
+          
+          if (posts.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px 0; color:#94A3B8;">No articles published yet.</div>';
+            return;
+          }
+          
+          posts.forEach(post => {
+            const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            });
+            
+            const card = document.createElement('article');
+            card.className = 'blog-card';
+            card.onclick = () => {
+              window.history.pushState({}, '', `/blog.html?id=${post.id}`);
+              loadArticleDetail(post.id);
+            };
+            
+            card.innerHTML = `
+              <div class="blog-image">
+                <img src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
+              </div>
+              <div class="blog-info">
+                <h4 class="blog-card-title">${post.title}</h4>
+                <p class="blog-card-excerpt">${post.excerpt || ''}</p>
+                <div class="blog-meta">
+                  <span class="badge-tag" style="background:rgba(37,99,235,0.06); color:var(--color-primary);">${post.category}</span>
+                  <span>${dateStr}</span>
+                </div>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+        }
+      } catch (err) {
+        console.error("List load failed:", err);
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:red; padding:40px 0;">Failed to load insights.</div>';
+      }
+    }
+
+    async function loadArticleDetail(id) {
+      document.getElementById('blog-list-view').style.display = 'none';
+      const detail = document.getElementById('blog-detail-view');
+      detail.style.display = 'block';
+      
+      document.getElementById('article-title').innerText = "Loading article...";
+      document.getElementById('article-body').innerHTML = "";
+      
+      try {
+        const res = await fetch(`/api/blog?id=${id}`);
+        if (res.ok) {
+          const post = await res.json();
+          
+          const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          });
+          
+          document.getElementById('article-category').innerText = post.category;
+          document.getElementById('article-date').innerText = dateStr;
+          document.getElementById('article-title').innerText = post.title;
+          document.getElementById('article-image').src = post.featuredImage || '/images/blog_default.jpg';
+          
+          // Formatter
+          const paragraphs = post.content.split('\n\n').map(p => {
+            if (p.startsWith('###')) {
+              return `<h3 class="blog-subheading">${p.replace('###', '').trim()}</h3>`;
+            }
+            return `<p class="blog-paragraph">${p.trim().replace(/\n/g, '<br>')}</p>`;
+          }).join('\n');
+          
+          document.getElementById('article-body').innerHTML = paragraphs;
+          
+          // Dynamically adjust page title for SEO benefit
+          document.title = `${post.title} | AI Smart Kids Ujjain`;
+        }
+      } catch (err) {
+        console.error("Detail load failed:", err);
+        document.getElementById('article-title').innerText = "Error loading article";
+      }
+    }
+  </script>
+</body>
+</html>
