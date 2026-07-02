@@ -199,57 +199,109 @@
       
       <div class="courses-grid">
         <!-- Junior Card -->
-        <div class="glass-card course-card glass-card-hover" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div class="glass-card course-card glass-card-hover" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 28px; border-radius: 24px;">
           <div>
-            <span class="course-badge badge-junior">AI Junior Explorers (Ages 9–12)</span>
-            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--color-text-dark); margin: 12px 0 6px 0;">3 Months &middot; 48 Sessions &middot; 4 classes per week &middot; Max 12 students per batch</h4>
-            <p class="course-desc">Where imagination meets AI. Young explorers learn to think, create, and build — not just click buttons. Through storytelling, art, and their first taste of coding logic, kids turn their own ideas into real digital creations.</p>
+            <span class="course-badge badge-junior" style="font-size: 10px; padding: 4px 10px; background: rgba(37,99,235,0.06); color: var(--color-primary); font-weight: 700; border-radius: 9999px; text-transform: uppercase;">AI Junior Explorers (Ages 9–12)</span>
+            
+            <!-- Specs Grid -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 20px 0 16px 0; border-top: 1px solid rgba(0,0,0,0.03); border-bottom: 1px solid rgba(0,0,0,0.03); padding: 12px 0;">
+              <div style="text-align: center;">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Duration</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">3 Months</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Sessions</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">48 Classes</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Frequency</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">4x / Week</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Capacity</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">Max 12</span>
+              </div>
+            </div>
+
+            <p class="course-desc" style="font-size: 12px; line-height: 1.6; color: var(--color-text-gray); margin-bottom: 20px;">A creative launchpad where kids turn their imagination into digital reality. Through storyboarding, digital art, and scratch programming, they master the fundamentals of structured AI thinking.</p>
             
             <div class="course-learn" style="margin-top: 16px;">
-              <h5 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-gray); margin-bottom: 8px;">What They Learn</h5>
-              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                <span style="font-size: 10px; background: rgba(37,99,235,0.06); color: var(--color-primary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">AI Storytelling & Comics</span>
-                <span style="font-size: 10px; background: rgba(37,99,235,0.06); color: var(--color-primary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Creative Prompt Art</span>
-                <span style="font-size: 10px; background: rgba(37,99,235,0.06); color: var(--color-primary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Scratch Coding Logic</span>
-                <span style="font-size: 10px; background: rgba(37,99,235,0.06); color: var(--color-primary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Design & Imagination</span>
+              <h5 style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-gray); margin-bottom: 12px; font-weight: 700;">Core Curriculums</h5>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-primary); font-weight: 700;">✓</span> AI Storytelling
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-primary); font-weight: 700;">✓</span> Creative Prompt Art
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-primary); font-weight: 700;">✓</span> Coding Logic
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-primary); font-weight: 700;">✓</span> Design Thinking
+                </div>
               </div>
             </div>
           </div>
           
-          <div class="course-footer" style="flex-direction: column; align-items: stretch; gap: 14px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.04);">
-            <p style="font-size: 10px; line-height: 1.5; color: var(--color-text-gray); margin: 0;">
-              3-month program &middot; Only 12 seats per batch &middot; Admission after a free demo. Batches fill fast &mdash; join the waitlist below.
-            </p>
+          <div class="course-footer" style="display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.03);">
+            <div style="font-size: 10px; color: var(--color-text-gray); text-align: center; background: rgba(0,0,0,0.015); padding: 8px; border-radius: 8px; font-weight: 500;">
+              Only 12 seats per batch. Free demo session included.
+            </div>
             <a href="#enroll-form" class="btn btn-primary" style="text-align: center; justify-content: center; width: 100%;">Join the Waitlist</a>
           </div>
         </div>
 
         <!-- Senior Card -->
-        <div class="glass-card course-card glass-card-hover" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div class="glass-card course-card glass-card-hover" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 28px; border-radius: 24px;">
           <div>
-            <span class="course-badge badge-senior">AI Teen Creators (Ages 13–16)</span>
-            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--color-text-dark); margin: 12px 0 6px 0;">3 Months &middot; 36 Sessions &middot; 3 classes per week &middot; Max 12 students per batch</h4>
-            <p class="course-desc">From consumers to creators. Teens go beyond using AI to directing it. They master structured prompting, think in systems, and build real projects — sharpening the exact skills that set them apart in school, college, and their future careers.</p>
+            <span class="course-badge badge-senior" style="font-size: 10px; padding: 4px 10px; background: rgba(124, 58, 237, 0.06); color: var(--color-secondary); font-weight: 700; border-radius: 9999px; text-transform: uppercase;">AI Teen Creators (Ages 13–16)</span>
             
-            <div class="course-learn" style="margin-top: 16px;">
-              <h5 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-gray); margin-bottom: 8px;">What They Learn</h5>
-              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                <span style="font-size: 10px; background: rgba(124, 58, 237, 0.06); color: var(--color-secondary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Advanced Prompting Formulas</span>
-                <span style="font-size: 10px; background: rgba(124, 58, 237, 0.06); color: var(--color-secondary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Marketing with AI</span>
-                <span style="font-size: 10px; background: rgba(124, 58, 237, 0.06); color: var(--color-secondary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Product Pitching</span>
-                <span style="font-size: 10px; background: rgba(124, 58, 237, 0.06); color: var(--color-secondary); padding: 4px 8px; border-radius: 6px; font-weight: 600;">Real Project Building</span>
+            <!-- Specs Grid -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 20px 0 16px 0; border-top: 1px solid rgba(0,0,0,0.03); border-bottom: 1px solid rgba(0,0,0,0.03); padding: 12px 0;">
+              <div style="text-align: center;">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Duration</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">3 Months</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Sessions</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">36 Classes</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Frequency</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">3x / Week</span>
+              </div>
+              <div style="text-align: center; border-left: 1px solid rgba(0,0,0,0.05);">
+                <span style="font-size: 8px; color: var(--color-text-gray); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Capacity</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-text-dark);">Max 12</span>
               </div>
             </div>
+
+            <p class="course-desc" style="font-size: 12px; line-height: 1.6; color: var(--color-text-gray); margin-bottom: 20px;">A project-driven cohort focused on system thinking, advanced prompting, and real product development. Teens learn to command AI to build web dashboards, automate workflows, and design products.</p>
             
-            <p style="font-size: 10px; color: var(--color-text-gray); margin-top: 16px; font-style: italic; line-height: 1.5; border-left: 2px solid rgba(124, 58, 237, 0.2); padding-left: 8px;">
-              Teens also apply AI to real-world skills — creating marketing content, pitching their own product ideas, building presentations, and personal branding — the kind of work that builds confidence and stands out on any application.
-            </p>
+            <div class="course-learn" style="margin-top: 16px;">
+              <h5 style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-gray); margin-bottom: 12px; font-weight: 700;">Core Curriculums</h5>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-secondary); font-weight: 700;">✓</span> Advanced Prompting
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-secondary); font-weight: 700;">✓</span> Marketing with AI
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-secondary); font-weight: 700;">✓</span> Product Pitching
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-text-dark); font-weight: 600;">
+                  <span style="color: var(--color-secondary); font-weight: 700;">✓</span> Real Project Building
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div class="course-footer" style="flex-direction: column; align-items: stretch; gap: 14px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.04);">
-            <p style="font-size: 10px; line-height: 1.5; color: var(--color-text-gray); margin: 0;">
-              3-month program &middot; Only 12 seats per batch &middot; Admission after a free demo. Batches fill fast &mdash; join the waitlist below.
-            </p>
+          <div class="course-footer" style="display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.03);">
+            <div style="font-size: 10px; color: var(--color-text-gray); text-align: center; background: rgba(0,0,0,0.015); padding: 8px; border-radius: 8px; font-weight: 500;">
+              Only 12 seats per batch. Free demo session included.
+            </div>
             <a href="#enroll-form" class="btn btn-primary" style="text-align: center; justify-content: center; width: 100%;">Join the Waitlist</a>
           </div>
         </div>
