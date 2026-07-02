@@ -1468,20 +1468,21 @@ footer p {
 
 .sticky-bottom-cta {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.85);
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.03);
-  padding: 16px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 10px 16px;
   z-index: 850;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform: translateY(100%);
+  transform: translateY(150%);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1494,27 +1495,48 @@ footer p {
 .sticky-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .sticky-icon {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: rgba(37, 99, 235, 0.08);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.sticky-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 .sticky-text h4 {
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .sticky-text p {
-  font-size: 10px;
+  font-size: 9px;
+  color: var(--color-text-gray);
+  margin: 2px 0 0 0;
+  line-height: 1.2;
+}
+
+.sticky-bottom-cta .btn {
+  padding: 8px 16px !important;
+  font-size: 11px !important;
+  border-radius: 12px !important;
+  flex-shrink: 0;
+  font-weight: 700;
+  box-shadow: none;
 }
 
 /* Chatbot window */
