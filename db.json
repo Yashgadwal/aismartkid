@@ -167,10 +167,10 @@
   "batches": [
     {
       "id": "batch_junior",
-      "name": "Junior Creators",
+      "name": "AI Junior Explorers",
       "ageGroup": "9–12",
       "timing": "4:00 PM - 5:30 PM",
-      "teacher": "Mr. Yash G.",
+      "teacher": "Saurabh Singhal",
       "capacity": 12,
       "seatsFilled": 8,
       "waitingListCount": 0,
@@ -178,10 +178,10 @@
     },
     {
       "id": "batch_senior",
-      "name": "Senior Innovators",
+      "name": "AI Teen Creators",
       "ageGroup": "13–16",
       "timing": "6:00 PM - 7:30 PM",
-      "teacher": "Mr. Yash G.",
+      "teacher": "Saurabh Singhal",
       "capacity": 12,
       "seatsFilled": 10,
       "waitingListCount": 2,
@@ -286,14 +286,14 @@
   "settings": {
     "instituteName": "AI Smart Kids",
     "tagline": "Ujjain's First AI Institute for Kids",
-    "phone": "+91 98260 12345",
-    "whatsapp": "+919826012345",
-    "email": "admissions@aismartkids.in",
-    "address": "102, Premium Tower, Freeganj, Ujjain, Madhya Pradesh 456010",
-    "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.653456885375!2d75.7830386!3d23.1820468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963746654261775%3A0xea8412674e2d2745!2sFreeganj%2C%20Ujjain%2C%20Madhya%20Pradesh%20456010!5e0!3m2!1sen!2sin!4v1719472300000!5m2!1sen!2sin",
+    "phone": "+91 83085 07820",
+    "whatsapp": "+918308507820",
+    "email": "",
+    "address": "B-9/8, Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain, MP 456010",
+    "googleMapsEmbed": "https://maps.google.com/maps?q=Cosmos%20Mall,%20Ujjain&t=&z=15&ie=UTF8&iwloc=&output=embed",
     "analyticsActive": true,
     "whatsappNotificationActive": true,
-    "emailNotificationActive": true,
+    "emailNotificationActive": false,
     "razorpayActive": false
   },
   "analytics": {
@@ -335,7 +335,7 @@
       },
       {
         "date": "2026-07-01",
-        "visits": 6,
+        "visits": 7,
         "leads": 0
       }
     ],
@@ -354,7 +354,7 @@
       },
       {
         "source": "Direct Traffic",
-        "count": 173
+        "count": 174
       },
       {
         "source": "Local News / Flyer",
@@ -372,7 +372,7 @@
       },
       {
         "device": "Desktop",
-        "count": 444
+        "count": 445
       },
       {
         "device": "Tablet",
@@ -382,7 +382,7 @@
     "pageViews": [
       {
         "page": "/",
-        "views": 1914
+        "views": 1915
       },
       {
         "page": "/#courses",

@@ -2230,3 +2230,38 @@ footer p {
     gap: 24px;
   }
 }
+
+/* 3 Core Skills Section */
+.core-skills-section {
+  padding: 96px 0;
+  background: #FFFFFF;
+  position: relative;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.12);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 1023px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 340px;
+    margin: 0 auto 32px auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .tools-split-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}

@@ -27,14 +27,14 @@ const defaultSchema = {
   settings: {
     instituteName: "AI Smart Kids",
     tagline: "Ujjain's First AI Institute for Kids",
-    phone: "+91 98260 12345",
-    whatsapp: "+919826012345",
-    email: "admissions@aismartkids.in",
-    address: "102, Premium Tower, Freeganj, Ujjain, MP",
-    googleMapsEmbed: "",
+    phone: "+91 83085 07820",
+    whatsapp: "+918308507820",
+    email: "",
+    address: "B-9/8, Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain, MP 456010",
+    googleMapsEmbed: "https://maps.google.com/maps?q=Cosmos%20Mall,%20Ujjain&t=&z=15&ie=UTF8&iwloc=&output=embed",
     analyticsActive: true,
     whatsappNotificationActive: true,
-    emailNotificationActive: true,
+    emailNotificationActive: false,
     razorpayActive: false
   },
   analytics: {

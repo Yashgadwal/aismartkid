@@ -6,19 +6,19 @@ const projectData = {
     title: "Cyber-Tiger Generative Canvas",
     category: "AI Art",
     img: "/images/student_project_ai_art.png",
-    desc: "Created by Kabir Rathore (Age 12) during our AI Creative Arts workshop. Kabir engineered multi-layer descriptive prompt inputs utilizing ChatGPT to map anatomical details, and Midjourney with stylization parameters to output a cyberpunk themed neon tiger canvas."
+    desc: "Created by Kabir Rathore (Age 12) during our AI Creative Arts workshop. Kabir engineered multi-layer descriptive prompt inputs utilizing ChatGPT to map anatomical details, and Leonardo AI with stylization parameters to output a cyberpunk themed neon tiger canvas."
   },
   web: {
     title: "Global Weather Tracker Dashboard",
-    category: "Web Coding",
+    category: "AI Analytics",
     img: "/images/student_project_web.png",
-    desc: "Coded by Rohan Gupta (Age 13). Rohan structured a custom HTML/CSS weather grid, and wrote a clean JavaScript async fetch sequence connecting to an open-source weather database API. The design allows families in Ujjain to search real-time metrics globally."
+    desc: "Built by Rohan Gupta (Age 13). Rohan leveraged AI-guided logic builders to structure a custom weather dashboard, connecting it to an open-source weather database API to fetch real-time metrics globally."
   },
-  bot: {
-    title: "Smart Quiz Conversational Agent",
-    category: "AI Assistant",
-    img: "/images/hero_ai_hologram.png",
-    desc: "Programmed by Isha Agrawal (Age 15). Isha built a custom interactive chat interface using Node.js logic pathways. The chatbot quizzes other kids on science questions and provides immediate prompt-based explanations depending on their response."
+  vr: {
+    title: "Virtual Universe Coding Concept",
+    category: "AI & VR",
+    img: "/images/student_project_vr_coding.png",
+    desc: "Designed by Anya Sharma (Age 14). Anya leveraged AI generation tools to design a stunning 3D virtual environment layout, drafting conceptual coding architectures and system logic to illustrate an immersive virtual learning lab."
   }
 };
 
@@ -76,16 +76,25 @@ async function loadGlobalSettings() {
     const res = await fetch('/api/settings');
     if (res.ok) {
       const data = await res.json();
-      document.getElementById('settings-phone').innerText = data.phone || '+91 98260 12345';
-      document.getElementById('settings-email').innerText = data.email || 'admissions@aismartkids.in';
-      document.getElementById('settings-address').innerText = data.address || '';
-      if (data.googleMapsEmbed) {
-        document.getElementById('settings-map').src = data.googleMapsEmbed;
+      const phoneEl = document.getElementById('settings-phone');
+      if (phoneEl) phoneEl.innerText = data.phone || '+91 83085 07820';
+      
+      const emailEl = document.getElementById('settings-email');
+      if (emailEl) emailEl.innerText = data.email || '';
+      
+      const addressEl = document.getElementById('settings-address');
+      if (addressEl) addressEl.innerText = data.address || '';
+
+      const mapEl = document.getElementById('settings-map');
+      if (mapEl && data.googleMapsEmbed) {
+        mapEl.src = data.googleMapsEmbed;
       }
-      // Set floating widgets links dynamically
-      if (data.phone) {
-        document.getElementById('floating-call-btn').href = 'tel:' + data.phone.replace(/\s+/g, '');
+      
+      const callBtn = document.getElementById('floating-call-btn');
+      if (callBtn && data.phone) {
+        callBtn.href = 'tel:' + data.phone.replace(/\s+/g, '');
       }
+      
       const whatsBtn = document.getElementById('floating-whats-btn');
       if (whatsBtn && data.whatsapp) {
         const cleanWa = data.whatsapp.replace(/\+/g, '').replace(/\s+/g, '').replace(/[^0-9]/g, '');
@@ -98,43 +107,16 @@ async function loadGlobalSettings() {
 }
 
 async function loadTestimonials() {
-  try {
-    const res = await fetch('/api/testimonials');
-    if (res.ok) {
-      const testimonials = await res.json();
-      const container = document.getElementById('testimonials-container');
-      container.innerHTML = '';
-
-      // Limit to 3 reviews on landing page
-      testimonials.slice(0, 3).forEach(t => {
-        const initials = t.name.split(' ').map(n => n[0]).join('').toUpperCase();
-        
-        let starsSvg = '';
-        for (let i = 0; i < (t.rating || 5); i++) {
-          starsSvg += `<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
-        }
-
-        const card = document.createElement('div');
-        card.className = 'glass-card testimonial-card glass-card-hover';
-        card.innerHTML = `
-          <div>
-            <div class="stars">${starsSvg}</div>
-            <p>"${t.reviewText}"</p>
-          </div>
-          <div class="test-user">
-            <div class="user-initials">${initials}</div>
-            <div class="test-user-info">
-              <h5>${t.name}</h5>
-              <p>${t.role || 'Parent'}</p>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-  } catch (err) {
-    console.error("Testimonials load fail:", err);
-  }
+  const container = document.getElementById('testimonials-container');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <div class="glass-card testimonial-card" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; border-radius: 20px; width: 100%; border: 1px dashed rgba(37,99,235,0.12);">
+      <div style="font-size: 28px; margin-bottom: 12px;">⭐</div>
+      <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--color-text-dark); margin-bottom: 8px;">Parent Reviews Coming Soon</h4>
+      <p style="font-size: 11px; color: var(--color-text-gray); margin: 0; max-width: 440px; margin: 0 auto; line-height: 1.6;">Our next batch of student creators is graduating soon! Check back to read their success stories, project creations, and feedback.</p>
+    </div>
+  `;
 }
 
 async function loadGallery() {
@@ -397,18 +379,18 @@ function matchBotResponse(query) {
   }
   if (query.includes('location') || query.includes('address') || query.includes('where') || query.includes('place') || query.includes('freeganj')) {
     return `We are located in Ujjain:
-    📍 102, Premium Tower, Freeganj, Ujjain, Madhya Pradesh 456010.
+    📍 B-9/8, Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain, MP 456010.
     Feel free to visit our futuristic studio for a guided tour!`;
   }
-  if (query.includes('founder') || query.includes('yash') || query.includes('teacher') || query.includes('mentor')) {
-    return `Our academy is founded by Mr. Yash G.
-    Yash has a structural Engineering and MBA corporate pedigree, and he personally instructs every student cohort.`;
+  if (query.includes('founder') || query.includes('yash') || query.includes('saurabh') || query.includes('teacher') || query.includes('mentor')) {
+    return `Our academy is founded by Saurabh Singhal.
+    Saurabh is an Engineer and MBA with 6+ years of hands-on experience working with AI tools at a professional level, and he leads the mentorship program at AI Smart Kids.`;
   }
-  if (query.includes('demo') || query.includes('booking') || query.includes('reserve') || query.includes('register')) {
-    return `Excellent! You can reserve a Free Demo Session by filling in the 'Admission Booking' wizard at the bottom of the page, or by sharing your contact number here. Mr. Yash will call you back!`;
+  if (query.includes('demo') || query.includes('booking') || query.includes('reserve') || query.includes('register') || query.includes('waitlist')) {
+    return `Excellent! You can join the Waitlist by filling in the 'Admission Booking' wizard at the bottom of the page, or by sharing your contact number here. Our team will contact you shortly!`;
   }
-  if (query.includes('contact') || query.includes('phone') || query.includes('whatsapp') || query.includes('email') || query.includes('call')) {
-    return `You can call or WhatsApp Mr. Yash directly at +91 98260 12345, or email admissions@aismartkids.in. We are happy to talk!`;
+  if (query.includes('contact') || query.includes('phone') || query.includes('whatsapp') || query.includes('call')) {
+    return `You can call or WhatsApp us directly at +91 83085 07820. We are happy to talk!`;
   }
   if (query.includes('thanks') || query.includes('thank you') || query.includes('ok') || query.includes('hello') || query.includes('hi')) {
     return `Hello! Let me know if you need any other details. I'm here to help you get started with Ujjain's first AI academy!`;
