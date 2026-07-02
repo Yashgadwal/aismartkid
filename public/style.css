@@ -2678,4 +2678,30 @@ body.loaded .hero-image-wrap {
   transform: scale(1) translateY(0);
 }
 
+/* Custom styling for Cohort Cards (Borders & Glow Hovers) */
+.course-card-junior {
+  border: 1.5px solid rgba(37, 99, 235, 0.15) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(37, 99, 235, 0.02) 100%) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.course-card-junior:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  border-color: rgba(37, 99, 235, 0.45) !important;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1), 0 0 30px rgba(37, 99, 235, 0.04) !important;
+}
+
+.course-card-senior {
+  border: 1.5px solid rgba(124, 58, 237, 0.15) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(124, 58, 237, 0.02) 100%) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.course-card-senior:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  border-color: rgba(124, 58, 237, 0.45) !important;
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1), 0 0 30px rgba(124, 58, 237, 0.04) !important;
+}
+
+
 
