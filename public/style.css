@@ -2482,3 +2482,25 @@ footer p {
     display: none !important;
   }
 }
+
+/* Instagram-style Dot Indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #CBD5E1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+  background-color: var(--color-primary);
+  transform: scale(1.4);
+}

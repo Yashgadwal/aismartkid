@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   init3DBackground();
   initBgSpotlight();
   initCustomCursor();
+  initCarouselPagination();
 });
 
 // ----------------------------------------
@@ -975,4 +976,47 @@ function scrollCarousel(button, direction) {
   if (!card) return;
   const scrollAmount = (card.offsetWidth + 24) * direction; // card width + CSS gap
   track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
+
+// Instagram-style Dot Indicators Initializer
+function initCarouselPagination() {
+  document.querySelectorAll('.carousel-wrapper').forEach((wrapper) => {
+    const track = wrapper.querySelector('.carousel-track');
+    const cards = track.querySelectorAll('.project-card');
+    if (!track || cards.length === 0) return;
+    
+    // Clear any existing dots first
+    const existingDots = wrapper.querySelector('.carousel-dots');
+    if (existingDots) existingDots.remove();
+    
+    // Create dots container
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'carousel-dots';
+    wrapper.appendChild(dotsContainer);
+    
+    // Create dots based on card count
+    cards.forEach((card, i) => {
+      const dot = document.createElement('div');
+      dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => {
+        const cardWidth = card.offsetWidth + 24;
+        track.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+      });
+      dotsContainer.appendChild(dot);
+    });
+    
+    // Update active dot on scroll
+    track.addEventListener('scroll', () => {
+      const cardWidth = cards[0].offsetWidth + 24;
+      if (cardWidth <= 24) return;
+      const activeIndex = Math.round(track.scrollLeft / cardWidth);
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        if (i === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    });
+  });
 }
