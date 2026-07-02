@@ -463,7 +463,7 @@
       },
       {
         "date": "2026-07-02",
-        "visits": 84,
+        "visits": 85,
         "leads": 1
       }
     ],
@@ -490,7 +490,7 @@
       },
       {
         "source": "localhost",
-        "count": 5
+        "count": 6
       }
     ],
     "deviceTypes": [
@@ -500,7 +500,7 @@
       },
       {
         "device": "Desktop",
-        "count": 522
+        "count": 523
       },
       {
         "device": "Tablet",
@@ -510,7 +510,7 @@
     "pageViews": [
       {
         "page": "/",
-        "views": 1999
+        "views": 2000
       },
       {
         "page": "/#courses",

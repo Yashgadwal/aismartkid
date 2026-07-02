@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Static Pages -->
   <url>
     <loc>https://aismartkid.vercel.app/</loc>
     <lastmod>2026-07-02</lastmod>
@@ -13,13 +14,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aismartkid.vercel.app/allinoneqr.html</loc>
+    <loc>https://aismartkid.vercel.app/blog.html</loc>
     <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aismartkid.vercel.app/blog.html</loc>
+    <loc>https://aismartkid.vercel.app/blog</loc>
     <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -35,5 +36,67 @@
     <lastmod>2026-07-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- Dynamic Blog Posts (SSR Slugs) -->
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/ai-classes-for-kids-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/why-every-child-in-ujjain-should-learn-artificial-intelligence-before-2030</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/top-coding-classes-for-kids-in-ujjain-which-one-should-you-choose</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/10-future-skills-every-student-in-ujjain-must-learn</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/how-ai-helps-children-improve-creativity-and-problem-solving</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/parents-guide-to-choosing-the-best-ai-coding-institute-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/screen-time-vs-smart-learning-how-ai-education-benefits-kids</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/top-7-career-opportunities-your-child-can-prepare-for-with-ai-skills</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/how-ai-classes-build-confidence-logic-communication-skills-in-kids</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/why-ai-smart-kids-is-becoming-the-preferred-ai-learning-center-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
