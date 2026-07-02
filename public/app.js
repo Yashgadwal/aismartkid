@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initStickyCta();
   init3DTilt();
   init3DBackground();
+  initBgSpotlight();
+  initCustomCursor();
 });
 
 // ----------------------------------------
@@ -772,4 +774,90 @@ function init3DBackground() {
   }
   
   animate();
+}
+
+// Background Glow Spotlight Cursor Follower
+function initBgSpotlight() {
+  if (window.innerWidth < 1024) return;
+
+  const spotlight = document.createElement('div');
+  spotlight.className = 'bg-glow-spotlight';
+  document.body.appendChild(spotlight);
+
+  window.addEventListener('mousemove', e => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+}
+
+// Custom Cursor trailing logic
+function initCustomCursor() {
+  // Only initialize on desktop viewports (1024px and wider)
+  if (window.innerWidth < 1024) return;
+
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'custom-cursor-dot';
+  const cursorOutline = document.createElement('div');
+  cursorOutline.className = 'custom-cursor-outline';
+
+  document.body.appendChild(cursorDot);
+  document.body.appendChild(cursorOutline);
+
+  let mouseX = -100, mouseY = -100;
+  let cursorX = -100, cursorY = -100;
+  let isHovered = false;
+  let isClick = false;
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Position dot instantly
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+  });
+
+  // Outline follow interpolation loop
+  function animateOutline() {
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
+    
+    let scaleStr = '';
+    if (isHovered) {
+      scaleStr = 'scale(1.4)';
+    } else if (isClick) {
+      scaleStr = 'scale(0.8)';
+    }
+    
+    cursorOutline.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) ${scaleStr}`;
+    
+    requestAnimationFrame(animateOutline);
+  }
+  animateOutline();
+
+  // Event delegation to capture dynamically loaded links/cards
+  document.addEventListener('mouseover', e => {
+    const target = e.target.closest('a, button, .btn, .course-card, .skill-card, .project-card, .why-card, .faq-question, .chatbot-btn, .testimonial-card');
+    if (target) {
+      isHovered = true;
+      cursorOutline.classList.add('cursor-hover-active');
+      cursorDot.classList.add('cursor-hover-active');
+    }
+  });
+
+  document.addEventListener('mouseout', e => {
+    const target = e.target.closest('a, button, .btn, .course-card, .skill-card, .project-card, .why-card, .faq-question, .chatbot-btn, .testimonial-card');
+    if (target) {
+      isHovered = false;
+      cursorOutline.classList.remove('cursor-hover-active');
+      cursorDot.classList.remove('cursor-hover-active');
+    }
+  });
+
+  window.addEventListener('mousedown', () => {
+    isClick = true;
+  });
+
+  window.addEventListener('mouseup', () => {
+    isClick = false;
+  });
 }

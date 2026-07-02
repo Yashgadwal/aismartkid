@@ -2269,3 +2269,76 @@ footer p {
     gap: 20px;
   }
 }
+
+/* Background Glowing Spotlight Tracking the Mouse */
+.bg-glow-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, -600px) var(--mouse-y, -600px),
+    rgba(37, 99, 235, 0.07) 0%,
+    rgba(124, 58, 237, 0.03) 45%,
+    transparent 80%
+  );
+  will-change: background;
+}
+
+/* Custom Interactive Cursor trail */
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate3d(-50%, -50%, 0);
+  transition: background-color 0.3s ease;
+  will-change: transform;
+}
+
+.custom-cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-50%, -50%, 0);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Hover active state alterations */
+.custom-cursor-dot.cursor-hover-active {
+  background-color: var(--color-accent-orange);
+  width: 6px;
+  height: 6px;
+}
+
+.custom-cursor-outline.cursor-hover-active {
+  border-color: var(--color-accent-orange);
+  background-color: rgba(255, 138, 0, 0.08);
+  width: 56px;
+  height: 56px;
+}
+
+/* Hide default cursor on desktop screens */
+@media (min-width: 1024px) {
+  body {
+    cursor: none;
+  }
+  a, button, .btn, .course-card, .skill-card, .project-card, .why-card, .faq-question, .chatbot-btn, .testimonial-card {
+    cursor: none !important;
+  }
+}
