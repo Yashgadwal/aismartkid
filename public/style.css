@@ -2537,29 +2537,71 @@ footer p {
   perspective: 1200px;
 }
 
-/* 3D Glass Tube Cylinder Container */
-.loader-3d-container {
-  width: 280px;
-  height: 16px;
-  position: relative;
-  transform: rotateX(25deg) rotateY(-20deg);
-  transform-style: preserve-3d;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 40px rgba(37, 99, 235, 0.15);
-  border-radius: 99px;
-  margin: 16px 0;
+/* Animated Cartoon Robot Loading styles */
+.robot-animation {
+  overflow: visible;
 }
 
-/* Neon Backglow overlay */
-.loader-3d-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(124, 58, 237, 0) 70%);
-  filter: blur(20px);
-  pointer-events: none;
+.robot-floating {
+  animation: float-anim 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.robot-shadow {
+  animation: shadow-anim 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.robot-left-arm {
+  transform-origin: 25px 44px;
+  animation: left-arm-sway 2.2s ease-in-out infinite;
+}
+
+.robot-right-arm {
+  transform-origin: 75px 44px;
+  animation: wave-anim 2.2s ease-in-out infinite;
+}
+
+.robot-flame {
+  animation: flame-flicker 0.15s ease-in-out infinite alternate;
+  transform-origin: 50px 70px;
+}
+
+.robot-light {
+  animation: light-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes float-anim {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shadow-anim {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(0.85); opacity: 0.35; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+@keyframes wave-anim {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-35deg); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes left-arm-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes flame-flicker {
+  0% { transform: scaleY(1) scaleX(1); opacity: 0.9; }
+  100% { transform: scaleY(1.3) scaleX(0.9); opacity: 1; }
+}
+
+@keyframes light-pulse {
+  0% { fill: var(--color-secondary); filter: drop-shadow(0 0 2px var(--color-secondary)); }
+  100% { fill: #f43f5e; filter: drop-shadow(0 0 8px #f43f5e); }
 }
 
 /* Scroll Reveal Classes */

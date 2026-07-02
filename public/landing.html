@@ -19,27 +19,42 @@
 </head>
 <body class="mesh-glow">
 
-  <!-- 3D LOADING OVERLAY -->
+  <!-- ANIMATED CARTOON LOADER OVERLAY -->
   <div id="global-3d-loader">
     <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <!-- Title -->
-      <h2 style="font-family: var(--font-display); font-size: 24px; font-weight: 800; margin-bottom: 20px; letter-spacing: 0.1em; background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI SMART KIDS</h2>
+      <!-- Cute Animated Cartoon Robot -->
+      <svg class="robot-animation" viewBox="0 0 100 100" style="width: 140px; height: 140px; margin-bottom: 16px;">
+        <ellipse cx="50" cy="88" rx="22" ry="4" fill="rgba(0,0,0,0.25)" class="robot-shadow" />
+        <g class="robot-floating">
+          <line x1="50" y1="25" x2="50" y2="15" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" />
+          <circle cx="50" cy="12" r="4" fill="var(--color-secondary)" class="robot-light" />
+          
+          <rect x="22" y="42" width="6" height="20" rx="3" fill="#94a3b8" class="robot-left-arm" />
+          <rect x="72" y="42" width="6" height="20" rx="3" fill="#94a3b8" class="robot-right-arm" />
+          
+          <rect x="35" y="22" width="30" height="22" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2.5" />
+          <rect x="41" y="28" width="18" height="10" rx="3" fill="#0f172a" />
+          <circle cx="47" cy="33" r="2" fill="#38bdf8" class="robot-eye" />
+          <circle cx="53" cy="33" r="2" fill="#38bdf8" class="robot-eye" />
+          
+          <rect x="32" y="42" width="36" height="28" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2.5" />
+          <rect x="42" y="49" width="16" height="8" rx="2" fill="#0f172a" />
+          <path d="M45 53 Q50 51 55 53" stroke="var(--color-primary)" stroke-width="1.5" fill="none" stroke-linecap="round" class="robot-pulse" />
+          
+          <path d="M46 70 h8 v3 l-4 5 l-4 -5 z" fill="var(--color-orange)" class="robot-flame" />
+        </g>
+      </svg>
       
-      <!-- 3D Bar -->
-      <div class="loader-3d-container">
-        <!-- Backglow -->
-        <div class="loader-3d-glow"></div>
-        <!-- Back Glass Tube -->
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 99px; box-shadow: inset 0 2px 10px rgba(255,255,255,0.05); overflow:hidden;">
-          <!-- Glowing Liquid -->
-          <div id="loader-fill" style="height:100%; width:0%; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%); box-shadow: 0 0 25px var(--color-primary), inset 0 2px 6px rgba(255,255,255,0.4); border-radius: 99px; transition: width 0.3s ease;"></div>
-        </div>
-        <!-- 3D Highlights glass shine overlay -->
-        <div style="position: absolute; top:2px; left:2px; right:2px; height:35%; background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%); border-radius: 99px; pointer-events: none;"></div>
+      <!-- Title -->
+      <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 800; margin-bottom: 24px; letter-spacing: 0.1em; background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI SMART KIDS</h2>
+      
+      <!-- Flat Progress Bar -->
+      <div style="width: 200px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <div id="loader-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%); border-radius: 99px; transition: width 0.3s ease;"></div>
       </div>
       
       <!-- Percentage Text -->
-      <div id="loader-text" style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: #94A3B8; margin-top: 10px;">0%</div>
+      <div id="loader-text" style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #94A3B8;">0%</div>
     </div>
   </div>
 
