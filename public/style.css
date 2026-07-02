@@ -2393,6 +2393,21 @@ footer p {
   }
 }
 
+/* Restore default system cursor on text-heavy/document content pages */
+.default-cursor-page,
+.default-cursor-page body {
+  cursor: auto !important;
+}
+.default-cursor-page a,
+.default-cursor-page button,
+.default-cursor-page .btn,
+.default-cursor-page .blog-card,
+.default-cursor-page .back-to-blogs,
+.default-cursor-page .studio-item {
+  cursor: pointer !important;
+}
+
+
 /* Skeleton Loading Shimmer Effect */
 .skeleton-loader {
   background: #F1F5F9;
