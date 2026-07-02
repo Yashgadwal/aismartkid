@@ -120,21 +120,27 @@
       <div class="skills-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
         <!-- Card 1 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
-          <div class="skill-icon-wrap" style="width: 44px; height: 44px; border-radius: 12px; background: rgba(37, 99, 235, 0.06); display: flex; align-items: center; justify-content: center; color: var(--color-primary); font-size: 20px;">🧩</div>
+          <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+            <img src="/images/core_problem_solving.png" alt="Problem Solving" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Problem Solving</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">Kids learn to break big challenges into steps and <em>direct</em> AI to solve them — instead of just asking it for answers. This is the skill that separates creators from consumers.</p>
         </div>
         
         <!-- Card 2 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
-          <div class="skill-icon-wrap" style="width: 44px; height: 44px; border-radius: 12px; background: rgba(124, 58, 237, 0.06); display: flex; align-items: center; justify-content: center; color: var(--color-secondary); font-size: 20px;">🔍</div>
+          <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+            <img src="/images/core_analytical_thinking.png" alt="Analytical Thinking" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Analytical Thinking</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">In a world full of AI-generated content, kids learn to question, verify, and judge what's actually true and useful. Clear thinking is becoming the new literacy.</p>
         </div>
         
         <!-- Card 3 -->
         <div class="glass-card skill-card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease;">
-          <div class="skill-icon-wrap" style="width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 138, 0, 0.06); display: flex; align-items: center; justify-content: center; color: var(--color-accent-orange); font-size: 20px;">🎨</div>
+          <div class="skill-icon-wrap" style="width: 100%; height: 140px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+            <img src="/images/core_creative_thinking.png" alt="Creative Thinking" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-dark);">Creative Thinking</h4>
           <p style="font-size: 11px; line-height: 1.6; color: var(--color-text-gray); margin: 0;">AI can generate, but the ideas and vision come from your child. We help them imagine, combine, and create what doesn't exist yet — the one skill AI can't replace.</p>
         </div>
@@ -412,7 +418,15 @@
       </div>
       
       <div class="studio-grid" id="gallery-container">
-        <!-- Rendered dynamically -->
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -463,7 +477,24 @@
     </div>
     
     <div class="blogs-grid" id="blogs-container">
-      <!-- Loaded dynamically via API -->
+      <div class="skeleton-card">
+        <div class="skeleton-image skeleton-loader"></div>
+        <div class="skeleton-title skeleton-loader"></div>
+        <div class="skeleton-text skeleton-loader"></div>
+        <div class="skeleton-text short skeleton-loader"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-image skeleton-loader"></div>
+        <div class="skeleton-title skeleton-loader"></div>
+        <div class="skeleton-text skeleton-loader"></div>
+        <div class="skeleton-text short skeleton-loader"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-image skeleton-loader"></div>
+        <div class="skeleton-title skeleton-loader"></div>
+        <div class="skeleton-text skeleton-loader"></div>
+        <div class="skeleton-text short skeleton-loader"></div>
+      </div>
     </div>
   </section>
 
