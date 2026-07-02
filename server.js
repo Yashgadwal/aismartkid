@@ -710,6 +710,86 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/admin/index.html'));
 });
 
+// Blog SEO Listing Route
+app.get('/blog', (req, res) => {
+  const db = readDB();
+  const publishedPosts = db.blogs.filter(b => b.status === 'Published');
+  
+  const templatePath = path.join(__dirname, 'public', 'blog-list-template.html');
+  if (!fs.existsSync(templatePath)) {
+    return res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
+  
+  let html = fs.readFileSync(templatePath, 'utf-8');
+  
+  const listHtml = publishedPosts.map(post => {
+    const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    return `
+      <article class="blog-card" onclick="location.href='/blog/${post.id}'">
+        <div class="blog-image">
+          <img loading="lazy" src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
+        </div>
+        <div class="blog-info">
+          <h4 class="blog-card-title">${post.title}</h4>
+          <p class="blog-card-excerpt">${post.excerpt || ''}</p>
+          <div class="blog-meta">
+            <span class="badge-tag">${post.category}</span>
+            <span>${dateStr}</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('\n');
+  
+  html = html.replace(/{{BLOGS_GRID}}/g, listHtml);
+  res.send(html);
+});
+
+// Blog SEO Individual Article Route
+app.get('/blog/:id', (req, res) => {
+  const postId = req.params.id;
+  const db = readDB();
+  const post = db.blogs.find(b => b.id === postId && b.status === 'Published');
+  
+  if (!post) {
+    return res.redirect('/blog');
+  }
+  
+  const templatePath = path.join(__dirname, 'public', 'blog-template.html');
+  if (!fs.existsSync(templatePath)) {
+    return res.redirect('/blog');
+  }
+  
+  let html = fs.readFileSync(templatePath, 'utf-8');
+  
+  const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+  
+  const paragraphs = post.content.split('\n\n').map(p => {
+    if (p.startsWith('###')) {
+      return `<h3 class="blog-subheading">${p.replace('###', '').trim()}</h3>`;
+    }
+    return `<p class="blog-paragraph">${p.trim().replace(/\n/g, '<br>')}</p>`;
+  }).join('\n');
+  
+  html = html.replace(/{{SEO_TITLE}}/g, post.seoTitle || `${post.title} | AI Smart Kids Ujjain`);
+  html = html.replace(/{{SEO_DESCRIPTION}}/g, post.seoDescription || post.excerpt);
+  html = html.replace(/{{BLOG_TITLE}}/g, post.title);
+  html = html.replace(/{{BLOG_CATEGORY}}/g, post.category);
+  html = html.replace(/{{BLOG_DATE}}/g, dateStr);
+  html = html.replace(/{{BLOG_IMAGE}}/g, post.featuredImage || '/images/blog_default.jpg');
+  html = html.replace(/{{BLOG_CONTENT}}/g, paragraphs);
+  
+  res.send(html);
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
