@@ -772,12 +772,53 @@ app.get('/blog/:id', (req, res) => {
     year: 'numeric'
   });
   
-  const paragraphs = post.content.split('\n\n').map(p => {
-    if (p.startsWith('###')) {
-      return `<h3 class="blog-subheading">${p.replace('###', '').trim()}</h3>`;
+function parseMarkdown(text) {
+  if (!text) return '';
+  // Escape HTML entities to prevent raw HTML injection issues
+  let clean = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Parse headings: ### heading -> <h3 class="blog-subheading">heading</h3>
+  clean = clean.replace(/^### (.*?)$/gm, '<h3 class="blog-subheading">$1</h3>');
+
+  // Parse bold: **text** -> <strong>text</strong>
+  clean = clean.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+  // Parse italic: *text* -> <em>text</em>
+  clean = clean.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+  // Parse horizontal rules: --- -> <hr style="border: 0; border-top: 1.5px solid rgba(37,99,235,0.08); margin: 32px 0;">
+  clean = clean.replace(/^---$/gm, '<hr style="border: 0; border-top: 1.5px solid rgba(37,99,235,0.08); margin: 32px 0;">');
+
+  // Parse bullet points: * point -> <li class="blog-list-item">point</li>
+  clean = clean.replace(/^\s*\*\s+(.*?)$/gm, '<li class="blog-list-item">$1</li>');
+
+  // Parse numbered lists: 1. point -> <li class="blog-list-item-num">point</li>
+  clean = clean.replace(/^\s*(\d+)\.\s+(.*?)$/gm, '<li class="blog-list-item-num">$2</li>');
+
+  // Group lists into <ul> and <ol> tags
+  clean = clean.replace(/(<li class="blog-list-item">.*?<\/li>\n?)+/gs, (match) => {
+    return `<ul style="margin-bottom: 20px;">\n${match}</ul>\n`;
+  });
+  clean = clean.replace(/(<li class="blog-list-item-num">.*?<\/li>\n?)+/gs, (match) => {
+    return `<ol style="margin-bottom: 20px;">\n${match}</ol>\n`;
+  });
+
+  // Split double newlines and wrap ordinary lines in styled <p class="blog-paragraph"> tags
+  return clean.split('\n\n').map(p => {
+    p = p.trim();
+    if (!p) return '';
+    // Skip tags that already form block elements
+    if (p.startsWith('<h') || p.startsWith('<hr') || p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<li')) {
+      return p;
     }
-    return `<p class="blog-paragraph">${p.trim().replace(/\n/g, '<br>')}</p>`;
+    return `<p class="blog-paragraph" style="font-weight: 400; color: var(--color-text-gray); margin-bottom: 20px;">${p.replace(/\n/g, '<br>')}</p>`;
   }).join('\n');
+}
+
+  const parsedContent = parseMarkdown(post.content);
   
   html = html.replace(/{{SEO_TITLE}}/g, post.seoTitle || `${post.title} | AI Smart Kids Ujjain`);
   html = html.replace(/{{SEO_DESCRIPTION}}/g, post.seoDescription || post.excerpt);
@@ -785,7 +826,7 @@ app.get('/blog/:id', (req, res) => {
   html = html.replace(/{{BLOG_CATEGORY}}/g, post.category);
   html = html.replace(/{{BLOG_DATE}}/g, dateStr);
   html = html.replace(/{{BLOG_IMAGE}}/g, post.featuredImage || '/images/blog_default.jpg');
-  html = html.replace(/{{BLOG_CONTENT}}/g, paragraphs);
+  html = html.replace(/{{BLOG_CONTENT}}/g, parsedContent);
   
   res.send(html);
 });
