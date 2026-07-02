@@ -265,8 +265,8 @@ nav a:hover {
 }
 
 .hero-content h2 {
-  font-size: 52px;
-  line-height: 1.05;
+  font-size: 34px;
+  line-height: 1.15;
   color: var(--color-text-dark);
 }
 
@@ -1892,7 +1892,7 @@ footer p {
 
 @media (max-width: 480px) {
   .hero-content h2 {
-    font-size: 38px;
+    font-size: 28px;
   }
   .btn-orange {
     width: 100%;
