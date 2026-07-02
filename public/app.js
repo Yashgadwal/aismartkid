@@ -796,7 +796,7 @@ async function loadBlogsLanding() {
 
         card.innerHTML = `
           <div class="blog-image">
-            <img src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
+            <img src="${post.featuredImage || '/images/blog_default.png'}" alt="${post.title}">
           </div>
           <div class="blog-info">
             <h4 style="font-family: var(--font-display); font-weight:800; font-size: 13px; line-height: 1.35; color: var(--color-text-dark);">${post.title}</h4>
@@ -827,7 +827,7 @@ async function openBlogReader(id) {
         year: 'numeric'
       });
 
-      document.getElementById('blog-modal-img').src = post.featuredImage || '/images/blog_default.jpg';
+      document.getElementById('blog-modal-img').src = post.featuredImage || '/images/blog_default.png';
       document.getElementById('blog-modal-category').innerText = post.category;
       document.getElementById('blog-modal-date').innerText = dateStr;
       document.getElementById('blog-modal-title').innerText = post.title;

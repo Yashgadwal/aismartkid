@@ -1,6 +1,21 @@
 {
   "leads": [
     {
+      "id": "lead_1783008139726",
+      "parentName": "test demo",
+      "childName": "Inquirer Student",
+      "age": 15,
+      "school": "",
+      "class": "",
+      "phone": "9575131552",
+      "email": "",
+      "preferredBatch": "Senior Innovators (6:00 PM)",
+      "status": "New",
+      "notes": "Initial enquiry: Inquiry booked via mobile QR hub portal.",
+      "followUpDate": "",
+      "createdAt": "2026-07-02T16:02:19.726Z"
+    },
+    {
       "id": "lead_1782548979715",
       "parentName": "yash gadwar",
       "childName": "test child",
@@ -195,7 +210,7 @@
       "content": "Prompt engineering is not just for software engineers anymore. In today's AI-centric world, the ability to clearly direct artificial intelligence is becoming a core literacy skill. At AI Smart Kids, we teach children how to write structured prompts, iterate on AI responses, and break down complex projects into granular tasks.\n\n### Why it matters:\n1. **Critical Thinking**: To guide an AI, a student must first understand what they want to achieve and how to describe it logicially.\n2. **Immediate Feedback**: Testing prompts provides instant results, encouraging exploration and learning from failure.\n3. **Empowerment**: Kids transition from being consumers of technology to creators who leverage AI to bring their imaginations to life.",
       "excerpt": "Discover why prompt engineering is the new fundamental skill for the modern generation and how children in Ujjain are learning to co-create with AI.",
       "category": "Education",
-      "featuredImage": "/images/blog_prompt.jpg",
+      "featuredImage": "/images/blog_prompt.png",
       "seoTitle": "Learn Prompt Engineering for Kids | AI Smart Kids Ujjain",
       "seoDescription": "Prompt engineering is a critical future literacy. Find out how children age 9-16 learn to command ChatGPT, Claude, and Midjourney to build cool projects.",
       "status": "Published",
@@ -207,7 +222,7 @@
       "content": "Ujjain is a city of heritage, and now it becomes a hub for futuristic learning! AI Smart Kids is officially open in the heart of Ujjain, offering kids a direct gateway to cutting-edge tools like ChatGPT, Midjourney, Cursor, and Canva.\n\nOur classroom features futuristic 3D workspaces, small batch sizes capped at 12 students, and a 100% practical, project-based curriculum where kids build actual websites, write code, create generative art, and compile their own portfolios.",
       "excerpt": "We are proud to announce the launch of AI Smart Kids in Ujjain. Read about our mission to equip children with essential AI and tech skills.",
       "category": "Announcement",
-      "featuredImage": "/images/blog_launch.jpg",
+      "featuredImage": "/images/blog_launch.png",
       "seoTitle": "First AI Institute for Kids in Ujjain | AI Smart Kids",
       "seoDescription": "AI Smart Kids opens in Ujjain! We provide premium, practical, project-based AI training for kids aged 9-16. Join us for a free demo session.",
       "status": "Published",
@@ -342,8 +357,8 @@
       },
       {
         "date": "2026-07-02",
-        "visits": 68,
-        "leads": 0
+        "visits": 69,
+        "leads": 1
       }
     ],
     "trafficSources": [
@@ -361,7 +376,7 @@
       },
       {
         "source": "Direct Traffic",
-        "count": 242
+        "count": 243
       },
       {
         "source": "Local News / Flyer",
@@ -375,7 +390,7 @@
     "deviceTypes": [
       {
         "device": "Mobile",
-        "count": 826
+        "count": 827
       },
       {
         "device": "Desktop",
@@ -389,7 +404,7 @@
     "pageViews": [
       {
         "page": "/",
-        "views": 1983
+        "views": 1984
       },
       {
         "page": "/#courses",
