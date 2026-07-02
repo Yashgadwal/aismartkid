@@ -19,6 +19,90 @@ const projectData = {
     category: "AI & VR",
     img: "/images/student_project_vr_coding.png",
     desc: "Designed by Anya Sharma (Age 14). Anya leveraged AI generation tools to design a stunning 3D virtual environment layout, drafting conceptual coding architectures and system logic to illustrate an immersive virtual learning lab."
+  },
+  j1: {
+    title: "Space Station Concept Illustration",
+    category: "AI Art",
+    img: "/student-projects/project_junior_1.jpeg",
+    desc: "Created by Aarav S. (Age 10). Aarav designed a multi-layer spaceship module prompt, utilizing ChatGPT and Midjourney to render this complex hyper-realistic space dock concept."
+  },
+  j2: {
+    title: "Future City Skylines Concept",
+    category: "AI Art",
+    img: "/student-projects/project_junior_2.jpeg",
+    desc: "Created by Yash V. (Age 11). Yash generated futuristic urban architectural forms using descriptive style guides and AI render tools during our Creative Design cohort."
+  },
+  j3: {
+    title: "Mythological Temple Reconstruction",
+    category: "AI Art",
+    img: "/student-projects/project_junior_3.jpeg",
+    desc: "Created by Ananya P. (Age 9). Ananya used natural language descriptors to instruct AI image builders to draft this detailed ancient temple scene."
+  },
+  j4: {
+    title: "Steampunk Airship Mechanics",
+    category: "AI Art",
+    img: "/student-projects/project_junior_4.jpeg",
+    desc: "Created by Parth K. (Age 12). Parth compiled detailed mechanical descriptors to generate this retro-futuristic steampunk flying airship design."
+  },
+  j5: {
+    title: "Cybernetic Rainforest Biome",
+    category: "AI Art",
+    img: "/student-projects/project_junior_5.jpeg",
+    desc: "Created by Diya N. (Age 10). Diya prompt-engineered detailed neon vegetation forms, blending organic biomes with synthetic cyberpunk lighting details."
+  },
+  j6: {
+    title: "Galactic Voyage Concept Art",
+    category: "AI Art",
+    img: "/student-projects/project_junior_6.jpeg",
+    desc: "Created by Vivaan S. (Age 11). Vivaan leveraged AI space render templates to build an atmospheric space cruiser traveling through deep cosmos."
+  },
+  j7: {
+    title: "Deep Sea Atlantis Exploration",
+    category: "AI Art",
+    img: "/student-projects/project_junior_7.jpeg",
+    desc: "Created by Tanvi M. (Age 12). Tanvi engineered prompts outlining coral reefs, underwater cities, and ancient submarine ruins."
+  },
+  j8: {
+    title: "Neon Samurai Knight Canvas",
+    category: "AI Art",
+    img: "/student-projects/project_junior_8.jpeg",
+    desc: "Created by Dev J. (Age 11). Dev combined traditional Japanese armor styles with futuristic neon graphics to design this action canvas."
+  },
+  j9: {
+    title: "Eco-Friendly Solar Cruiser",
+    category: "AI Art",
+    img: "/student-projects/project_junior_9.jpeg",
+    desc: "Created by Myra K. (Age 10). Myra designed a concept solar-powered yacht, directing generative algorithms to output a sleek minimalist cruiser design."
+  },
+  jv1: {
+    title: "Interactive Solar System Simulation",
+    category: "AI Programming",
+    img: "/student-projects/project_junior_v1.mp4",
+    desc: "Built by Kabir R. (Age 12). Kabir prompt-engineered code templates to structure an interactive solar system simulator, rendering motion trails and orbital mathematics."
+  },
+  jv2: {
+    title: "AI-Assisted Adventure Animation",
+    category: "AI Animation",
+    img: "/student-projects/project_junior_v2.mp4",
+    desc: "Created by Siya G. (Age 11). Siya used AI text-to-video generators to produce custom animation clips, editing them into a cohesive story sequence."
+  },
+  jv3: {
+    title: "Smart Robot Navigation Routine",
+    category: "AI Robotics",
+    img: "/student-projects/project_junior_v3.mp4",
+    desc: "Built by Advait T. (Age 10). Advait directed generative logic engines to write pathfinding algorithms, showing active obstacle avoidance simulation."
+  },
+  jv4: {
+    title: "Holographic Interface Animation",
+    category: "AI Design",
+    img: "/student-projects/project_junior_v4.mp4",
+    desc: "Designed by Isha S. (Age 12). Isha leveraged prompt descriptors to animate rotating science-fiction HUD graphics and tech parameters."
+  },
+  jv5: {
+    title: "Future World Tour Video Walkthrough",
+    category: "AI Architecture",
+    img: "/student-projects/project_junior_v5.mp4",
+    desc: "Created by Aryan P. (Age 11). Aryan generated dynamic environment layers, creating a moving video tour of a futuristic ecological city dome."
   }
 };
 
@@ -173,7 +257,23 @@ function openProjectModal(type) {
   const data = projectData[type];
   if (!data) return;
 
-  document.getElementById('modal-img').src = data.img;
+  const modalImg = document.getElementById('modal-img');
+  const modalVideo = document.getElementById('modal-video');
+
+  if (data.img && data.img.endsWith('.mp4')) {
+    modalImg.style.display = 'none';
+    modalVideo.style.display = 'block';
+    modalVideo.src = data.img;
+    modalVideo.load();
+    modalVideo.play().catch(e => console.log("Video play deferred:", e));
+  } else {
+    modalVideo.style.display = 'none';
+    modalVideo.pause();
+    modalVideo.src = '';
+    modalImg.style.display = 'block';
+    modalImg.src = data.img;
+  }
+
   document.getElementById('modal-title').innerText = data.title;
   document.getElementById('modal-badge').innerText = data.category;
   document.getElementById('modal-desc').innerText = data.desc;
@@ -183,6 +283,11 @@ function openProjectModal(type) {
 }
 
 function closeProjectModal() {
+  const modalVideo = document.getElementById('modal-video');
+  if (modalVideo) {
+    modalVideo.pause();
+    modalVideo.src = '';
+  }
   document.getElementById('project-modal').classList.remove('active');
   document.body.style.overflow = '';
 }
