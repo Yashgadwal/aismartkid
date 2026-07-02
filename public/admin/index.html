@@ -148,6 +148,20 @@
             </div>
             <div class="kpi-icon"><i data-lucide="sparkles"></i></div>
           </div>
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span>Total Pageviews</span>
+              <h3 id="kpi-pageviews">0</h3>
+            </div>
+            <div class="kpi-icon"><i data-lucide="eye"></i></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span>Avg Engagement</span>
+              <h3 id="kpi-engagement">0s</h3>
+            </div>
+            <div class="kpi-icon"><i data-lucide="clock"></i></div>
+          </div>
         </div>
         
         <!-- Charts Grid -->
@@ -186,6 +200,27 @@
                   </tr>
                 </thead>
                 <tbody id="recent-leads-tbody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+        </div>
+        
+        <!-- Page-Level Analytics Grid -->
+        <div class="charts-grid" style="margin-top: 24px;">
+          <div class="chart-card card-span-12" style="grid-column: span 12;">
+            <h4>Page-Level Analytics (Views & Engagement)</h4>
+            <div class="table-wrapper" style="max-height: 350px; overflow-y: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Page Address</th>
+                    <th>Pageviews Count</th>
+                    <th>Total Engagement Time</th>
+                    <th>Avg Session Duration</th>
+                  </tr>
+                </thead>
+                <tbody id="page-analytics-tbody">
                   <!-- Rendered dynamically -->
                 </tbody>
               </table>

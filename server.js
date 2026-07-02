@@ -583,34 +583,60 @@ app.get('/api/analytics', requireAuth, (req, res) => {
   const totalRevenue = students.reduce((acc, curr) => acc + (curr.feesPaid || 0), 0);
   const totalVisitors = db.analytics.dailyVisits.reduce((acc, curr) => acc + (curr.visits || 0), 0);
 
+  // Compute total page views across all pages
+  const totalViews = (db.analytics.pageViews || []).reduce((acc, curr) => acc + (curr.views || 0), 0);
+
   return res.json({
     kpis: {
       todaysLeads: todaysLeadsCount,
       totalAdmissions: totalAdmissionsCount,
       revenue: totalRevenue,
-      visitors: totalVisitors
+      visitors: totalVisitors,
+      totalPageViews: totalViews,
+      totalTimeSpentSec: db.analytics.totalTimeSpentSec || 0
     },
     analytics: db.analytics
   });
 });
 
 app.post('/api/analytics', (req, res) => {
-  const { action, page, source, device } = req.body;
+  let body = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch (e) {}
+  }
+
+  const { action, event, page, source, device, durationSec, duration } = body || {};
   const db = readDB();
 
-  if (action === 'view' && page) {
+  if (!db.analytics) {
+    db.analytics = {
+      dailyVisits: [],
+      trafficSources: [],
+      deviceTypes: [],
+      pageViews: [],
+      totalTimeSpentSec: 0
+    };
+  }
+
+  const triggerEvent = event || action;
+
+  if ((triggerEvent === 'view' || triggerEvent === 'pageview') && page) {
+    if (!db.analytics.pageViews) db.analytics.pageViews = [];
     const pageView = db.analytics.pageViews.find(p => p.page === page);
     if (pageView) {
-      pageView.views += 1;
+      pageView.views = (pageView.views || 0) + 1;
     } else {
-      db.analytics.pageViews.push({ page, views: 1 });
+      db.analytics.pageViews.push({ page, views: 1, timeSpentSec: 0 });
     }
     writeDB(db);
     return res.json({ success: true });
   }
 
-  if (action === 'visit') {
+  if (triggerEvent === 'visit') {
     const today = new Date().toISOString().split('T')[0];
+    if (!db.analytics.dailyVisits) db.analytics.dailyVisits = [];
     const visitObj = db.analytics.dailyVisits.find(v => v.date === today);
     if (visitObj) {
       visitObj.visits += 1;
@@ -620,6 +646,7 @@ app.post('/api/analytics', (req, res) => {
     }
 
     const detectedSource = source || 'Direct Traffic';
+    if (!db.analytics.trafficSources) db.analytics.trafficSources = [];
     const srcObj = db.analytics.trafficSources.find(s => s.source.toLowerCase() === detectedSource.toLowerCase());
     if (srcObj) {
       srcObj.count += 1;
@@ -628,6 +655,7 @@ app.post('/api/analytics', (req, res) => {
     }
 
     const detectedDevice = device || 'Desktop';
+    if (!db.analytics.deviceTypes) db.analytics.deviceTypes = [];
     const devObj = db.analytics.deviceTypes.find(d => d.device.toLowerCase() === detectedDevice.toLowerCase());
     if (devObj) {
       devObj.count += 1;
@@ -639,7 +667,24 @@ app.post('/api/analytics', (req, res) => {
     return res.json({ success: true });
   }
 
-  return res.status(400).json({ error: 'Invalid action' });
+  if (triggerEvent === 'timespent') {
+    const sec = parseInt(durationSec || duration || 0, 10);
+    if (sec > 0 && sec < 7200) {
+      db.analytics.totalTimeSpentSec = (db.analytics.totalTimeSpentSec || 0) + sec;
+
+      if (!db.analytics.pageViews) db.analytics.pageViews = [];
+      const pageView = db.analytics.pageViews.find(p => p.page === page);
+      if (pageView) {
+        pageView.timeSpentSec = (pageView.timeSpentSec || 0) + sec;
+      } else {
+        db.analytics.pageViews.push({ page, views: 0, timeSpentSec: sec });
+      }
+      writeDB(db);
+    }
+    return res.json({ success: true });
+  }
+
+  return res.status(400).json({ error: 'Invalid action or event' });
 });
 
 // ----------------------------------------

@@ -171,11 +171,50 @@ async function loadDashboardKPIs() {
     document.getElementById('kpi-admissions').innerText = data.kpis.totalAdmissions || 0;
     document.getElementById('kpi-revenue').innerText = `₹${data.kpis.revenue.toLocaleString('en-IN')}`;
     document.getElementById('kpi-visitors').innerText = data.kpis.visitors || 0;
+    document.getElementById('kpi-pageviews').innerText = data.kpis.totalPageViews || 0;
+    
+    // Average Engagement Time
+    const avgSec = data.kpis.totalPageViews > 0 ? Math.round(data.kpis.totalTimeSpentSec / data.kpis.totalPageViews) : 0;
+    document.getElementById('kpi-engagement').innerText = `${avgSec}s`;
 
     // Render Chart.js analytics graphs
     renderVisitsChart(data.analytics.dailyVisits || []);
     renderDevicesChart(data.analytics.deviceTypes || []);
     renderSourcesChart(data.analytics.trafficSources || []);
+
+    // Render Page-Level Analytics Table
+    const pageAnalyticsTbody = document.getElementById('page-analytics-tbody');
+    if (pageAnalyticsTbody) {
+      const pageViewsList = data.analytics.pageViews || [];
+      // Sort by views descending
+      pageViewsList.sort((a, b) => (b.views || 0) - (a.views || 0));
+      
+      const formatDuration = (s) => {
+        if (s < 60) return `${s}s`;
+        const m = Math.floor(s / 60);
+        const remSec = s % 60;
+        return `${m}m ${remSec}s`;
+      };
+      
+      pageAnalyticsTbody.innerHTML = pageViewsList.map(item => {
+        const views = item.views || 0;
+        const timeSpent = item.timeSpentSec || 0;
+        const avgTime = views > 0 ? Math.round(timeSpent / views) : 0;
+        
+        return `
+          <tr>
+            <td style="font-weight: 600; color: var(--color-text-dark); text-align: left;">${item.page}</td>
+            <td style="text-align: left;">${views.toLocaleString()}</td>
+            <td style="text-align: left;">${formatDuration(timeSpent)}</td>
+            <td style="text-align: left;">
+              <span style="background: rgba(37,99,235,0.06); color: #2563EB; font-weight: 700; padding: 4px 8px; border-radius: 6px; font-size: 11px;">
+                ${formatDuration(avgTime)}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('\n');
+    }
 
     // Load recent inquiries logs
     loadRecentInquiriesTable();
