@@ -709,7 +709,7 @@
 
       <div class="hero-actions">
         <a href="#booking-section" class="btn btn-orange" onclick="openDemoModal()">Book Free Demo</a>
-        <a href="https://wa.me/918308507820?text=Hello%2520AI%2520Smart%2520Kids%252C%2520I%2520scanned%2520your%2520QR%2520code%2520and%2520would%2520like%2520to%2520enquire%2520about%2520batches." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <a href="https://wa.me/918308507820?text=Hello%20AI%20Smart%20Kids%2C%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20enquire%20about%20batches." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
           <i data-lucide="message-square" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> WhatsApp
         </a>
       </div>
@@ -883,7 +883,7 @@
       <i data-lucide="graduation-cap"></i>
       <span>Demo</span>
     </button>
-    <a href="https://wa.me/918308507820?text=Hello%2520AI%2520Smart%2520Kids%252C%2520I%2520would%2520like%2520to%2520enquire." target="_blank" class="sticky-nav-btn">
+    <a href="https://wa.me/918308507820?text=Hello%20AI%20Smart%20Kids%2C%20I%20would%20like%20to%20enquire." target="_blank" class="sticky-nav-btn">
       <i data-lucide="message-square"></i>
       <span>WhatsApp</span>
     </a>
@@ -1201,6 +1201,15 @@
       const phone = document.getElementById('qr-phone').value.trim();
       const age = document.getElementById('qr-age').value;
       const preferredBatch = document.getElementById('qr-batch').value;
+
+      if (!parentName) {
+        alert("Please enter Parent Full Name.");
+        return;
+      }
+      if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+      }
 
       try {
         const res = await fetch('/api/leads', {

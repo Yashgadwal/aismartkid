@@ -189,6 +189,37 @@ async function loadGlobalSettings() {
         const cleanWa = data.whatsapp.replace(/\+/g, '').replace(/\s+/g, '').replace(/[^0-9]/g, '');
         whatsBtn.href = `https://wa.me/${cleanWa}?text=Hello%20AI%20Smart%20Kids%2C%20I%20would%20like%20to%20enquire%20about%20your%20AI%20batches%20for%20my%20child.`;
       }
+
+      // Initialize Dynamic Cohort Card Countdowns
+      if (data.cohortDateJunior) {
+        startCountdown(data.cohortDateJunior, 'junior');
+      }
+      if (data.cohortDateSenior) {
+        startCountdown(data.cohortDateSenior, 'senior');
+      }
+      
+      // Update seats banner using the closest date
+      let bannerDate = null;
+      if (data.cohortDateJunior && data.cohortDateSenior) {
+        const jTime = new Date(data.cohortDateJunior).getTime();
+        const sTime = new Date(data.cohortDateSenior).getTime();
+        const now = Date.now();
+        
+        // Pick the closest future date
+        if (jTime > now && sTime > now) {
+          bannerDate = jTime < sTime ? data.cohortDateJunior : data.cohortDateSenior;
+        } else if (jTime > now) {
+          bannerDate = data.cohortDateJunior;
+        } else if (sTime > now) {
+          bannerDate = data.cohortDateSenior;
+        }
+      } else {
+        bannerDate = data.cohortDateJunior || data.cohortDateSenior;
+      }
+      
+      if (bannerDate) {
+        startBannerCountdown(bannerDate);
+      }
     }
   } catch (err) {
     console.error("Failed to load settings:", err);
@@ -325,9 +356,22 @@ function toggleFaq(button) {
 function goToStep2() {
   const parentName = document.getElementById('input-parent-name').value.trim();
   const phone = document.getElementById('input-phone').value.trim();
+  const email = document.getElementById('input-email').value.trim();
   
-  if (!parentName || !phone) {
-    alert("Please fill in Parent Name and Phone Number");
+  if (!parentName) {
+    alert("Please enter Parent Name.");
+    return;
+  }
+  if (!phone) {
+    alert("Please enter Phone Number.");
+    return;
+  }
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return;
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert("Please enter a valid Email Address.");
     return;
   }
 
@@ -359,8 +403,17 @@ async function submitBookingForm() {
   const preferredBatch = document.getElementById('input-batch').value;
   const message = document.getElementById('input-message').value.trim();
 
-  if (!childName || !age) {
-    alert("Please fill in Child Name and Age");
+  if (!childName) {
+    alert("Please enter Child's Full Name.");
+    return;
+  }
+  if (!age) {
+    alert("Please enter Child's Age.");
+    return;
+  }
+  const ageNum = parseInt(age, 10);
+  if (isNaN(ageNum) || ageNum < 5 || ageNum > 18) {
+    alert("Please enter a valid age between 5 and 18.");
     return;
   }
 
@@ -369,7 +422,7 @@ async function submitBookingForm() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        parentName, phone, email, childName, age, school, class: childClass, preferredBatch, message
+        parentName, phone, email, childName, age: ageNum, school, class: childClass, preferredBatch, message
       })
     });
 
@@ -535,6 +588,15 @@ async function submitExitInquiry(event) {
   const parentName = document.getElementById('exit-parent-name').value.trim();
   const phone = document.getElementById('exit-phone').value.trim();
 
+  if (!parentName) {
+    alert("Please enter Parent Full Name.");
+    return;
+  }
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return;
+  }
+
   try {
     const res = await fetch('/api/leads', {
       method: 'POST',
@@ -628,43 +690,78 @@ const statsGrid = document.querySelector('.hero-stats');
 if (statsGrid) counterObserver.observe(statsGrid);
 
 // Seats Banner Countdown timer
-const countdownTargetDate = new Date();
-countdownTargetDate.setDate(countdownTargetDate.getDate() + 5);
-countdownTargetDate.setHours(16, 0, 0, 0);
-
-function updateSeatsCountdown() {
-  const now = new Date();
-  const diff = countdownTargetDate - now;
-
-  const daysLabel = document.getElementById('banner-days');
-  const hoursLabel = document.getElementById('banner-hours');
-  const minsLabel = document.getElementById('banner-minutes');
-  const secsLabel = document.getElementById('banner-seconds');
-
-  if (!daysLabel || !hoursLabel || !minsLabel || !secsLabel) return;
-
-  if (diff <= 0) {
-    daysLabel.innerText = "00";
-    hoursLabel.innerText = "00";
-    minsLabel.innerText = "00";
-    secsLabel.innerText = "00";
-    return;
+function startCountdown(targetDateStr, prefix) {
+  const targetDate = new Date(targetDateStr);
+  
+  function update() {
+    const now = new Date();
+    const diff = targetDate - now;
+    
+    const daysEl = document.getElementById(`${prefix}-days`);
+    const hoursEl = document.getElementById(`${prefix}-hours`);
+    const minsEl = document.getElementById(`${prefix}-minutes`);
+    const secsEl = document.getElementById(`${prefix}-seconds`);
+    
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+    
+    if (diff <= 0) {
+      daysEl.innerText = "00";
+      hoursEl.innerText = "00";
+      minsEl.innerText = "00";
+      secsEl.innerText = "00";
+      return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    
+    daysEl.innerText = String(days).padStart(2, '0');
+    hoursEl.innerText = String(hours).padStart(2, '0');
+    minsEl.innerText = String(minutes).padStart(2, '0');
+    secsEl.innerText = String(seconds).padStart(2, '0');
   }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / 1000 / 60) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  daysLabel.innerText = String(days).padStart(2, '0');
-  hoursLabel.innerText = String(hours).padStart(2, '0');
-  minsLabel.innerText = String(minutes).padStart(2, '0');
-  secsLabel.innerText = String(seconds).padStart(2, '0');
+  
+  update();
+  setInterval(update, 1000);
 }
 
-if (window.location.pathname.includes('/landing')) {
-  updateSeatsCountdown();
-  setInterval(updateSeatsCountdown, 1000);
+function startBannerCountdown(targetDateStr) {
+  const targetDate = new Date(targetDateStr);
+  
+  function update() {
+    const now = new Date();
+    const diff = targetDate - now;
+    
+    const daysEl = document.getElementById('banner-days');
+    const hoursEl = document.getElementById('banner-hours');
+    const minsEl = document.getElementById('banner-minutes');
+    const secsEl = document.getElementById('banner-seconds');
+    
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+    
+    if (diff <= 0) {
+      daysEl.innerText = "00";
+      hoursEl.innerText = "00";
+      minsEl.innerText = "00";
+      secsEl.innerText = "00";
+      return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    
+    daysEl.innerText = String(days).padStart(2, '0');
+    hoursEl.innerText = String(hours).padStart(2, '0');
+    minsEl.innerText = String(minutes).padStart(2, '0');
+    secsEl.innerText = String(seconds).padStart(2, '0');
+  }
+  
+  update();
+  setInterval(update, 1000);
 }
 
 // ----------------------------------------

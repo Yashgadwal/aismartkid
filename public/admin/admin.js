@@ -983,6 +983,8 @@ async function loadGlobalSettings() {
       document.getElementById('set-email').value = data.email || '';
       document.getElementById('set-address').value = data.address || '';
       document.getElementById('set-googleMapsEmbed').value = data.googleMapsEmbed || '';
+      document.getElementById('set-cohortDateJunior').value = data.cohortDateJunior || '';
+      document.getElementById('set-cohortDateSenior').value = data.cohortDateSenior || '';
       document.getElementById('set-whatsappNotificationActive').checked = !!data.whatsappNotificationActive;
       document.getElementById('set-emailNotificationActive').checked = !!data.emailNotificationActive;
     }
@@ -1000,11 +1002,13 @@ async function handleSaveSettings(event) {
   const email = document.getElementById('set-email').value.trim();
   const address = document.getElementById('set-address').value.trim();
   const googleMapsEmbed = document.getElementById('set-googleMapsEmbed').value.trim();
+  const cohortDateJunior = document.getElementById('set-cohortDateJunior').value;
+  const cohortDateSenior = document.getElementById('set-cohortDateSenior').value;
   const whatsappNotificationActive = document.getElementById('set-whatsappNotificationActive').checked;
   const emailNotificationActive = document.getElementById('set-emailNotificationActive').checked;
 
   const payload = {
-    instituteName, tagline, phone, whatsapp, email, address, googleMapsEmbed, whatsappNotificationActive, emailNotificationActive
+    instituteName, tagline, phone, whatsapp, email, address, googleMapsEmbed, cohortDateJunior, cohortDateSenior, whatsappNotificationActive, emailNotificationActive
   };
 
   try {

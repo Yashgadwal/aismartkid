@@ -35,7 +35,9 @@ const defaultSchema = {
     analyticsActive: true,
     whatsappNotificationActive: true,
     emailNotificationActive: false,
-    razorpayActive: false
+    razorpayActive: false,
+    cohortDateJunior: "2026-08-01T16:00",
+    cohortDateSenior: "2026-08-01T18:00"
   },
   analytics: {
     dailyVisits: [],
