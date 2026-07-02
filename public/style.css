@@ -1018,7 +1018,7 @@ nav a:hover {
 /* Registration Form Section */
 .enroll-section {
   background-color: var(--color-card-bg);
-  padding: 96px 0 48px 0;
+  padding: 64px 0 24px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -1280,7 +1280,7 @@ textarea {
 footer {
   background: white;
   border-top: 1px solid var(--color-border);
-  padding: 24px 0;
+  padding: 16px 0;
 }
 
 .footer-container {
