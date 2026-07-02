@@ -249,7 +249,27 @@ async function loadTestimonials() {
         return;
       }
       
-      items.forEach(t => {
+      // Limit to 3 testimonials on the homepage
+      const displayedTestimonials = items.slice(0, 3);
+      
+      // Helper function to build dynamic letter initials avatar
+      const getInitialsAvatar = (name) => {
+        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        const gradients = [
+          'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+          'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)',
+          'linear-gradient(135deg, #FF8A00 0%, #E06900 100%)',
+          'linear-gradient(135deg, #10B981 0%, #059669 100%)'
+        ];
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+          hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const gradient = gradients[Math.abs(hash) % gradients.length];
+        return `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: ${gradient}; color: white; font-weight: 800; font-size: 13.5px; font-family: var(--font-display);">${initials}</div>`;
+      };
+      
+      displayedTestimonials.forEach(t => {
         const card = document.createElement('div');
         card.className = 'glass-card testimonial-card';
         
@@ -258,12 +278,17 @@ async function loadTestimonials() {
           stars += '★';
         }
         
+        const hasValidImage = t.image && !t.image.includes('avatar_parent') && !t.image.includes('avatar_student');
+        const avatarMarkup = hasValidImage 
+          ? `<img src="${t.image}" alt="${t.name}" style="width: 100%; height: 100%; object-fit: cover;">`
+          : getInitialsAvatar(t.name);
+        
         card.innerHTML = `
           <div class="testimonial-stars" style="color: #FF8A00; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px;">${stars}</div>
           <p class="testimonial-text" style="font-size: 12.5px; color: var(--color-text-gray); line-height: 1.7; margin-bottom: 16px; font-style: italic;">"${t.reviewText}"</p>
           <div class="testimonial-author" style="display: flex; align-items: center; gap: 12px;">
-            <div class="author-avatar" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #e2e8f0; border: 1px solid rgba(0,0,0,0.05);">
-              <img src="${t.image || '/images/avatar_parent1.jpg'}" alt="${t.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="author-avatar" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #e2e8f0; border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center;">
+              ${avatarMarkup}
             </div>
             <div class="author-meta">
               <h5 style="font-family: var(--font-display); font-weight: 800; font-size: 12.5px; color: var(--color-text-dark); margin: 0;">${t.name}</h5>
