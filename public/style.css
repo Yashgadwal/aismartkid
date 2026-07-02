@@ -337,7 +337,7 @@ nav a:hover {
 
 /* Founder / About */
 .about-section {
-  background-color: var(--color-card-bg);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.015) 0%, rgba(124, 58, 237, 0.015) 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -563,7 +563,7 @@ nav a:hover {
 
 /* Portfolio Projects */
 .projects-section {
-  background-color: var(--color-card-bg);
+  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -729,6 +729,9 @@ nav a:hover {
 /* Why Us */
 .why-section {
   padding: 96px 0;
+  background: #F8FAFC;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .why-grid {
@@ -778,7 +781,7 @@ nav a:hover {
 
 /* AI Tools */
 .tools-section {
-  background-color: var(--color-card-bg);
+  background-color: #FFFFFF;
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -826,6 +829,9 @@ nav a:hover {
 /* Testimonials */
 .testimonials-section {
   padding: 96px 0;
+  background: #F8FAFC;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .testimonials-grid {
@@ -900,7 +906,7 @@ nav a:hover {
 
 /* Classroom Studio */
 .studio-section {
-  background-color: var(--color-card-bg);
+  background-color: #FFFFFF;
   padding: 80px 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -2145,6 +2151,9 @@ footer p {
    ---------------------------------------- */
 .blog-section {
   padding: 96px 0;
+  background: #F8FAFC;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .blogs-grid {
@@ -2239,7 +2248,7 @@ footer p {
 /* 3 Core Skills Section */
 .core-skills-section {
   padding: 96px 0;
-  background: #FFFFFF;
+  background: #F8FAFC;
   position: relative;
 }
 
