@@ -365,6 +365,16 @@
       "category": "Parent",
       "image": "/images/avatar_parent2.jpg",
       "videoUrl": ""
+    },
+    {
+      "id": "tst_1783012718191",
+      "name": "Anand & Suman Agrawal",
+      "role": "Parents of Aarav (10), Freeganj, Ujjain",
+      "reviewText": "We were looking for computer coding classes near Freeganj, but standard institutes only taught MS Office or basic typing. Enrolling Aarav at AI Smart Kids Ujjain was the best decision. He now creates his own visual logic blocks, designs web layout panels, and understands prompt engineering. The modern laboratory setup near Cosmos Mall is truly world-class, and Saurabh sir's mentorship is exceptional.",
+      "rating": 5,
+      "category": "Parent",
+      "image": "/images/parent_review_avatar_ujjain.jpg",
+      "videoUrl": ""
     }
   ],
   "gallery": [
