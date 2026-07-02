@@ -1917,6 +1917,8 @@ footer p {
   gap: 12px;
   margin-top: 28px;
   width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .trust-badge-item {
@@ -1942,6 +1944,7 @@ footer p {
 @media (min-width: 768px) {
   .trust-badges-grid {
     grid-template-columns: repeat(3, 1fr);
+    padding: 0;
   }
 }
 
