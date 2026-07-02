@@ -84,12 +84,12 @@ p {
 
 /* Glassmorphism Card styles */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04),
-              0 1px 1px 0 rgba(255, 255, 255, 0.8) inset;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 35px 0 rgba(31, 38, 135, 0.04),
+              0 1px 1px 0 rgba(255, 255, 255, 0.9) inset;
   border-radius: 24px;
   padding: 32px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -99,8 +99,9 @@ p {
 
 .glass-card-hover:hover {
   transform: translateY(-6px);
-  border-color: rgba(37, 99, 235, 0.25);
-  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.08),
+  border-color: rgba(37, 99, 235, 0.45);
+  box-shadow: 0 24px 45px -15px rgba(37, 99, 235, 0.15),
+              0 0 15px rgba(37, 99, 235, 0.06),
               0 1px 1px 0 rgba(255, 255, 255, 1) inset;
 }
 
@@ -116,10 +117,10 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .header-container {

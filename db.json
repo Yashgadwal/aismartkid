@@ -340,7 +340,7 @@
       },
       {
         "date": "2026-07-02",
-        "visits": 30,
+        "visits": 38,
         "leads": 0
       }
     ],
@@ -359,7 +359,7 @@
       },
       {
         "source": "Direct Traffic",
-        "count": 204
+        "count": 212
       },
       {
         "source": "Local News / Flyer",
@@ -377,7 +377,7 @@
       },
       {
         "device": "Desktop",
-        "count": 475
+        "count": 483
       },
       {
         "device": "Tablet",
@@ -387,7 +387,7 @@
     "pageViews": [
       {
         "page": "/",
-        "views": 1945
+        "views": 1953
       },
       {
         "page": "/#courses",
