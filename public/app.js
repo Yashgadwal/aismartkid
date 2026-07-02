@@ -232,13 +232,51 @@ async function loadTestimonials() {
   const container = document.getElementById('testimonials-container');
   if (!container) return;
   
-  container.innerHTML = `
-    <div class="glass-card testimonial-card" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; border-radius: 20px; width: 100%; border: 1px dashed rgba(37,99,235,0.12);">
-      <div style="font-size: 28px; margin-bottom: 12px;">⭐</div>
-      <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--color-text-dark); margin-bottom: 8px;">Parent Reviews Coming Soon</h4>
-      <p style="font-size: 11px; color: var(--color-text-gray); margin: 0; max-width: 440px; margin: 0 auto; line-height: 1.6;">Our next batch of student creators is graduating soon! Check back to read their success stories, project creations, and feedback.</p>
-    </div>
-  `;
+  try {
+    const res = await fetch('/api/testimonials');
+    if (res.ok) {
+      const items = await res.json();
+      container.innerHTML = '';
+      
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card testimonial-card" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; border-radius: 20px; width: 100%; border: 1px dashed rgba(37,99,235,0.12);">
+            <div style="font-size: 28px; margin-bottom: 12px;">⭐</div>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--color-text-dark); margin-bottom: 8px;">Parent Reviews Coming Soon</h4>
+            <p style="font-size: 11px; color: var(--color-text-gray); margin: 0; max-width: 440px; margin: 0 auto; line-height: 1.6;">Our next batch of student creators is graduating soon! Check back to read their success stories, project creations, and feedback.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      items.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'glass-card testimonial-card';
+        
+        let stars = '';
+        for (let i = 0; i < (t.rating || 5); i++) {
+          stars += '★';
+        }
+        
+        card.innerHTML = `
+          <div class="testimonial-stars" style="color: #FF8A00; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px;">${stars}</div>
+          <p class="testimonial-text" style="font-size: 12.5px; color: var(--color-text-gray); line-height: 1.7; margin-bottom: 16px; font-style: italic;">"${t.reviewText}"</p>
+          <div class="testimonial-author" style="display: flex; align-items: center; gap: 12px;">
+            <div class="author-avatar" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #e2e8f0; border: 1px solid rgba(0,0,0,0.05);">
+              <img src="${t.image || '/images/avatar_parent1.jpg'}" alt="${t.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="author-meta">
+              <h5 style="font-family: var(--font-display); font-weight: 800; font-size: 12.5px; color: var(--color-text-dark); margin: 0;">${t.name}</h5>
+              <span style="font-size: 10px; color: var(--color-text-gray); font-weight: 500;">${t.role}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  } catch (err) {
+    console.error("Testimonials loader failed:", err);
+  }
 }
 
 async function loadGallery() {
@@ -783,7 +821,10 @@ async function loadBlogsLanding() {
         return;
       }
 
-      posts.forEach(post => {
+      // Display only the 3 most recent articles on the homepage
+      const landingPosts = posts.slice(0, 3);
+
+      landingPosts.forEach(post => {
         const card = document.createElement('div');
         card.className = 'blog-card';
         card.onclick = () => location.href = `/blog.html?slug=${post.slug}`;

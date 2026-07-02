@@ -430,10 +430,32 @@
     "cohortDateSenior": "2026-08-01T18:00"
   },
   "analytics": {
-    "dailyVisits": [],
-    "trafficSources": [],
-    "deviceTypes": [],
-    "pageViews": [],
+    "dailyVisits": [
+      {
+        "date": "2026-07-02",
+        "visits": 5,
+        "leads": 0
+      }
+    ],
+    "trafficSources": [
+      {
+        "source": "Direct Traffic",
+        "count": 5
+      }
+    ],
+    "deviceTypes": [
+      {
+        "device": "Desktop",
+        "count": 5
+      }
+    ],
+    "pageViews": [
+      {
+        "page": "/",
+        "views": 10,
+        "timeSpentSec": 0
+      }
+    ],
     "totalTimeSpentSec": 0
   },
   "attendance": [
