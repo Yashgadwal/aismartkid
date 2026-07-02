@@ -786,7 +786,7 @@ async function loadBlogsLanding() {
       posts.forEach(post => {
         const card = document.createElement('div');
         card.className = 'blog-card';
-        card.onclick = () => location.href = `/blog.html?id=${post.id}`;
+        card.onclick = () => location.href = `/blog.html?slug=${post.slug}`;
         
         const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
           month: 'short',

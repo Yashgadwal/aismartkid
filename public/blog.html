@@ -334,10 +334,10 @@
     // Client-side Blog logic (Fail-Safe router)
     window.onload = function() {
       const urlParams = new URLSearchParams(window.location.search);
-      const postId = urlParams.get('id');
+      const postSlug = urlParams.get('slug');
       
-      if (postId) {
-        loadArticleDetail(postId);
+      if (postSlug) {
+        loadArticleDetail(postSlug);
       } else {
         loadBlogList();
       }
@@ -376,8 +376,8 @@
             const card = document.createElement('article');
             card.className = 'blog-card';
             card.onclick = () => {
-              window.history.pushState({}, '', `/blog.html?id=${post.id}`);
-              loadArticleDetail(post.id);
+              window.history.pushState({}, '', `/blog.html?slug=${post.slug}`);
+              loadArticleDetail(post.slug);
             };
             
             card.innerHTML = `
@@ -402,7 +402,7 @@
       }
     }
 
-    async function loadArticleDetail(id) {
+    async function loadArticleDetail(slug) {
       document.getElementById('blog-list-view').style.display = 'none';
       const detail = document.getElementById('blog-detail-view');
       detail.style.display = 'block';
@@ -411,7 +411,7 @@
       document.getElementById('article-body').innerHTML = "";
       
       try {
-        const res = await fetch(`/api/blog?id=${id}`);
+        const res = await fetch(`/api/blog?slug=${slug}`);
         if (res.ok) {
           const post = await res.json();
           

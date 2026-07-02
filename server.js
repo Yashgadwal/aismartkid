@@ -498,12 +498,18 @@ app.post('/api/settings', requireAuth, (req, res) => {
 // BLOG CMS API
 // ----------------------------------------
 app.get('/api/blog', (req, res) => {
-  const { id } = req.query;
+  const { id, slug } = req.query;
   const db = readDB();
   const blogs = db.blogs || [];
 
   if (id) {
     const post = blogs.find(b => b.id === id);
+    if (!post) return res.status(404).json({ error: 'Post not found' });
+    return res.json(post);
+  }
+
+  if (slug) {
+    const post = blogs.find(b => b.slug === slug);
     if (!post) return res.status(404).json({ error: 'Post not found' });
     return res.json(post);
   }
@@ -750,12 +756,17 @@ app.get('/blog', (req, res) => {
 });
 
 // Blog SEO Individual Article Route
-app.get('/blog/:id', (req, res) => {
-  const postId = req.params.id;
+app.get('/blog/:slug', (req, res) => {
+  const postSlug = req.params.slug;
   const db = readDB();
-  const post = db.blogs.find(b => b.id === postId && b.status === 'Published');
+  let post = db.blogs.find(b => b.slug === postSlug && b.status === 'Published');
   
   if (!post) {
+    // ID-based fallback redirect
+    const postById = db.blogs.find(b => b.id === postSlug && b.status === 'Published');
+    if (postById) {
+      return res.redirect(`/blog/${postById.slug}`);
+    }
     return res.redirect('/blog');
   }
   
