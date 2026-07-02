@@ -728,14 +728,26 @@ app.get('/blog', (req, res) => {
   
   let html = fs.readFileSync(templatePath, 'utf-8');
   
-  const listHtml = publishedPosts.map(post => {
+  // Pagination logic
+  const postsPerPage = 4;
+  let page = parseInt(req.query.page, 10) || 1;
+  const totalPages = Math.ceil(publishedPosts.length / postsPerPage);
+  
+  if (page < 1) page = 1;
+  if (page > totalPages && totalPages > 0) page = totalPages;
+  
+  const start = (page - 1) * postsPerPage;
+  const end = start + postsPerPage;
+  const paginatedPosts = publishedPosts.slice(start, end);
+  
+  const listHtml = paginatedPosts.map(post => {
     const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric'
     });
     return `
-      <article class="blog-card" onclick="location.href='/blog/${post.id}'">
+      <article class="blog-card" onclick="location.href='/blog/${post.slug}'">
         <div class="blog-image">
           <img loading="lazy" src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
         </div>
@@ -751,7 +763,28 @@ app.get('/blog', (req, res) => {
     `;
   }).join('\n');
   
+  // Generate pagination buttons HTML
+  let paginationHtml = '';
+  if (totalPages > 1) {
+    // Previous button
+    const prevClass = page === 1 ? 'pagination-btn disabled' : 'pagination-btn';
+    const prevHref = page === 1 ? '#' : `/blog?page=${page - 1}`;
+    paginationHtml += `<a class="${prevClass}" href="${prevHref}">Previous</a>\n`;
+    
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      const activeClass = i === page ? 'pagination-btn active' : 'pagination-btn';
+      paginationHtml += `<a class="${activeClass}" href="/blog?page=${i}">${i}</a>\n`;
+    }
+    
+    // Next button
+    const nextClass = page === totalPages ? 'pagination-btn disabled' : 'pagination-btn';
+    const nextHref = page === totalPages ? '#' : `/blog?page=${page + 1}`;
+    paginationHtml += `<a class="${nextClass}" href="${nextHref}">Next</a>\n`;
+  }
+  
   html = html.replace(/{{BLOGS_GRID}}/g, listHtml);
+  html = html.replace(/{{PAGINATION}}/g, paginationHtml);
   res.send(html);
 });
 

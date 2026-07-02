@@ -168,6 +168,40 @@
       list-style-type: decimal;
       margin-left: 20px;
     }
+    
+    /* Pagination Styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    .pagination-btn {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(37, 99, 235, 0.15);
+      border-radius: 12px;
+      color: var(--color-text-dark);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pagination-btn:hover:not(:disabled) {
+      border-color: rgba(37, 99, 235, 0.45);
+      background: rgba(255, 255, 255, 0.85);
+      transform: translateY(-1px);
+    }
+    .pagination-btn.active {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      border-color: var(--color-primary);
+    }
+    .pagination-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
     .blog-subheading {
       font-family: var(--font-display);
       font-size: 18px;
@@ -241,6 +275,7 @@
       <div class="blogs-grid-seo" id="blogs-grid-container">
         <!-- Rendered dynamically -->
       </div>
+      <div class="pagination-container" id="pagination-controls"></div>
     </div>
 
     <!-- B. INDIVIDUAL ARTICLE VIEW -->
@@ -351,54 +386,111 @@
       loadBlogList();
     }
 
+    let currentPage = 1;
+    const postsPerPage = 4;
+    let allPosts = [];
+
     async function loadBlogList() {
       const grid = document.getElementById('blogs-grid-container');
+      const controls = document.getElementById('pagination-controls');
       grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px 0;">Loading articles...</div>';
+      controls.innerHTML = '';
       
       try {
         const res = await fetch('/api/blog');
         if (res.ok) {
-          const posts = await res.json();
-          grid.innerHTML = '';
-          
-          if (posts.length === 0) {
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px 0; color:#94A3B8;">No articles published yet.</div>';
-            return;
-          }
-          
-          posts.forEach(post => {
-            const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric'
-            });
-            
-            const card = document.createElement('article');
-            card.className = 'blog-card';
-            card.onclick = () => {
-              window.history.pushState({}, '', `/blog.html?slug=${post.slug}`);
-              loadArticleDetail(post.slug);
-            };
-            
-            card.innerHTML = `
-              <div class="blog-image">
-                <img src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
-              </div>
-              <div class="blog-info">
-                <h4 class="blog-card-title">${post.title}</h4>
-                <p class="blog-card-excerpt">${post.excerpt || ''}</p>
-                <div class="blog-meta">
-                  <span class="badge-tag" style="background:rgba(37,99,235,0.06); color:var(--color-primary);">${post.category}</span>
-                  <span>${dateStr}</span>
-                </div>
-              </div>
-            `;
-            grid.appendChild(card);
-          });
+          allPosts = await res.json();
+          renderCurrentPage();
         }
       } catch (err) {
         console.error("List load failed:", err);
         grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:red; padding:40px 0;">Failed to load insights.</div>';
+      }
+    }
+
+    function renderCurrentPage() {
+      const grid = document.getElementById('blogs-grid-container');
+      const controls = document.getElementById('pagination-controls');
+      grid.innerHTML = '';
+      controls.innerHTML = '';
+      
+      if (allPosts.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px 0; color:#94A3B8;">No articles published yet.</div>';
+        return;
+      }
+      
+      const totalPages = Math.ceil(allPosts.length / postsPerPage);
+      if (currentPage < 1) currentPage = 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      
+      const start = (currentPage - 1) * postsPerPage;
+      const end = start + postsPerPage;
+      const paginatedPosts = allPosts.slice(start, end);
+      
+      paginatedPosts.forEach(post => {
+        const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+        
+        const card = document.createElement('article');
+        card.className = 'blog-card';
+        card.onclick = () => {
+          window.history.pushState({}, '', `/blog.html?slug=${post.slug}`);
+          loadArticleDetail(post.slug);
+        };
+        
+        card.innerHTML = `
+          <div class="blog-image">
+            <img src="${post.featuredImage || '/images/blog_default.jpg'}" alt="${post.title}">
+          </div>
+          <div class="blog-info">
+            <h4 class="blog-card-title">${post.title}</h4>
+            <p class="blog-card-excerpt">${post.excerpt || ''}</p>
+            <div class="blog-meta">
+              <span class="badge-tag" style="background:rgba(37,99,235,0.06); color:var(--color-primary);">${post.category}</span>
+              <span>${dateStr}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      
+      if (totalPages > 1) {
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'pagination-btn';
+        prevBtn.innerText = 'Previous';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => {
+          currentPage--;
+          renderCurrentPage();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        controls.appendChild(prevBtn);
+        
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+          btn.innerText = i;
+          btn.onclick = () => {
+            currentPage = i;
+            renderCurrentPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          };
+          controls.appendChild(btn);
+        }
+        
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'pagination-btn';
+        nextBtn.innerText = 'Next';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => {
+          currentPage++;
+          renderCurrentPage();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        controls.appendChild(nextBtn);
       }
     }
 

@@ -111,6 +111,43 @@
         font-size: 28px;
       }
     }
+    
+    /* Pagination Styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    .pagination-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(37, 99, 235, 0.15);
+      border-radius: 12px;
+      color: var(--color-text-dark);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pagination-btn:hover:not(.disabled) {
+      border-color: rgba(37, 99, 235, 0.45);
+      background: rgba(255, 255, 255, 0.85);
+      transform: translateY(-1px);
+    }
+    .pagination-btn.active {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      border-color: var(--color-primary);
+    }
+    .pagination-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="mesh-glow default-cursor-page">
@@ -142,6 +179,10 @@
     
     <div class="blogs-grid-seo">
       {{BLOGS_GRID}}
+    </div>
+    
+    <div class="pagination-container">
+      {{PAGINATION}}
     </div>
   </div>
 
