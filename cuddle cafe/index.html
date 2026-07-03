@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuddle Cafe Ujjain | Premium Pizza, Coffee & Fast Food in Rishi Nagar</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Experience Ujjain's finest premium cafe in Rishi Nagar. Cuddle Cafe serves hand-crafted pizzas, rich coffees, gourmet burgers, shakes, and fast food in a cozy, Instagrammable light-filled space. Reserve your table today!">
+  <meta name="keywords" content="Cuddle Cafe Ujjain, Rishi Nagar Cafe, Best Pizza Ujjain, Coffee Shop Ujjain, Banquet Hall Ujjain, Birthday Party Venue Ujjain, Fast Food Rishi Nagar">
+  <meta name="author" content="Cuddle Cafe">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cuddlecafeujn.com/">
+  <meta property="og:title" content="Cuddle Cafe Ujjain | Premium Pizza, Coffee & Fast Food">
+  <meta property="og:description" content="Where Every Bite Feels Like a Hug. Cozy vibes, hand-crafted pizzas, and premium coffees in Rishi Nagar, Ujjain.">
+  <meta property="og:image" content="assets/hero_bg.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Cuddle Cafe Ujjain | Premium Cafe Experience">
+  <meta property="twitter:description" content="Where Every Bite Feels Like a Hug. Join us for Ujjain's best pizza, milkshakes, and coffee.">
+  <meta property="twitter:image" content="assets/hero_bg.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Style Sheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- JSON-LD Local SEO Schema Markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Cuddle Cafe",
+      "image": "assets/hero_bg.png",
+      "priceRange": "₹₹",
+      "telephone": "+917000234433",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rishi Nagar",
+        "addressLocality": "Ujjain",
+        "addressRegion": "Madhya Pradesh",
+        "postalCode": "456010",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.1612,
+        "longitude": 75.7954
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "11:00",
+        "closes": "23:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/cuddle_cafe_ujjain",
+        "https://maps.google.com/?q=Cuddle+Cafe+Rishi+Nagar+Ujjain"
+      ]
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="preloader-logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-4-5H4v13h12V3zm2 3h2v1h-2V6zm0 3h2v1h-2V9zm-8 4c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+      </svg>
+    </div>
+    <div class="preloader-line-container">
+      <div class="preloader-line"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </div>
+
+  <!-- Mouse Glow Ray Overlay -->
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+  <!-- Sticky Transparent Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-4-5H4v13h12V3zm2 3h2v1h-2V6zm0 3h2v1h-2V9zm-8 4c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+        </svg>
+        <span>Cuddle Cafe</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#banquet">Banquets</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+        <li><a href="#contact" class="nav-cta">Book Table</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Premium Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-bg-wrapper">
+        <img src="assets/hero_bg.png" alt="Cuddle Cafe Interior" class="hero-img">
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i data-lucide="award"></i> Ujjain's Premium Hangout Destination
+        </div>
+        <h1>Cuddle Cafe</h1>
+        <p class="hero-tagline">Where Every Bite Feels Like a Hug.</p>
+        <p class="hero-desc">Crafted with Love. Served with Happiness. Experience a cozy, luxurious sanctuary in Ujjain offering premium wood-fired style pizzas, rich specialty coffees, hand-crafted burgers, and mouthwatering milkshakes.</p>
+        <div class="hero-ctas">
+          <a href="#menu" class="btn btn-primary"><i data-lucide="menu"></i> View Menu</a>
+          <a href="#contact" class="btn btn-secondary"><i data-lucide="calendar"></i> Book Table</a>
+          <a href="https://wa.me/917000234433?text=Hi%20Cuddle%20Cafe!%20I'd%20like%20to%20place%20an%20order." target="_blank" class="btn btn-secondary" style="background-color: #25D366; color: white; border-color: #25D366;"><i data-lucide="message-square"></i> WhatsApp Order</a>
+        </div>
+      </div>
+      <!-- Animated Floating Elements -->
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236F4E37'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>" class="floating-element floating-bean-1" alt="Floating Bean">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236F4E37'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>" class="floating-element floating-bean-2" alt="Floating Bean">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23758C65'><path d='M17 8C8 8 4 16 4 16s8-1 11-5 2-8 2-8z'/></svg>" class="floating-element floating-leaf-1" alt="Floating Leaf">
+    </section>
+
+    <!-- 2. Featured Weekend Live Event Banner (Bonus Section) -->
+    <section class="event-banner-section" style="padding-top: 50px; padding-bottom: 50px;">
+      <div class="event-banner">
+        <div class="event-content">
+          <span class="event-tag"><i data-lucide="music" style="width:12px;height:12px;vertical-align:middle;margin-right:4px;"></i> Live Acoustic Nights</span>
+          <h3>Weekend Acoustic Sessions</h3>
+          <p>Unwind every Saturday & Sunday evening with soul-stirring live music, warm lights, and your favorite cup of freshly brewed coffee. <strong>Time: 7:00 PM onwards.</strong></p>
+        </div>
+        <a href="#contact" class="event-cta-btn">Reserve a Front Table</a>
+      </div>
+    </section>
+
+    <!-- 3. Storytelling About Section -->
+    <section class="about" id="about">
+      <div class="about-grid">
+        <div class="about-info">
+          <span class="section-subtitle">Our Philosophy</span>
+          <h3>Crafting Cozy Moments & Delicious Memories in Ujjain</h3>
+          <p>Located in the heart of Rishi Nagar, Cuddle Cafe is designed to be your cozy escape from the bustle. Inspired by premium minimalist aesthetics, we combine warm wood textures with vibrant green plants and comfortable spaces to create Ujjain's most Instagrammable destination.</p>
+          <p>Whether you're looking for a perfect romantic date spot, a lively table for birthday celebrations, a quiet corner to study, or a warm family hangout, Cuddle Cafe welcomes you with open arms. Every pizza is stretched by hand, every shake is whipped to perfection, and every cup of coffee is crafted to feel like a warm hug.</p>
+          
+          <div class="about-features">
+            <div class="about-card">
+              <div class="about-card-icon"><i data-lucide="heart"></i></div>
+              <h4>Date Destination</h4>
+              <p>Soft ambient lighting and cozy tables create the ultimate date night vibe.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon"><i data-lucide="smile"></i></div>
+              <h4>College Favourite</h4>
+              <p>The perfect spot for student groups to hang out, collaborate, and chat.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon"><i data-lucide="cake"></i></div>
+              <h4>Celebration Ready</h4>
+              <p>From birthdays to kitty parties, make your small gatherings unforgettable.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon"><i data-lucide="sparkles"></i></div>
+              <h4>Instagrammable</h4>
+              <p>Beautiful corners, aesthetic plating, and gorgeous natural lighting.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-image-collage">
+          <div class="about-img-container about-img-1">
+            <img src="assets/coffee.png" alt="Specialty Coffee Art">
+          </div>
+          <div class="about-img-container about-img-2">
+            <img src="assets/pizza.png" alt="Fresh Wood-Fired Pizza">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Signature Menu Section -->
+    <section class="menu-section" id="menu">
+      <div class="section-header">
+        <span class="section-subtitle">Aesthetic Gastronomy</span>
+        <h2 class="section-title">The Signature Menu</h2>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <!-- Card 1 -->
+        <div class="menu-card" data-category="pizza">
+          <div class="menu-card-img-wrapper">
+            <span class="menu-badge">Chef Recommended</span>
+            <img src="assets/pizza.png" alt="Margherita Pizza" class="menu-card-img">
+          </div>
+          <div class="menu-card-content">
+            <div class="menu-card-title-row">
+              <h4>Margherita Pizza</h4>
+              <div class="menu-card-price pizza-prices">S: ₹99<br>L: ₹149</div>
+            </div>
+            <p class="menu-card-desc">Classic Italian thin crust topped with rich tomato sauce, premium mozzarella cheese, and fresh aromatic basil leaves.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-tag">Pizza</span>
+              <button class="menu-order-btn" onclick="orderMenuItem('Margherita Pizza', 'Pizza')">Order Now <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="menu-card" data-category="burger">
+          <div class="menu-card-img-wrapper">
+            <span class="menu-badge best-seller">Best Seller</span>
+            <img src="assets/burger.png" alt="Double Cheese Burger" class="menu-card-img">
+          </div>
+          <div class="menu-card-content">
+            <div class="menu-card-title-row">
+              <h4>Double Cheese Burger</h4>
+              <div class="menu-card-price">₹119</div>
+            </div>
+            <p class="menu-card-desc">Loaded double cheddar cheese slices, liquid cheese sauce, caramelized onions, and butter-toasted brioche buns.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-tag">Burger</span>
+              <button class="menu-order-btn" onclick="orderMenuItem('Double Cheese Burger', 'Burger')">Order Now <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="menu-card" data-category="beverages">
+          <div class="menu-card-img-wrapper">
+            <span class="menu-badge">Chef Recommended</span>
+            <img src="assets/coffee.png" alt="Cold Coffee with Ice Cream" class="menu-card-img">
+          </div>
+          <div class="menu-card-content">
+            <div class="menu-card-title-row">
+              <h4>Cold Coffee with Ice Cream</h4>
+              <div class="menu-card-price">₹129</div>
+            </div>
+            <p class="menu-card-desc">Rich blended espresso, chilled milk, and sugar, served with a big scoop of vanilla ice cream.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-tag">Cold Coffee</span>
+              <button class="menu-order-btn" onclick="orderMenuItem('Cold Coffee with Ice Cream', 'Drinks')">Order Now <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="menu-card" data-category="beverages">
+          <div class="menu-card-img-wrapper">
+            <span class="menu-badge best-seller">Best Seller</span>
+            <img src="assets/shake.png" alt="Kitkat Shake" class="menu-card-img">
+          </div>
+          <div class="menu-card-content">
+            <div class="menu-card-title-row">
+              <h4>Kitkat Shake</h4>
+              <div class="menu-card-price">₹129</div>
+            </div>
+            <p class="menu-card-desc">Thick vanilla milkshake blended with crispy KitKat wafers, rich chocolate syrup, and whipped cream.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-tag">Milkshake</span>
+              <button class="menu-order-btn" onclick="orderMenuItem('Kitkat Shake', 'Drinks')">Order Now <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Featured Dessert of the Week (Bonus Section) -->
+    <section class="dessert-section" style="background-color: var(--bg-primary);">
+      <div class="dessert-image-wrapper">
+        <img src="assets/dessert.png" alt="Molten Chocolate Lava Cake" class="dessert-img">
+      </div>
+      <div class="dessert-info">
+        <span class="section-subtitle">Featured Dessert of the Week</span>
+        <h3>Sizzling Molten Chocolate Lava Cake</h3>
+        <p class="dessert-price">₹120/-</p>
+        <p class="dessert-desc">A premium gourmet dessert. Rich, warm chocolate cake with a molten liquid cocoa core that flows with your first spoonful. Served hot on a wooden platter alongside a cool, premium scoop of vanilla bean ice cream and dusted with powdered sugar.</p>
+        <ul class="dessert-features">
+          <li><i data-lucide="check-circle-2"></i> Baked fresh on order</li>
+          <li><i data-lucide="check-circle-2"></i> Premium Belgian cocoa</li>
+          <li><i data-lucide="check-circle-2"></i> Perfect sweet balance</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary"><i data-lucide="sparkles"></i> Reserve A Table for Dessert</a>
+      </div>
+    </section>
+
+    <!-- 6. Loyalty Rewards Section (Bonus Section) -->
+    <section class="loyalty-section" style="background-color: var(--bg-secondary); padding: 60px 40px; text-align: center;">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <span class="section-subtitle">Cuddle Club Rewards</span>
+        <h3 style="font-size:2.2rem; margin-bottom: 16px;">Buy 5 Coffees/Shakes, Get the 6th FREE!</h3>
+        <p style="margin-bottom: 24px;">Join our exclusive cafe loyalty program. Walk in, collect digital stamps on your phone, and enjoy a free drink on us. Ask our friendly cashier to activate your loyalty card during checkout!</p>
+        <div style="display:flex; justify-content:center; gap: 15px; flex-wrap:wrap; margin-bottom: 30px;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent-gold); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; border:2px solid var(--accent-gold-dark)">1</div>
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent-gold); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; border:2px solid var(--accent-gold-dark)">2</div>
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent-gold); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; border:2px solid var(--accent-gold-dark)">3</div>
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent-gold); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; border:2px solid var(--accent-gold-dark)">4</div>
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent-gold); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; border:2px solid var(--accent-gold-dark)">5</div>
+          <div style="width:50px; height:50px; border-radius:50%; background:white; color:var(--text-muted); display:flex; align-items:center; justify-content:center; font-weight:700; border:2px dashed var(--accent-gold)">🎁</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Why People Love Us / Stats -->
+    <section class="stats-section" id="why-us">
+      <div class="section-header">
+        <span class="section-subtitle">Affordable Luxury</span>
+        <h2 class="section-title">Why People Love Us</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" data-target="4.9">0.0★</div>
+          <div class="stat-label">Google Rating</div>
+          <div class="stat-desc">Consistently voted Ujjain's favorite cozy cafe.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="50000">0+</div>
+          <div class="stat-label">Happy Guests</div>
+          <div class="stat-desc">Serving smiles, dates, and cozy gatherings.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="15000">0+</div>
+          <div class="stat-label">Pizzas Handcrafted</div>
+          <div class="stat-desc">Freshly prepared, wood-fired styled crusts.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="20000">0+</div>
+          <div class="stat-label">Coffees Brewed</div>
+          <div class="stat-desc">Carefully sourced beans, perfect milk art.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Pinterest Masonry Cafe Gallery -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-header">
+        <span class="section-subtitle">Visual Feed</span>
+        <h2 class="section-title">The Cafe Gallery</h2>
+      </div>
+      
+      <div class="gallery-wrapper">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/hero_bg.png" alt="Cafe Ambience">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Cozy Interior Vibe</h4>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/pizza.png" alt="Aesthetic Pizza Shot">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Wood-fired Pizza Art</h4>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/coffee.png" alt="Coffee Latte Close-up">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Rich Espresso Art</h4>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/burger.png" alt="Juicy Burger Slice">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Gourmet Double Cheese</h4>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/banquet.png" alt="Banquet Setup">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Elegant Gatherings</h4>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/dessert.png" alt="Warm lava cake">
+            <div class="gallery-overlay">
+              <i data-lucide="instagram"></i>
+              <h4>Molten Lava Treat</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Birthday & Banquet Section -->
+    <section class="banquet-section" id="banquet">
+      <div class="banquet-grid">
+        <div class="banquet-info">
+          <span class="section-subtitle">Private Gathering Space</span>
+          <h3>Book Our Banquet Hall for Special Occasions</h3>
+          <p>Planning an event? Host your special gatherings in Ujjain's most elegant indoor space. We cater to birthday parties, kitty parties, corporate events, wedding anniversaries, ring ceremonies, and private group meetings.</p>
+          <div class="banquet-features-list">
+            <div class="banquet-feature-item"><i data-lucide="check"></i> Up to 60 guests capacity</div>
+            <div class="banquet-feature-item"><i data-lucide="check"></i> Elegant warm lights & decor</div>
+            <div class="banquet-feature-item"><i data-lucide="check"></i> Custom food & drinks menu</div>
+            <div class="banquet-feature-item"><i data-lucide="check"></i> Integrated audio/sound system</div>
+          </div>
+          <a href="#contact" class="btn btn-primary"><i data-lucide="sparkles"></i> Inquiry For Banquet Booking</a>
+        </div>
+        <div class="banquet-image-wrapper">
+          <img src="assets/banquet.png" alt="Elegant Banquet setup" class="banquet-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Nearby Attractions Section (Ujjain special, Bonus Section) -->
+    <section class="attractions-section">
+      <div class="section-header">
+        <span class="section-subtitle">Traveler's Guide</span>
+        <h2 class="section-title">Explore Nearby Ujjain</h2>
+      </div>
+      <div class="attractions-grid">
+        <div class="attraction-card">
+          <div class="attraction-header">
+            <div class="attraction-icon"><i data-lucide="map-pin"></i></div>
+            <span class="attraction-distance">10 mins away</span>
+          </div>
+          <h4>Mahakaleshwar Jyotirlinga</h4>
+          <p>Just 3.5 km from the sacred temple. Cuddle Cafe is the perfect quiet sanctuary to rest, cool down, and have a delicious meal after your darshan.</p>
+        </div>
+        <div class="attraction-card">
+          <div class="attraction-header">
+            <div class="attraction-icon"><i data-lucide="map-pin"></i></div>
+            <span class="attraction-distance">12 mins away</span>
+          </div>
+          <h4>Harsiddhi Mata Temple</h4>
+          <p>Located 3.8 km away, this ancient temple is one of the Shaktipeeths. Stop by Rishi Nagar for our specialty iced cold coffees and dessert afterward.</p>
+        </div>
+        <div class="attraction-card">
+          <div class="attraction-header">
+            <div class="attraction-icon"><i data-lucide="map-pin"></i></div>
+            <span class="attraction-distance">14 mins away</span>
+          </div>
+          <h4>Ram Ghat (Shipra River)</h4>
+          <p>Situated 4.0 km away, ideal for evening walks. Visit us afterward to warm up with our artisanal hot teas, hot coffees, and cheesy garlic bread.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Google Reviews Section -->
+    <section class="reviews-section">
+      <div class="section-header">
+        <span class="section-subtitle">Customer Voices</span>
+        <h2 class="section-title">What Our Guests Say</h2>
+      </div>
+      
+      <div class="reviews-carousel-container">
+        <div class="reviews-track" id="reviewsTrack">
+          <!-- Card 1 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+            </div>
+            <p class="review-text">"Amazing place! The Margherita pizza has the perfect thin crust and cheese ratio. The cold coffee is rich and delicious. The light-wood cafe design makes it feel so premium and luxurious. Best date spot in Rishi Nagar!"</p>
+            <div class="review-user">
+              <div class="review-avatar">A</div>
+              <div class="review-details">
+                <h5>Aman Sharma</h5>
+                <span>Google Local Guide</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+            </div>
+            <p class="review-text">"Highly recommend Cuddle Cafe. We booked their banquet hall for my sister's birthday celebration. The decor was elegant, the service was super fast, and the paneer burgers and Hakka noodles were absolutely mouth-watering."</p>
+            <div class="review-user">
+              <div class="review-avatar">R</div>
+              <div class="review-details">
+                <h5>Riya Patel</h5>
+                <span>Customer Review</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+            </div>
+            <p class="review-text">"We came here after visiting the Mahakal Temple. It was so relaxing, clean, and air-conditioned. The chocolate Kitkat shake and peri-peri French fries are out of this world. Ujjain needed a high-end luxury cafe like this!"</p>
+            <div class="review-user">
+              <div class="review-avatar">V</div>
+              <div class="review-details">
+                <h5>Vikram Aditya</h5>
+                <span>Traveler Review</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+            </div>
+            <p class="review-text">"Cuddle Cafe is where I study on weekdays. The ambient music is soft, the staff is very polite, and their cheese chutney sandwich is toasted to absolute perfection. Best fast food and cafe experience in Ujjain."</p>
+            <div class="review-user">
+              <div class="review-avatar">N</div>
+              <div class="review-details">
+                <h5>Neha Joshi</h5>
+                <span>College Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="carousel-dots" id="reviewsDots"></div>
+      </div>
+    </section>
+
+    <!-- 12. Curated Instagram Feed Section -->
+    <section class="insta-section">
+      <div class="section-header">
+        <span class="section-subtitle">@cuddle_cafe_ujjain</span>
+        <h2 class="section-title">Instagram Feed</h2>
+      </div>
+      <div class="insta-wrapper">
+        <div class="insta-grid">
+          <div class="insta-item">
+            <img src="assets/coffee.png" alt="Aesthetic coffee flatlay">
+            <div class="insta-overlay">
+              <span class="insta-stat"><i data-lucide="heart"></i> 412</span>
+              <span class="insta-stat"><i data-lucide="message-circle"></i> 24</span>
+            </div>
+          </div>
+          <div class="insta-item">
+            <img src="assets/pizza.png" alt="Pizza cheese pull">
+            <div class="insta-overlay">
+              <span class="insta-stat"><i data-lucide="heart"></i> 589</span>
+              <span class="insta-stat"><i data-lucide="message-circle"></i> 42</span>
+            </div>
+          </div>
+          <div class="insta-item">
+            <img src="assets/burger.png" alt="Burger details">
+            <div class="insta-overlay">
+              <span class="insta-stat"><i data-lucide="heart"></i> 340</span>
+              <span class="insta-stat"><i data-lucide="message-circle"></i> 18</span>
+            </div>
+          </div>
+          <div class="insta-item">
+            <img src="assets/hero_bg.png" alt="Friends enjoying drinks">
+            <div class="insta-overlay">
+              <span class="insta-stat"><i data-lucide="heart"></i> 621</span>
+              <span class="insta-stat"><i data-lucide="message-circle"></i> 56</span>
+            </div>
+          </div>
+        </div>
+        <div class="insta-btn-wrapper">
+          <a href="https://www.instagram.com/cuddle_cafe_ujjain" target="_blank" class="btn btn-primary"><i data-lucide="instagram"></i> Follow Us On Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Visit Us Split Layout (Google Maps Embed) -->
+    <section class="visit-section" id="visit">
+      <div class="visit-grid">
+        <div class="visit-info">
+          <span class="section-subtitle">Find Your Hug</span>
+          <h3>Visit Our Cafe in Ujjain</h3>
+          <p>We are situated in Rishi Nagar, one of Ujjain's most accessible, premium residential areas. Drop in to experience luxury coffeehouse vibes, fast food, and cozy seating arrangements.</p>
+          
+          <div class="visit-details">
+            <div class="visit-item">
+              <div class="visit-icon"><i data-lucide="map-pin"></i></div>
+              <div>
+                <h4>Address</h4>
+                <p>Rishi Nagar, Near Mahakal Area, Ujjain, Madhya Pradesh 456010</p>
+              </div>
+            </div>
+            
+            <div class="visit-item">
+              <div class="visit-icon"><i data-lucide="clock"></i></div>
+              <div>
+                <h4>Working Hours</h4>
+                <p>Monday - Sunday: 11:00 AM - 11:00 PM</p>
+              </div>
+            </div>
+
+            <div class="visit-item">
+              <div class="visit-icon"><i data-lucide="phone"></i></div>
+              <div>
+                <h4>Direct Phone Lines</h4>
+                <p><a href="tel:+917000234433">+91 70002 34433</a></p>
+                <p><a href="tel:+916261842446">+91 62618 42446</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px;">
+            <a href="https://maps.google.com/?q=Rishi+Nagar+Ujjain" target="_blank" class="btn btn-primary"><i data-lucide="navigation"></i> Get Directions</a>
+            <a href="tel:+917000234433" class="btn btn-secondary"><i data-lucide="phone-call"></i> Call Cafe</a>
+          </div>
+        </div>
+        
+        <div class="map-wrapper">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14686.079219355799!2d75.7951523!3d23.1338271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963746c8733235b%3A0xe54d92418e24c538!2sRishi%20Nagar%2C%20Ujjain%2C%20Madhya%20Pradesh%20456010!5e0!3m2!1sen!2sin!4v1783000000000!5m2!1sen!2sin" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Modern FAQ Section (Bonus Section) -->
+    <section class="faq-section" style="background-color: var(--bg-primary);">
+      <div class="section-header">
+        <span class="section-subtitle">FAQ</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>What are your cafe operating hours?</h4>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We are open daily from 11:00 AM to 11:00 PM, including weekends. Last kitchen orders are taken at 10:45 PM.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Do you accept online table reservations?</h4>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes, you can reserve a table directly using our online booking form below or by clicking the WhatsApp floating assistant. Reservations are free of charge.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>How can I book the banquet hall?</h4>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You can fill out the Banquet inquiry form below or call us directly. We accommodate up to 60 guests and provide customized menu templates for birthdays, anniversaries, and small gatherings.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Is parking available at the Rishi Nagar location?</h4>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes, we have dedicated roadside four-wheeler and two-wheeler parking available in front of the cafe in Rishi Nagar, Ujjain.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Contact & Reservation Form Section -->
+    <section class="contact-section" id="contact" style="background-color: var(--bg-secondary);">
+      <div class="section-header">
+        <span class="section-subtitle">Reservations</span>
+        <h2 class="section-title">Book Table or Banquet</h2>
+      </div>
+      
+      <div class="contact-grid">
+        <form class="contact-form" id="bookingForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="E.g., Yash Gupta" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="E.g., 7000234433" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="guests">Number of Guests *</label>
+            <select id="guests" name="guests" required>
+              <option value="2">2 Guests (Standard Table)</option>
+              <option value="4">4 Guests (Family Table)</option>
+              <option value="6">6 Guests (Large Table)</option>
+              <option value="10">10+ Guests (Group/Party)</option>
+              <option value="Banquet">15-60 Guests (Banquet Hall Inquiry)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="date">Date *</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+
+          <div class="form-group" id="timeGroup">
+            <label for="time">Preferred Time</label>
+            <input type="time" id="time" name="time">
+          </div>
+
+          <div class="form-group" style="display:none;">
+            <label for="event_type">Event Type</label>
+            <input type="text" id="event_type" name="event_type" value="Table Booking">
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="message">Special Requests / Message</label>
+            <textarea id="message" name="message" placeholder="E.g., celebrating anniversary, need window table, or food allergies..."></textarea>
+          </div>
+          
+          <div class="form-btn-wrapper">
+            <button type="submit" class="btn btn-primary"><i data-lucide="check-square"></i> Book on WhatsApp</button>
+            <a href="tel:+917000234433" class="btn btn-secondary"><i data-lucide="phone-call"></i> Call to Confirm</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Gallery Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose"><i data-lucide="x"></i></button>
+      <img src="" id="lightboxImg" alt="Enlarged gallery photo">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-4-5H4v13h12V3zm2 3h2v1h-2V6zm0 3h2v1h-2V9zm-8 4c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+          </svg>
+          <span>Cuddle Cafe</span>
+        </a>
+        <p>Where Every Bite Feels Like a Hug. Experience premium fast food, authentic wood-fired styled pizzas, gourmet burger recipes, and artisanal coffees in a cozy modern aesthetic.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/cuddle_cafe_ujjain" target="_blank" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="https://maps.google.com/?q=Rishi+Nagar+Ujjain" target="_blank" aria-label="Google Maps"><i data-lucide="map"></i></a>
+          <a href="tel:+917000234433" aria-label="Phone Call"><i data-lucide="phone"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#menu">Signature Menu</a></li>
+          <li><a href="#why-us">Why People Love Us</a></li>
+          <li><a href="#gallery">Cafe Gallery</a></li>
+          <li><a href="#banquet">Banquets</a></li>
+          <li><a href="#visit">Visit Us</a></li>
+          <li><a href="#contact">Contact/Reservations</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-contact">
+        <h4>Cafe Location</h4>
+        <div class="footer-contact-details">
+          <div class="footer-contact-item">
+            <i data-lucide="map-pin"></i>
+            <span>Rishi Nagar, Ujjain,<br>Madhya Pradesh 456010</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="clock"></i>
+            <span>Daily: 11:00 AM - 11:00 PM</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="phone"></i>
+            <span>
+              <a href="tel:+917000234433">+91 70002 34433</a><br>
+              <a href="tel:+916261842446">+91 62618 42446</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 Cuddle Cafe, Rishi Nagar, Ujjain. All Rights Reserved.</p>
+      <p>Luxury Hospitality Branding • Inspired by Aesop & Apple</p>
+    </div>
+  </footer>
+
+  <!-- Floating Call & WhatsApp Buttons -->
+  <div class="floating-widgets">
+    <a href="tel:+917000234433" class="float-btn float-btn-phone" aria-label="Call Cuddle Cafe"><i data-lucide="phone"></i></a>
+    <a href="https://wa.me/917000234433?text=Hi%20Cuddle%20Cafe!%20I'd%20like%20to%20make%20a%20table%20reservation." target="_blank" class="float-btn float-btn-whatsapp" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+  </div>
+
+  <!-- Sticky "Reserve Your Table" CTA -->
+  <div class="sticky-reserve-cta" id="stickyReserveCta">
+    <div class="sticky-cta-text">
+      <h4>Plan a cozy visit to Cuddle Cafe?</h4>
+      <p>Book a premium table in Rishi Nagar, Ujjain now.</p>
+    </div>
+    <a href="#contact" class="sticky-cta-btn">Book Table Now</a>
+  </div>
+
+  <!-- JS Scripts (Lenis Scroll, GSAP, Lucide Icons, main.js) -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="main.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dynamically adjust reservation inputs for Banquet vs Table
+    const guestsSelect = document.getElementById('guests');
+    const timeGroup = document.getElementById('timeGroup');
+    const formHeading = document.querySelector('.contact-section .section-title');
+    const eventTypeInput = document.getElementById('event_type');
+
+    guestsSelect.addEventListener('change', (e) => {
+      if (e.target.value === 'Banquet') {
+        timeGroup.style.display = 'none';
+        formHeading.textContent = 'Inquire For Banquet';
+        eventTypeInput.value = 'Banquet Booking';
+      } else {
+        timeGroup.style.display = 'flex';
+        formHeading.textContent = 'Reserve A Table';
+        eventTypeInput.value = 'Table Booking';
+      }
+    });
+  </script>
+</body>
+</html>
