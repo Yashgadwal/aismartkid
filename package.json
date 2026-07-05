@@ -7,8 +7,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "clean-css": "^5.3.3",
+    "compression": "^1.8.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
-    "jimp": "^1.6.1"
+    "jimp": "^1.6.1",
+    "terser": "^5.48.0"
   }
 }

@@ -433,26 +433,26 @@
     "dailyVisits": [
       {
         "date": "2026-07-02",
-        "visits": 6,
+        "visits": 9,
         "leads": 0
       }
     ],
     "trafficSources": [
       {
         "source": "Direct Traffic",
-        "count": 6
+        "count": 9
       }
     ],
     "deviceTypes": [
       {
         "device": "Desktop",
-        "count": 6
+        "count": 9
       }
     ],
     "pageViews": [
       {
         "page": "/",
-        "views": 12,
+        "views": 18,
         "timeSpentSec": 0
       }
     ],
