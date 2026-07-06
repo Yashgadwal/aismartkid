@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api
 
-Sitemap: https://aismartkid.vercel.app/sitemap.xml
+Sitemap: https://aismartkid.vercel.app/sitemap-main.xml
