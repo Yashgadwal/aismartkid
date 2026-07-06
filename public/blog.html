@@ -414,7 +414,7 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/lucide@latest" defer defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
 
@@ -554,7 +554,7 @@
         `;
         grid.appendChild(card);
       });
-      
+      if (typeof lucide !== "undefined") { lucide.createIcons(); }
       if (totalPages > 1) {
         const prevBtn = document.createElement('button');
         prevBtn.className = 'pagination-btn';
@@ -619,6 +619,7 @@
           // Formatter
           const parsedContent = parseMarkdown(post.content);
           document.getElementById('article-body').innerHTML = parsedContent;
+          if (typeof lucide !== "undefined") { lucide.createIcons(); }
           
           // Dynamically adjust page title for SEO benefit
           document.title = `${post.title} | AI Smart Kids Ujjain`;
