@@ -248,6 +248,28 @@
     </article>
   </div>
 
+  <!-- CLASSROOM STUDIO GALLERY -->
+  <section class="studio-section" style="margin-top: 60px;">
+    <div class="container">
+      <div class="section-header">
+        <h3>Our Tech Learning Studio</h3>
+        <p>A premium, bright, collaborative workspace designed to inspire kids to create freely.</p>
+      </div>
+      
+      <div class="studio-grid" id="gallery-container">
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
+        <div class="skeleton-card" style="border: none; padding: 0;">
+          <div class="skeleton-image skeleton-loader" style="height: 240px; border-radius: 20px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="container footer-container">
@@ -267,7 +289,46 @@
   </footer>
 
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>lucide.createIcons();</script>
+  <script>
+    lucide.createIcons();
+
+    async function loadStudioGallery() {
+      const container = document.getElementById('gallery-container');
+      if (!container) return;
+      
+      try {
+        const res = await fetch('/api/gallery');
+        if (res.ok) {
+          const items = await res.json();
+          container.innerHTML = '';
+          
+          if (items.length === 0) {
+            container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#94A3B8; padding:20px 0;">No studio photos uploaded.</div>';
+            return;
+          }
+          
+          items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'studio-item';
+            div.innerHTML = `
+              <div class="gallery-photo">
+                <img src="${item.imageUrl}" alt="${item.caption}">
+                <div class="gallery-caption">${item.caption}</div>
+              </div>
+            `;
+            container.appendChild(div);
+          });
+          if (typeof lucide !== "undefined") { lucide.createIcons(); }
+        }
+      } catch (err) {
+        console.error("Gallery loader failed:", err);
+      }
+    }
+
+    window.onload = function() {
+      loadStudioGallery();
+    };
+  </script>
   
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/918308507820?text=Hello%20AI%20Smart%20Kids%2C%20I%20would%20like%20to%20know%20more%20about%20your%20AI%20and%20coding%20classes%20for%20my%20child." class="floating-whatsapp" target="_blank" rel="noopener noreferrer">
