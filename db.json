@@ -435,24 +435,34 @@
         "date": "2026-07-02",
         "visits": 9,
         "leads": 0
+      },
+      {
+        "date": "2026-07-10",
+        "visits": 4,
+        "leads": 0
       }
     ],
     "trafficSources": [
       {
         "source": "Direct Traffic",
-        "count": 9
+        "count": 13
       }
     ],
     "deviceTypes": [
       {
         "device": "Desktop",
-        "count": 9
+        "count": 13
       }
     ],
     "pageViews": [
       {
         "page": "/",
-        "views": 18,
+        "views": 26,
+        "timeSpentSec": 0
+      },
+      {
+        "page": "/blog.html",
+        "views": 1,
         "timeSpentSec": 0
       }
     ],
