@@ -2722,5 +2722,32 @@ body.loaded .hero-image-wrap {
   box-shadow: 0 24px 48px rgba(124, 58, 237, 0.22), 0 0 35px rgba(124, 58, 237, 0.08) !important;
 }
 
+/* WhatsApp Floating Button */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  border-radius: 50px;
+  box-shadow: 2px 2px 15px rgba(37,211,102,0.3);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 2px 20px rgba(37,211,102,0.5);
+}
+
+/* Hide card project titles in Creations grid */
+.project-info h4 {
+  display: none !important;
+}
+
 
 
