@@ -493,6 +493,9 @@ async function submitBookingForm() {
 
     if (res.ok) {
       const result = await res.json();
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', { content_name: 'Waitlist Booking' });
+      }
       
       // Explosion celebration
       if (typeof confetti === 'function') {
@@ -677,6 +680,9 @@ async function submitExitInquiry(event) {
     });
 
     if (res.ok) {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', { content_name: 'Exit Intent Inquiry' });
+      }
       if (typeof confetti === 'function') {
         confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
       }
