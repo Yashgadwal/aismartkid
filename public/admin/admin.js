@@ -9,6 +9,7 @@ let allBlogs = [];
 let editingStudentId = null;
 let editingBatchId = null;
 let editingBlogId = null;
+let editingLeadId = null;
 
 function toggleSidebar() {
   const sidebar = document.querySelector('.sidebar');
@@ -364,6 +365,7 @@ async function loadRecentInquiriesTable() {
 // ----------------------------------------
 async function loadLeadsPipeline() {
   try {
+    await populateBatchDropdowns();
     const res = await fetch('/api/leads');
     if (res.ok) {
       allLeads = await res.json();
@@ -377,6 +379,7 @@ async function loadLeadsPipeline() {
 function filterLeads() {
   const query = document.getElementById('leads-search').value.toLowerCase();
   const statusFilter = document.getElementById('leads-filter-status').value;
+  const batchFilter = document.getElementById('leads-filter-batch').value;
   const tbody = document.getElementById('leads-tbody');
   tbody.innerHTML = '';
 
@@ -385,7 +388,8 @@ function filterLeads() {
                           (l.childName || '').toLowerCase().includes(query) ||
                           (l.phone || '').includes(query);
     const matchesStatus = statusFilter === 'All' || l.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    const matchesBatch = batchFilter === 'All' || l.preferredBatch === batchFilter;
+    return matchesSearch && matchesStatus && matchesBatch;
   });
 
   filtered.forEach(l => {
@@ -417,9 +421,14 @@ function filterLeads() {
         </select>
       </td>
       <td>
-        <button class="action-btn delete-btn" onclick="deleteLead('${l.id}')" title="Delete Inquiry">
-          <i data-lucide="trash-2"></i>
-        </button>
+        <div class="action-row">
+          <button class="action-btn edit-btn" onclick="openLeadModal('${l.id}')" title="Edit Inquiry">
+            <i data-lucide="edit-3"></i>
+          </button>
+          <button class="action-btn delete-btn" onclick="deleteLead('${l.id}')" title="Delete Inquiry">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
       </td>
     `;
     tbody.appendChild(tr);
@@ -463,76 +472,235 @@ function exportLeadsCsv() {
   window.open('/api/leads?export=csv', '_blank');
 }
 
+async function populateBatchDropdowns() {
+  try {
+    if (allBatches.length === 0) {
+      const batchesRes = await fetch('/api/batches');
+      allBatches = await batchesRes.json();
+    }
+    
+    // Populate Leads filter
+    const leadsFilter = document.getElementById('leads-filter-batch');
+    if (leadsFilter) {
+      const currentVal = leadsFilter.value;
+      leadsFilter.innerHTML = '<option value="All">All Batches</option>';
+      allBatches.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b.name;
+        opt.innerText = b.name;
+        leadsFilter.appendChild(opt);
+      });
+      if (currentVal) leadsFilter.value = currentVal;
+    }
+    
+    // Populate Students filter
+    const studentsFilter = document.getElementById('students-filter-batch');
+    if (studentsFilter) {
+      const currentVal = studentsFilter.value;
+      studentsFilter.innerHTML = '<option value="All">All Batches</option>';
+      allBatches.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b.id;
+        opt.innerText = b.name;
+        studentsFilter.appendChild(opt);
+      });
+      if (currentVal) studentsFilter.value = currentVal;
+    }
+  } catch (err) {
+    console.error("Failed to populate batch dropdowns:", err);
+  }
+}
+
+function openLeadModal(id = null) {
+  editingLeadId = id;
+  const modal = document.getElementById('lead-modal');
+  const title = document.getElementById('lead-modal-title');
+  const select = document.getElementById('lead-input-batch');
+
+  // Populate batch select dropdown options
+  select.innerHTML = '';
+  allBatches.forEach(b => {
+    const opt = document.createElement('option');
+    opt.value = b.name;
+    opt.innerText = b.name;
+    select.appendChild(opt);
+  });
+  
+  const otherOpt = document.createElement('option');
+  otherOpt.value = 'Undecided';
+  otherOpt.innerText = 'Undecided / Other';
+  select.appendChild(otherOpt);
+
+  if (id) {
+    title.innerText = "Edit Inquiry Lead";
+    const lead = allLeads.find(l => l.id === id);
+    if (lead) {
+      document.getElementById('lead-input-parentName').value = lead.parentName || '';
+      document.getElementById('lead-input-childName').value = lead.childName || '';
+      document.getElementById('lead-input-age').value = lead.age || '';
+      document.getElementById('lead-input-school').value = lead.school || '';
+      document.getElementById('lead-input-class').value = lead.class || '';
+      document.getElementById('lead-input-phone').value = lead.phone || '';
+      document.getElementById('lead-input-email').value = lead.email || '';
+      document.getElementById('lead-input-batch').value = lead.preferredBatch || 'Undecided';
+      document.getElementById('lead-input-status').value = lead.status || 'New';
+      document.getElementById('lead-input-followUpDate').value = lead.followUpDate || '';
+      document.getElementById('lead-input-notes').value = lead.notes || '';
+    }
+  } else {
+    title.innerText = "Add Manual Inquiry Lead";
+    document.getElementById('lead-form').reset();
+    document.getElementById('lead-input-status').value = 'New';
+    document.getElementById('lead-input-batch').value = allBatches.length > 0 ? allBatches[0].name : 'Undecided';
+  }
+
+  modal.classList.add('active');
+}
+
+function closeLeadModal() {
+  document.getElementById('lead-modal').classList.remove('active');
+  editingLeadId = null;
+}
+
+async function handleSaveLead(event) {
+  event.preventDefault();
+  const parentName = document.getElementById('lead-input-parentName').value.trim();
+  const childName = document.getElementById('lead-input-childName').value.trim();
+  const age = document.getElementById('lead-input-age').value;
+  const school = document.getElementById('lead-input-school').value.trim();
+  const childClass = document.getElementById('lead-input-class').value.trim();
+  const phone = document.getElementById('lead-input-phone').value.trim();
+  const email = document.getElementById('lead-input-email').value.trim();
+  const preferredBatch = document.getElementById('lead-input-batch').value;
+  const status = document.getElementById('lead-input-status').value;
+  const followUpDate = document.getElementById('lead-input-followUpDate').value;
+  const notes = document.getElementById('lead-input-notes').value.trim();
+
+  const payload = {
+    parentName,
+    childName,
+    age: age ? Number(age) : 0,
+    school,
+    class: childClass,
+    phone,
+    email,
+    preferredBatch,
+    status,
+    notes,
+    followUpDate
+  };
+
+  try {
+    let res;
+    if (editingLeadId) {
+      payload.id = editingLeadId;
+      res = await fetch('/api/leads', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+
+    if (res.ok) {
+      closeLeadModal();
+      loadLeadsPipeline();
+    } else {
+      const err = await res.json();
+      alert(`Error saving lead: ${err.message || err.error}`);
+    }
+  } catch (err) {
+    console.error("Failed to save lead:", err);
+    alert("Error occurred while saving lead record.");
+  }
+}
+
 // ----------------------------------------
 // TAB 3: STUDENT ROSTER
 // ----------------------------------------
 async function loadStudentsRoster() {
   try {
-    // Load batches list first for dropdown options and naming
-    const batchesRes = await fetch('/api/batches');
-    allBatches = await batchesRes.json();
-
+    await populateBatchDropdowns();
     const res = await fetch('/api/students');
     allStudents = await res.json();
-
-    // Map batch names
-    const batchMap = {};
-    allBatches.forEach(b => batchMap[b.id] = b.name);
-
-    const tbody = document.getElementById('students-tbody');
-    tbody.innerHTML = '';
-
-    allStudents.forEach(s => {
-      const initials = s.name.split(' ').map(n => n[0]).join('').toUpperCase();
-      const feePercent = s.feesTotal ? Math.min(100, Math.round((s.feesPaid / s.feesTotal) * 100)) : 0;
-      
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <div class="user-initials" style="width:30px; height:30px; font-size:10px;">${initials}</div>
-            <div>
-              <span class="text-bold-dark">${s.name}</span>
-              <span class="sub-label">Parent: ${s.parentName || ''}</span>
-            </div>
-          </div>
-        </td>
-        <td>
-          <span>${s.phone || ''}</span>
-          <span class="sub-label">${s.email || ''}</span>
-        </td>
-        <td>${batchMap[s.enrolledBatchId] || 'Unassigned'}</td>
-        <td class="fee-progress-cell">
-          <span>₹${s.feesPaid.toLocaleString('en-IN')} / ₹${s.feesTotal.toLocaleString('en-IN')}</span>
-          <div class="fee-bar-track">
-            <div class="fee-bar-fill" style="width: ${feePercent}%;"></div>
-          </div>
-        </td>
-        <td>
-          <span class="text-bold-dark" style="color:${s.attendance >= 90 ? 'var(--color-success-green)' : 'var(--color-accent-orange)'}">${s.attendance}%</span>
-        </td>
-        <td>
-          <div style="display:flex; flex-wrap:wrap; gap:4px;">
-            ${(s.certificates || []).map(c => `<span class="badge-tag" style="padding:2px 8px; font-size:8px;">${c}</span>`).join('')}
-            <button class="action-btn" onclick="addCertificateBadge('${s.id}')" title="Grant Badge" style="padding:2px;"><i data-lucide="plus-circle" style="width:14px; height:14px;"></i></button>
-          </div>
-        </td>
-        <td>
-          <span class="badge-status status-${(s.status || 'Active').toLowerCase()}">${s.status || 'Active'}</span>
-        </td>
-        <td>
-          <div class="action-row">
-            <button class="action-btn edit-btn" onclick="openStudentModal('${s.id}')"><i data-lucide="edit-3"></i></button>
-            <button class="action-btn delete-btn" onclick="deleteStudent('${s.id}')"><i data-lucide="trash-2"></i></button>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-    lucide.createIcons();
+    filterStudents();
   } catch (err) {
     console.error("Failed to load student roster:", err);
   }
+}
+
+function filterStudents() {
+  const query = document.getElementById('students-search').value.toLowerCase();
+  const batchFilter = document.getElementById('students-filter-batch').value;
+  const statusFilter = document.getElementById('students-filter-status').value;
+  const tbody = document.getElementById('students-tbody');
+  tbody.innerHTML = '';
+
+  const batchMap = {};
+  allBatches.forEach(b => batchMap[b.id] = b.name);
+
+  const filtered = allStudents.filter(s => {
+    const matchesSearch = (s.name || '').toLowerCase().includes(query) ||
+                          (s.parentName || '').toLowerCase().includes(query) ||
+                          (s.school || '').toLowerCase().includes(query);
+    const matchesBatch = batchFilter === 'All' || s.enrolledBatchId === batchFilter;
+    const matchesStatus = statusFilter === 'All' || s.status === statusFilter;
+    return matchesSearch && matchesBatch && matchesStatus;
+  });
+
+  filtered.forEach(s => {
+    const initials = s.name.split(' ').map(n => n[0]).join('').toUpperCase();
+    const feePercent = s.feesTotal ? Math.min(100, Math.round((s.feesPaid / s.feesTotal) * 100)) : 0;
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="user-initials" style="width:30px; height:30px; font-size:10px;">${initials}</div>
+          <div>
+            <span class="text-bold-dark">${s.name}</span>
+            <span class="sub-label">Parent: ${s.parentName || ''}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <span>${s.phone || ''}</span>
+        <span class="sub-label">${s.email || ''}</span>
+      </td>
+      <td>${batchMap[s.enrolledBatchId] || 'Unassigned'}</td>
+      <td class="fee-progress-cell">
+        <span>₹${s.feesPaid.toLocaleString('en-IN')} / ₹${s.feesTotal.toLocaleString('en-IN')}</span>
+        <div class="fee-bar-track">
+          <div class="fee-bar-fill" style="width: ${feePercent}%;"></div>
+        </div>
+      </td>
+      <td>
+        <span class="text-bold-dark" style="color:${s.attendance >= 90 ? 'var(--color-success-green)' : 'var(--color-accent-orange)'}">${s.attendance}%</span>
+      </td>
+      <td>
+        <div style="display:flex; flex-wrap:wrap; gap:4px;">
+          ${(s.certificates || []).map(c => `<span class="badge-tag" style="padding:2px 8px; font-size:8px;">${c}</span>`).join('')}
+          <button class="action-btn" onclick="addCertificateBadge('${s.id}')" title="Grant Badge" style="padding:2px;"><i data-lucide="plus-circle" style="width:14px; height:14px;"></i></button>
+        </div>
+      </td>
+      <td>
+        <span class="badge-status status-${(s.status || 'Active').toLowerCase()}">${s.status || 'Active'}</span>
+      </td>
+      <td>
+        <div class="action-row">
+          <button class="action-btn edit-btn" onclick="openStudentModal('${s.id}')"><i data-lucide="edit-3"></i></button>
+          <button class="action-btn delete-btn" onclick="deleteStudent('${s.id}')"><i data-lucide="trash-2"></i></button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+  lucide.createIcons();
 }
 
 function openStudentModal(id = null) {

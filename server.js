@@ -200,14 +200,22 @@ app.post('/api/leads', (req, res) => {
 });
 
 app.put('/api/leads', requireAuth, (req, res) => {
-  const { id, status, notes, followUpDate } = req.body;
+  const { id, parentName, childName, age, school, class: childClass, phone, email, preferredBatch, status, notes, followUpDate } = req.body;
   if (!id) return res.status(400).json({ error: 'Missing lead ID' });
 
   const db = readDB();
   const index = db.leads.findIndex(l => l.id === id);
   if (index === -1) return res.status(404).json({ error: 'Lead not found' });
 
-  if (status) db.leads[index].status = status;
+  if (parentName !== undefined) db.leads[index].parentName = parentName;
+  if (childName !== undefined) db.leads[index].childName = childName;
+  if (age !== undefined) db.leads[index].age = Number(age) || 0;
+  if (school !== undefined) db.leads[index].school = school;
+  if (childClass !== undefined) db.leads[index].class = childClass;
+  if (phone !== undefined) db.leads[index].phone = phone;
+  if (email !== undefined) db.leads[index].email = email;
+  if (preferredBatch !== undefined) db.leads[index].preferredBatch = preferredBatch;
+  if (status !== undefined) db.leads[index].status = status;
   if (notes !== undefined) db.leads[index].notes = notes;
   if (followUpDate !== undefined) db.leads[index].followUpDate = followUpDate;
 
