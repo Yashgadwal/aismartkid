@@ -6,7 +6,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DB_FILE = path.join(__dirname, 'db.json');
+let DB_FILE = path.join(__dirname, 'db.json');
 
 // Middleware
 app.use(compression());
@@ -57,6 +57,26 @@ const defaultSchema = {
     pageViews: []
   }
 };
+
+// Writable database path compatibility check for serverless hosts (like Vercel)
+const isVercel = process.env.VERCEL || process.env.NOW_BUILDER;
+if (isVercel) {
+  const tmpDB = path.join('/tmp', 'db.json');
+  try {
+    if (!fs.existsSync(tmpDB)) {
+      if (fs.existsSync(DB_FILE)) {
+        fs.copyFileSync(DB_FILE, tmpDB);
+        console.log("Successfully cloned db.json to writable /tmp/db.json");
+      } else {
+        fs.writeFileSync(tmpDB, JSON.stringify(defaultSchema, null, 2), 'utf-8');
+        console.log("Successfully initialized default schema in /tmp/db.json");
+      }
+    }
+  } catch (err) {
+    console.error("Vercel /tmp database initialization error:", err);
+  }
+  DB_FILE = tmpDB;
+}
 
 function readDB() {
   try {
