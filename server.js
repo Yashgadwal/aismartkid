@@ -224,7 +224,17 @@ app.put('/api/leads', requireAuth, (req, res) => {
 });
 
 app.delete('/api/leads', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  db.leads = db.leads.filter(l => l.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/leads/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();
@@ -317,7 +327,26 @@ app.put('/api/students', requireAuth, (req, res) => {
 });
 
 app.delete('/api/students', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  const student = db.students.find(s => s.id === id);
+  if (student) {
+    const batch = db.batches.find(b => b.id === student.enrolledBatchId);
+    if (batch) {
+      batch.seatsFilled = Math.max(0, batch.seatsFilled - 1);
+      batch.status = 'Active';
+    }
+  }
+
+  db.students = db.students.filter(s => s.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/students/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();
@@ -393,7 +422,17 @@ app.put('/api/batches', requireAuth, (req, res) => {
 });
 
 app.delete('/api/batches', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  db.batches = db.batches.filter(b => b.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/batches/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();
@@ -446,7 +485,17 @@ app.put('/api/testimonials', requireAuth, (req, res) => {
 });
 
 app.delete('/api/testimonials', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  db.testimonials = db.testimonials.filter(t => t.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/testimonials/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();
@@ -481,7 +530,17 @@ app.post('/api/gallery', requireAuth, (req, res) => {
 });
 
 app.delete('/api/gallery', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  db.gallery = db.gallery.filter(g => g.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/gallery/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();
@@ -570,7 +629,17 @@ app.put('/api/blog', requireAuth, (req, res) => {
 });
 
 app.delete('/api/blog', requireAuth, (req, res) => {
-  const id = req.query.id;
+  const id = req.query.id || req.body.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+
+  const db = readDB();
+  db.blogs = db.blogs.filter(b => b.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/blog/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
   if (!id) return res.status(400).json({ error: 'Missing ID' });
 
   const db = readDB();

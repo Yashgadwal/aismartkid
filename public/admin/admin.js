@@ -458,13 +458,21 @@ async function updateLeadField(id, field, value) {
 async function deleteLead(id) {
   if (!confirm("Are you sure you want to delete this lead?")) return;
   try {
-    const res = await fetch(`/api/leads?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/leads/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
     if (res.ok) {
       allLeads = allLeads.filter(l => l.id !== id);
       filterLeads();
+    } else {
+      const err = await res.json();
+      alert(`Failed to delete lead: ${err.error || 'Server error'}`);
     }
   } catch (err) {
     console.error("Lead deletion error:", err);
+    alert("Network error: Could not complete deletion.");
   }
 }
 
@@ -794,12 +802,20 @@ async function handleSaveStudent(event) {
 async function deleteStudent(id) {
   if (!confirm("Are you sure you want to delete this student profile?")) return;
   try {
-    const res = await fetch(`/api/students?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/students/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
     if (res.ok) {
       loadStudentsRoster();
+    } else {
+      const err = await res.json();
+      alert(`Failed to delete student: ${err.error || 'Server error'}`);
     }
   } catch (err) {
     console.error("Student deletion request error:", err);
+    alert("Network error: Could not complete deletion.");
   }
 }
 
@@ -955,12 +971,20 @@ async function handleSaveBatch(event) {
 async function deleteBatch(id) {
   if (!confirm("Are you sure you want to delete this cohort batch? Allocated student records will stay but unlinked.")) return;
   try {
-    const res = await fetch(`/api/batches?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/batches/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
     if (res.ok) {
       loadBatchesPlanner();
+    } else {
+      const err = await res.json();
+      alert(`Failed to delete batch: ${err.error || 'Server error'}`);
     }
   } catch (err) {
     console.error("Batch deletion error:", err);
+    alert("Network error: Could not complete deletion.");
   }
 }
 
@@ -1023,12 +1047,20 @@ async function handleSaveGallery(event) {
 async function deleteGalleryItem(id) {
   if (!confirm("Are you sure you want to delete this media image link?")) return;
   try {
-    const res = await fetch(`/api/gallery?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/gallery/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
     if (res.ok) {
       loadGalleryVault();
+    } else {
+      const err = await res.json();
+      alert(`Failed to delete media item: ${err.error || 'Server error'}`);
     }
   } catch (err) {
     console.error("Gallery deletion error:", err);
+    alert("Network error: Could not complete deletion.");
   }
 }
 
@@ -1166,12 +1198,20 @@ async function updateBlogField(id, field, value) {
 async function deleteBlog(id) {
   if (!confirm("Are you sure you want to delete this blog article?")) return;
   try {
-    const res = await fetch(`/api/blog?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/blog/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
     if (res.ok) {
       loadBlogArticles();
+    } else {
+      const err = await res.json();
+      alert(`Failed to delete blog article: ${err.error || 'Server error'}`);
     }
   } catch (err) {
     console.error("Blog delete request error:", err);
+    alert("Network error: Could not complete deletion.");
   }
 }
 
