@@ -14,6 +14,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Disable caching for all API routes
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('Surrogate-Control', 'no-store');
+  next();
+});
+
 // Serve Static Frontend files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -241,6 +250,93 @@ app.post('/api/leads/delete', requireAuth, (req, res) => {
   db.leads = db.leads.filter(l => l.id !== id);
   writeDB(db);
   return res.json({ success: true });
+});
+
+app.post('/api/leads/import', requireAuth, (req, res) => {
+  const { leads, duplicateAction } = req.body;
+  if (!Array.isArray(leads)) {
+    return res.status(400).json({ error: 'Missing or invalid leads array' });
+  }
+
+  const db = readDB();
+  let countAdded = 0;
+  let countUpdated = 0;
+  let countSkipped = 0;
+
+  leads.forEach(importedLead => {
+    const parentName = importedLead.parentName || '';
+    const childName = importedLead.childName || '';
+    const phone = (importedLead.phone || '').trim();
+
+    if (!parentName || !childName || !phone) {
+      countSkipped++;
+      return;
+    }
+
+    const existingIndex = db.leads.findIndex(l => {
+      const cleanExisting = (l.phone || '').replace(/\D/g, '');
+      const cleanImported = phone.replace(/\D/g, '');
+      return cleanExisting === cleanImported && cleanImported.length > 0;
+    });
+
+    if (existingIndex !== -1) {
+      if (duplicateAction === 'overwrite') {
+        db.leads[existingIndex] = {
+          ...db.leads[existingIndex],
+          parentName: parentName || db.leads[existingIndex].parentName,
+          childName: childName || db.leads[existingIndex].childName,
+          age: Number(importedLead.age) || db.leads[existingIndex].age || 0,
+          school: importedLead.school || db.leads[existingIndex].school || '',
+          class: importedLead.class || db.leads[existingIndex].class || '',
+          email: importedLead.email || db.leads[existingIndex].email || '',
+          preferredBatch: importedLead.preferredBatch || db.leads[existingIndex].preferredBatch || '',
+          status: importedLead.status || db.leads[existingIndex].status || 'New',
+          notes: importedLead.notes ? `${db.leads[existingIndex].notes || ''}\nImported Note: ${importedLead.notes}`.trim() : (db.leads[existingIndex].notes || ''),
+          followUpDate: importedLead.followUpDate || db.leads[existingIndex].followUpDate || ''
+        };
+        countUpdated++;
+      } else {
+        countSkipped++;
+      }
+    } else {
+      const newLead = {
+        id: `lead_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+        parentName,
+        childName,
+        age: Number(importedLead.age) || 0,
+        school: importedLead.school || '',
+        class: importedLead.class || '',
+        phone,
+        email: importedLead.email || '',
+        preferredBatch: importedLead.preferredBatch || '',
+        status: importedLead.status || 'New',
+        notes: importedLead.notes || '',
+        followUpDate: importedLead.followUpDate || '',
+        createdAt: new Date().toISOString()
+      };
+      db.leads.unshift(newLead);
+      countAdded++;
+    }
+  });
+
+  // Update Lead Analytics count
+  if (countAdded > 0) {
+    const today = new Date().toISOString().split('T')[0];
+    const visitObj = db.analytics.dailyVisits.find(v => v.date === today);
+    if (visitObj) {
+      visitObj.leads += countAdded;
+    } else {
+      db.analytics.dailyVisits.push({ date: today, visits: countAdded, leads: countAdded });
+    }
+  }
+
+  writeDB(db);
+  return res.json({
+    success: true,
+    countAdded,
+    countUpdated,
+    countSkipped
+  });
 });
 
 // ----------------------------------------

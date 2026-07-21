@@ -1571,3 +1571,252 @@ async function saveAttendanceRoster() {
     console.error("Save attendance API failed:", err);
   }
 }
+
+// ----------------------------------------
+// LEAD CSV IMPORT SYSTEM
+// ----------------------------------------
+let csvLines = [];
+let csvHeaders = [];
+
+const crmFields = [
+  { key: 'parentName', label: 'Parent Full Name (Required)', required: true, matches: ["parent name", "parent", "father name", "mother name", "parentname", "parent_name"] },
+  { key: 'childName', label: 'Child Full Name (Required)', required: true, matches: ["child name", "student name", "student", "childname", "child_name", "name"] },
+  { key: 'phone', label: 'Contact Mobile (Required)', required: true, matches: ["phone", "mobile", "contact", "phone number", "mobile number", "mobile_number", "phone_number"] },
+  { key: 'age', label: 'Child Age', required: false, matches: ["age", "child age", "age of child"] },
+  { key: 'school', label: 'School Name', required: false, matches: ["school", "school name"] },
+  { key: 'class', label: 'School Class', required: false, matches: ["class", "grade", "standard", "school class"] },
+  { key: 'email', label: 'Email Address', required: false, matches: ["email", "email address", "email_address"] },
+  { key: 'preferredBatch', label: 'Preferred Batch', required: false, matches: ["preferred batch", "batch", "course", "preferred_batch"] },
+  { key: 'status', label: 'Pipeline Status', required: false, matches: ["status", "pipeline status", "lead status"] },
+  { key: 'notes', label: 'Admissions Notes', required: false, matches: ["notes", "message", "enquiry", "comments", "description"] },
+  { key: 'followUpDate', label: 'Follow-Up Date', required: false, matches: ["follow up date", "followup date", "followup_date"] }
+];
+
+function parseCSV(text) {
+  const lines = [];
+  let row = [""];
+  let insideQuote = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const nextChar = text[i + 1];
+
+    if (char === '"') {
+      if (insideQuote && nextChar === '"') {
+        row[row.length - 1] += '"';
+        i++;
+      } else {
+        insideQuote = !insideQuote;
+      }
+    } else if (char === ',' && !insideQuote) {
+      row.push("");
+    } else if ((char === '\r' || char === '\n') && !insideQuote) {
+      if (char === '\r' && nextChar === '\n') {
+        i++;
+      }
+      lines.push(row);
+      row = [""];
+    } else {
+      row[row.length - 1] += char;
+    }
+  }
+  if (row.length > 1 || row[0] !== "") {
+    lines.push(row);
+  }
+  return lines;
+}
+
+function openImportModal() {
+  resetImportModal();
+  document.getElementById('import-leads-modal').classList.add('active');
+}
+
+function closeImportModal() {
+  document.getElementById('import-leads-modal').classList.remove('active');
+}
+
+function resetImportModal() {
+  document.getElementById('csv-file-input').value = '';
+  document.getElementById('import-step-upload').style.display = 'block';
+  document.getElementById('import-step-mapping').style.display = 'none';
+  document.getElementById('import-step-status').style.display = 'none';
+  document.getElementById('import-loading-spinner').style.display = 'block';
+  document.getElementById('import-success-feedback').style.display = 'none';
+  csvLines = [];
+  csvHeaders = [];
+}
+
+function handleCsvFileSelected(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const parsed = parseCSV(text);
+    if (parsed.length < 2) {
+      alert("Invalid CSV structure. The file must have a header row and at least one lead row.");
+      resetImportModal();
+      return;
+    }
+
+    csvHeaders = parsed[0].map(h => h.trim());
+    csvLines = parsed.slice(1);
+
+    // Switch to step 2 (mapping)
+    document.getElementById('import-step-upload').style.display = 'none';
+    document.getElementById('import-step-mapping').style.display = 'block';
+
+    // Populate dropdowns in mapping table
+    const tbody = document.getElementById('mapping-tbody');
+    tbody.innerHTML = '';
+
+    crmFields.forEach(field => {
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid rgba(0,0,0,0.04)';
+      
+      const tdLabel = document.createElement('td');
+      tdLabel.style.padding = '8px 0';
+      tdLabel.style.fontWeight = '600';
+      tdLabel.style.fontSize = '13px';
+      tdLabel.innerText = field.label;
+
+      const tdSelect = document.createElement('td');
+      tdSelect.style.padding = '8px 0';
+      
+      const select = document.createElement('select');
+      select.id = `map-select-${field.key}`;
+      select.style.width = '100%';
+      select.style.padding = '6px';
+      select.style.borderRadius = '6px';
+      select.style.border = '1px solid rgba(0,0,0,0.15)';
+      
+      // Default empty option (only if field is not required)
+      if (!field.required) {
+        const optEmpty = document.createElement('option');
+        optEmpty.value = '';
+        optEmpty.innerText = '-- Skip Column --';
+        select.appendChild(optEmpty);
+      } else {
+        const optSelect = document.createElement('option');
+        optSelect.value = '';
+        optSelect.innerText = '-- Choose CSV Column --';
+        select.appendChild(optSelect);
+      }
+
+      // Add all CSV columns as options
+      csvHeaders.forEach((header, index) => {
+        const opt = document.createElement('option');
+        opt.value = index;
+        opt.innerText = header;
+        select.appendChild(opt);
+      });
+
+      // Smart pre-selection logic!
+      let preSelectedIndex = -1;
+      for (let i = 0; i < csvHeaders.length; i++) {
+        const normalizedHeader = csvHeaders[i].toLowerCase();
+        if (field.matches.some(m => normalizedHeader.includes(m) || m.includes(normalizedHeader))) {
+          preSelectedIndex = i;
+          break;
+        }
+      }
+      
+      if (preSelectedIndex !== -1) {
+        select.value = preSelectedIndex;
+      }
+
+      tdSelect.appendChild(select);
+      tr.appendChild(tdLabel);
+      tr.appendChild(tdSelect);
+      tbody.appendChild(tr);
+    });
+    
+    lucide.createIcons();
+  };
+  reader.readAsText(file);
+}
+
+async function processImportLeads() {
+  // Validate that required fields are mapped
+  const mappings = {};
+  let missingFields = [];
+
+  crmFields.forEach(field => {
+    const val = document.getElementById(`map-select-${field.key}`).value;
+    if (val === '') {
+      if (field.required) {
+        missingFields.push(field.label);
+      }
+    } else {
+      mappings[field.key] = Number(val);
+    }
+  });
+
+  if (missingFields.length > 0) {
+    alert(`Please map the following required CRM fields:\n${missingFields.join('\n')}`);
+    return;
+  }
+
+  // Switch to status step
+  document.getElementById('import-step-mapping').style.display = 'none';
+  document.getElementById('import-step-status').style.display = 'block';
+
+  // Build the list of mapped objects
+  const leadsToImport = [];
+  csvLines.forEach(line => {
+    // Skip empty lines
+    if (line.length <= 1 && line[0] === '') return;
+
+    const lead = {};
+    crmFields.forEach(field => {
+      const colIdx = mappings[field.key];
+      if (colIdx !== undefined) {
+        lead[field.key] = line[colIdx] ? line[colIdx].trim() : '';
+      }
+    });
+    
+    if (lead.parentName || lead.childName || lead.phone) {
+      leadsToImport.push(lead);
+    }
+  });
+
+  const duplicateAction = document.querySelector('input[name="duplicate-action"]:checked').value;
+
+  try {
+    const res = await fetch('/api/leads/import', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        leads: leadsToImport,
+        duplicateAction
+      })
+    });
+
+    if (res.ok) {
+      const result = await res.json();
+      
+      // Update UI feedback
+      document.getElementById('import-loading-spinner').style.display = 'none';
+      document.getElementById('import-success-feedback').style.display = 'block';
+
+      const summaryDiv = document.getElementById('import-stats-summary');
+      summaryDiv.innerHTML = `
+        <p>• <strong>${result.countAdded}</strong> new leads registered.</p>
+        <p>• <strong>${result.countUpdated}</strong> existing leads updated.</p>
+        <p>• <strong>${result.countSkipped}</strong> records skipped (duplicates or empty).</p>
+      `;
+
+      // Reload lead pipeline pipeline view in background
+      loadLeadsPipeline();
+    } else {
+      const err = await res.json();
+      alert(`Import failed: ${err.error || 'Server error'}`);
+      resetImportModal();
+    }
+  } catch (err) {
+    console.error("Import error:", err);
+    alert("Network error: Could not complete CSV import.");
+    resetImportModal();
+  }
+}
