@@ -15,11 +15,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Disable caching for all API routes
-app.use('/api', (req, res, next) => {
+app.use('/api', async (req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   res.setHeader('Surrogate-Control', 'no-store');
+
+  // Wait for database sync from cloud in serverless
+  if (isVercel && !dbInMemory && dbLoadPromise) {
+    try {
+      await dbLoadPromise;
+    } catch (err) {
+      console.error("Failed to load database from cloud on API request:", err);
+    }
+  }
   next();
 });
 
@@ -60,32 +69,66 @@ const defaultSchema = {
 
 // Writable database path compatibility check for serverless hosts (like Vercel)
 const isVercel = process.env.VERCEL || process.env.NOW_BUILDER;
+let dbInMemory = null;
+let dbLoadPromise = null;
+const CLOUD_BLOB_ID = '019f8917-482d-7268-868c-17c83a16f2ad';
+
+function loadDatabaseFromCloud() {
+  const https = require('https');
+  return new Promise((resolve, reject) => {
+    const url = `https://jsonblob.com/api/jsonBlob/${CLOUD_BLOB_ID}`;
+    https.get(url, (res) => {
+      let body = '';
+      res.on('data', (chunk) => body += chunk);
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          try {
+            dbInMemory = JSON.parse(body);
+            console.log("Successfully fetched database from jsonblob cloud storage.");
+            // Keep local /tmp file in sync on boot
+            fs.writeFileSync(DB_FILE, JSON.stringify(dbInMemory, null, 2), 'utf-8');
+            resolve(dbInMemory);
+          } catch (e) {
+            reject(e);
+          }
+        } else {
+          reject(new Error(`Failed to fetch database from cloud: ${res.statusCode}`));
+        }
+      });
+    }).on('error', reject);
+  });
+}
+
 if (isVercel) {
   const tmpDB = path.join('/tmp', 'db.json');
   try {
     if (!fs.existsSync(tmpDB)) {
       if (fs.existsSync(DB_FILE)) {
         fs.copyFileSync(DB_FILE, tmpDB);
-        console.log("Successfully cloned db.json to writable /tmp/db.json");
       } else {
         fs.writeFileSync(tmpDB, JSON.stringify(defaultSchema, null, 2), 'utf-8');
-        console.log("Successfully initialized default schema in /tmp/db.json");
       }
     }
   } catch (err) {
     console.error("Vercel /tmp database initialization error:", err);
   }
   DB_FILE = tmpDB;
+  dbLoadPromise = loadDatabaseFromCloud();
 }
 
 function readDB() {
+  if (isVercel && dbInMemory) {
+    return dbInMemory;
+  }
   try {
     if (!fs.existsSync(DB_FILE)) {
       fs.writeFileSync(DB_FILE, JSON.stringify(defaultSchema, null, 2), 'utf-8');
       return defaultSchema;
     }
     const data = fs.readFileSync(DB_FILE, 'utf-8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    if (isVercel) dbInMemory = parsed;
+    return parsed;
   } catch (error) {
     console.error("DB Read Error:", error);
     return defaultSchema;
@@ -93,10 +136,36 @@ function readDB() {
 }
 
 function writeDB(data) {
+  if (isVercel) {
+    dbInMemory = data;
+  }
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
   } catch (error) {
     console.error("DB Write Error:", error);
+  }
+
+  // Asynchronously synchronize to cloud database in production serverless
+  if (isVercel) {
+    try {
+      const https = require('https');
+      const payload = JSON.stringify(data);
+      const req = https.request(
+        `https://jsonblob.com/api/jsonBlob/${CLOUD_BLOB_ID}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(payload)
+          }
+        }
+      );
+      req.on('error', (e) => console.error("Cloud database sync error:", e));
+      req.write(payload);
+      req.end();
+    } catch (err) {
+      console.error("Failed to initiate cloud database sync:", err);
+    }
   }
 }
 
