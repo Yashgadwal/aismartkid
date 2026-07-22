@@ -274,6 +274,18 @@ app.post('/api/leads', (req, res) => {
   db.leads.unshift(newLead);
 
   // Increment Lead Analytics count
+  if (!db.analytics) {
+    db.analytics = {
+      dailyVisits: [],
+      trafficSources: [],
+      deviceTypes: [],
+      pageViews: [],
+      totalTimeSpentSec: 0
+    };
+  }
+  if (!db.analytics.dailyVisits) {
+    db.analytics.dailyVisits = [];
+  }
   const today = new Date().toISOString().split('T')[0];
   const visitObj = db.analytics.dailyVisits.find(v => v.date === today);
   if (visitObj) {
@@ -410,6 +422,18 @@ app.post('/api/leads/import', requireAuth, (req, res) => {
 
   // Update Lead Analytics count
   if (countAdded > 0) {
+    if (!db.analytics) {
+      db.analytics = {
+        dailyVisits: [],
+        trafficSources: [],
+        deviceTypes: [],
+        pageViews: [],
+        totalTimeSpentSec: 0
+      };
+    }
+    if (!db.analytics.dailyVisits) {
+      db.analytics.dailyVisits = [];
+    }
     const today = new Date().toISOString().split('T')[0];
     const visitObj = db.analytics.dailyVisits.find(v => v.date === today);
     if (visitObj) {
@@ -845,6 +869,20 @@ app.get('/api/analytics', requireAuth, (req, res) => {
   const todaysLeadsCount = leads.filter(l => l.createdAt && l.createdAt.startsWith(todayStr)).length;
   const totalAdmissionsCount = students.filter(s => s.status === 'Active').length;
   const totalRevenue = students.reduce((acc, curr) => acc + (curr.feesPaid || 0), 0);
+
+  if (!db.analytics) {
+    db.analytics = {
+      dailyVisits: [],
+      trafficSources: [],
+      deviceTypes: [],
+      pageViews: [],
+      totalTimeSpentSec: 0
+    };
+  }
+  if (!db.analytics.dailyVisits) {
+    db.analytics.dailyVisits = [];
+  }
+
   const totalVisitors = db.analytics.dailyVisits.reduce((acc, curr) => acc + (curr.visits || 0), 0);
 
   // Compute total page views across all pages
