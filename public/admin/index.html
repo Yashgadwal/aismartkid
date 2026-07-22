@@ -263,6 +263,15 @@
             <option value="Joined">Joined</option>
             <option value="Rejected">Rejected</option>
           </select>
+          <select id="leads-sort" onchange="filterLeads()">
+            <option value="newest">Sort by Date: Newest First</option>
+            <option value="oldest">Sort by Date: Oldest First</option>
+            <option value="parentName">Sort by Parent (A-Z)</option>
+            <option value="childName">Sort by Child (A-Z)</option>
+            <option value="age-desc">Sort by Age (High-Low)</option>
+            <option value="age-asc">Sort by Age (Low-High)</option>
+            <option value="status">Sort by Status (A-Z)</option>
+          </select>
         </div>
         
         <!-- Leads Table -->

@@ -383,6 +383,17 @@ async function loadRecentInquiriesTable() {
 // TAB 2: INQUIRIES & LEADS PIPELINE
 // ----------------------------------------
 async function loadLeadsPipeline() {
+  const tbody = document.getElementById('leads-tbody');
+  if (tbody) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" style="text-align: center; padding: 40px;">
+          <div class="spinner" style="width: 30px; height: 30px; border: 3px solid rgba(0,0,0,0.1); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s infinite linear; margin: 0 auto 12px;"></div>
+          <span style="color: var(--color-text-gray); font-size: 13px; font-weight: 500;">Retrieving leads pipeline...</span>
+        </td>
+      </tr>
+    `;
+  }
   try {
     await populateBatchDropdowns();
     const res = await fetch('/api/leads');
@@ -392,6 +403,15 @@ async function loadLeadsPipeline() {
     }
   } catch (err) {
     console.error("Failed to load leads:", err);
+    if (tbody) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align: center; padding: 30px; color: var(--color-danger-red);">
+            Failed to load leads. Please check your connection.
+          </td>
+        </tr>
+      `;
+    }
   }
 }
 
@@ -399,6 +419,8 @@ function filterLeads() {
   const query = document.getElementById('leads-search').value.toLowerCase();
   const statusFilter = document.getElementById('leads-filter-status').value;
   const batchFilter = document.getElementById('leads-filter-batch').value;
+  const sortSelect = document.getElementById('leads-sort');
+  const sortBy = sortSelect ? sortSelect.value : 'newest';
   const tbody = document.getElementById('leads-tbody');
   tbody.innerHTML = '';
 
@@ -409,6 +431,32 @@ function filterLeads() {
     const matchesStatus = statusFilter === 'All' || l.status === statusFilter;
     const matchesBatch = batchFilter === 'All' || l.preferredBatch === batchFilter;
     return matchesSearch && matchesStatus && matchesBatch;
+  });
+
+  // Sort the filtered array
+  filtered.sort((a, b) => {
+    if (sortBy === 'newest') {
+      return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+    }
+    if (sortBy === 'oldest') {
+      return new Date(a.createdAt || 0) - new Date(b.createdAt || 0);
+    }
+    if (sortBy === 'parentName') {
+      return (a.parentName || '').localeCompare(b.parentName || '');
+    }
+    if (sortBy === 'childName') {
+      return (a.childName || '').localeCompare(b.childName || '');
+    }
+    if (sortBy === 'age-desc') {
+      return (b.age || 0) - (a.age || 0);
+    }
+    if (sortBy === 'age-asc') {
+      return (a.age || 0) - (b.age || 0);
+    }
+    if (sortBy === 'status') {
+      return (a.status || '').localeCompare(b.status || '');
+    }
+    return 0;
   });
 
   filtered.forEach(l => {
