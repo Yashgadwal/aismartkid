@@ -35,8 +35,24 @@ async function checkAuthStatus() {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-workspace').style.display = 'flex';
       lucide.createIcons();
-      // Initialize active dashboard panel
-      loadPanelData('dashboard');
+      
+      // Restore active tab from localStorage
+      const savedTab = localStorage.getItem('adminActiveTab') || 'dashboard';
+      const navItems = document.querySelectorAll('.nav-item');
+      let targetBtn = null;
+      navItems.forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`switchTab('${savedTab}'`)) {
+          targetBtn = btn;
+        }
+      });
+      
+      if (targetBtn) {
+        switchTab(savedTab, targetBtn);
+      } else {
+        const dashboardBtn = Array.from(navItems).find(btn => (btn.getAttribute('onclick') || '').includes("switchTab('dashboard'"));
+        switchTab('dashboard', dashboardBtn || navItems[0]);
+      }
     } else {
       document.getElementById('login-screen').style.display = 'flex';
       document.getElementById('admin-workspace').style.display = 'none';
@@ -99,10 +115,13 @@ async function handleAdminLogout() {
 // ----------------------------------------
 function switchTab(tabName, buttonEl) {
   activeTab = tabName;
+  localStorage.setItem('adminActiveTab', tabName);
   
   // Toggle Navigation active classes
-  document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-  buttonEl.classList.add('active');
+  if (buttonEl) {
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+    buttonEl.classList.add('active');
+  }
 
   // Toggle visible panels
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
