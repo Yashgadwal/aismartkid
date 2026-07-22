@@ -179,7 +179,7 @@ app.get('/api/leads', requireAuth, (req, res) => {
 });
 
 app.post('/api/leads', (req, res) => {
-  const { parentName, childName, age, school, class: childClass, phone, email, preferredBatch, message } = req.body;
+  const { parentName, childName, age, school, class: childClass, phone, email, preferredBatch, message, status, notes, followUpDate } = req.body;
 
   if (!parentName || !childName || !phone) {
     return res.status(400).json({ success: false, message: 'Parent Name, Child Name, and Phone are required' });
@@ -196,9 +196,9 @@ app.post('/api/leads', (req, res) => {
     phone,
     email: email || '',
     preferredBatch: preferredBatch || '',
-    status: 'New',
-    notes: message ? `Initial enquiry: ${message}` : '',
-    followUpDate: '',
+    status: status || 'New',
+    notes: notes || (message ? `Initial enquiry: ${message}` : ''),
+    followUpDate: followUpDate || '',
     createdAt: new Date().toISOString()
   };
 
