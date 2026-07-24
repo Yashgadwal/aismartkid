@@ -69,8 +69,16 @@ const defaultSchema = {
 
 // Writable database path compatibility check for serverless hosts (like Vercel)
 const isVercel = process.env.VERCEL || process.env.NOW_BUILDER;
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const KV_URL = process.env.KV_REST_API_URL || 
+               process.env.UPSTASH_REDIS_REST_URL || 
+               process.env.aismartkid_KV_REST_API_URL ||
+               (Object.keys(process.env).find(k => k.endsWith('_KV_REST_API_URL')) ? process.env[Object.keys(process.env).find(k => k.endsWith('_KV_REST_API_URL'))] : null);
+
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || 
+                 process.env.UPSTASH_REDIS_REST_TOKEN || 
+                 process.env.aismartkid_KV_REST_API_TOKEN ||
+                 (Object.keys(process.env).find(k => k.endsWith('_KV_REST_API_TOKEN')) ? process.env[Object.keys(process.env).find(k => k.endsWith('_KV_REST_API_TOKEN'))] : null);
+
 const useKV = !!(KV_URL && KV_TOKEN);
 let dbInMemory = null;
 let dbLoadPromise = null;
