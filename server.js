@@ -69,7 +69,9 @@ const defaultSchema = {
 
 // Writable database path compatibility check for serverless hosts (like Vercel)
 const isVercel = process.env.VERCEL || process.env.NOW_BUILDER;
-const useKV = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const useKV = !!(KV_URL && KV_TOKEN);
 let dbInMemory = null;
 let dbLoadPromise = null;
 
@@ -89,11 +91,11 @@ function readDBFromFileSync() {
 
 function loadDatabaseFromKV() {
   const https = require('https');
-  const url = `${process.env.KV_REST_API_URL}/get/aismartkids_db`;
+  const url = `${KV_URL}/get/aismartkids_db`;
   return new Promise((resolve, reject) => {
     https.get(url, {
       headers: {
-        'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`
+        'Authorization': `Bearer ${KV_TOKEN}`
       }
     }, (res) => {
       let body = '';
@@ -108,7 +110,7 @@ function loadDatabaseFromKV() {
             }
             if (dbData && typeof dbData === 'object') {
               dbInMemory = dbData;
-              console.log("Successfully fetched database from Vercel KV.");
+              console.log("Successfully fetched database from Vercel KV / Upstash.");
               fs.writeFileSync(DB_FILE, JSON.stringify(dbInMemory, null, 2), 'utf-8');
               resolve(dbInMemory);
             } else {
@@ -132,13 +134,13 @@ function saveDatabaseToKV(data) {
   try {
     const https = require('https');
     const payload = JSON.stringify(data);
-    const url = `${process.env.KV_REST_API_URL}/set/aismartkids_db`;
+    const url = `${KV_URL}/set/aismartkids_db`;
     const req = https.request(
       url,
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
+          'Authorization': `Bearer ${KV_TOKEN}`,
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(payload)
         }
