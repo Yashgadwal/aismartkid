@@ -117,6 +117,32 @@ function loadDatabaseFromKV() {
               dbData = JSON.parse(dbData);
             }
             if (dbData && typeof dbData === 'object') {
+              // Merge repository db.json leads with Vercel KV (to sync git-committed CSV imports)
+              const repoDb = readDBFromFileSync();
+              const mergeLeads = (kvLeads, repoLeads) => {
+                const merged = [...kvLeads];
+                repoLeads.forEach(repoL => {
+                  const exists = merged.some(kvL => 
+                    (kvL.id && kvL.id === repoL.id) || 
+                    (kvL.phone && repoL.phone && kvL.phone.replace(/\s+/g, '') === repoL.phone.replace(/\s+/g, ''))
+                  );
+                  if (!exists) {
+                    merged.push(repoL);
+                  }
+                });
+                return merged;
+              };
+
+              if (repoDb && repoDb.leads && repoDb.leads.length > 0) {
+                const originalLength = dbData.leads ? dbData.leads.length : 0;
+                dbData.leads = mergeLeads(dbData.leads || [], repoDb.leads);
+                const addedCount = dbData.leads.length - originalLength;
+                if (addedCount > 0) {
+                  console.log(`Merged ${addedCount} new leads from git repository into Vercel KV.`);
+                  saveDatabaseToKV(dbData);
+                }
+              }
+
               dbInMemory = dbData;
               console.log("Successfully fetched database from Vercel KV / Upstash.");
               fs.writeFileSync(DB_FILE, JSON.stringify(dbInMemory, null, 2), 'utf-8');
