@@ -27,6 +27,77 @@ document.addEventListener("DOMContentLoaded", () => {
   checkAuthStatus();
 });
 
+function showToast(message, type = 'success') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style = 'position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;';
+    document.body.appendChild(container);
+  }
+  
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.style = `
+    padding: 12px 20px;
+    background: ${type === 'success' ? '#10B981' : (type === 'danger' ? '#EF4444' : '#F59E0B')};
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    pointer-events: auto;
+  `;
+  
+  toast.innerText = message;
+  container.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+  }, 10);
+  
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-20px)';
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, 4000);
+}
+
+async function checkDBStatus() {
+  const badge = document.getElementById('db-status-badge');
+  const dot = document.getElementById('db-status-dot');
+  const txt = document.getElementById('db-status-text');
+  if (!txt) return;
+
+  try {
+    const res = await fetch('/api/db-status');
+    if (res.ok) {
+      const data = await res.json();
+      txt.innerText = data.status;
+      if (data.status.includes('Temporary')) {
+        dot.style.background = '#EF4444';
+        txt.style.color = '#EF4444';
+        badge.style.border = '1px solid rgba(239, 68, 68, 0.2)';
+        badge.title = "Database is running on serverless ephemeral /tmp memory. Link Vercel KV database to persist permanently.";
+      } else {
+        dot.style.background = '#10B981';
+        txt.style.color = '#10B981';
+        badge.style.border = 'none';
+        badge.removeAttribute('title');
+      }
+    }
+  } catch (e) {
+    txt.innerText = "Offline / Connection Error";
+    dot.style.background = '#EF4444';
+  }
+}
+
 async function checkAuthStatus() {
   try {
     const res = await fetch('/api/auth');
@@ -35,6 +106,7 @@ async function checkAuthStatus() {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-workspace').style.display = 'flex';
       lucide.createIcons();
+      checkDBStatus();
       
       // Restore active tab from localStorage
       const savedTab = localStorage.getItem('adminActiveTab') || 'dashboard';
@@ -685,13 +757,14 @@ async function handleSaveLead(event) {
     if (res.ok) {
       closeLeadModal();
       loadLeadsPipeline();
+      showToast(editingLeadId ? "Lead updated successfully!" : "New lead added successfully!", "success");
     } else {
       const err = await res.json();
-      alert(`Error saving lead: ${err.message || err.error}`);
+      showToast(`Error saving lead: ${err.message || err.error}`, "danger");
     }
   } catch (err) {
     console.error("Failed to save lead:", err);
-    alert("Error occurred while saving lead record.");
+    showToast("Error occurred while saving lead record.", "danger");
   }
 }
 
@@ -1332,10 +1405,10 @@ async function handleSaveSettings(event) {
       body: JSON.stringify(payload)
     });
     if (res.ok) {
-      alert("Settings saved successfully!");
+      showToast("Settings saved successfully!", "success");
       loadGlobalSettings();
     } else {
-      alert("Failed to save global configurations.");
+      showToast("Failed to save global configurations.", "danger");
     }
   } catch (err) {
     console.error("Save settings error:", err);

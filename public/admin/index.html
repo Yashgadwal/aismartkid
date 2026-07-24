@@ -102,6 +102,10 @@
       </nav>
       
       <div class="sidebar-footer">
+        <div id="db-status-badge" style="margin-bottom: 12px; font-size: 10px; font-weight: 600; padding: 6px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); color: #94A3B8; display: flex; align-items: center; gap: 6px;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #F59E0B; display: inline-block;" id="db-status-dot"></span>
+          <span id="db-status-text">Checking DB...</span>
+        </div>
         <button class="logout-btn" onclick="handleAdminLogout()">
           <i data-lucide="log-out"></i> Log Out
         </button>

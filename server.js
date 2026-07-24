@@ -69,34 +69,96 @@ const defaultSchema = {
 
 // Writable database path compatibility check for serverless hosts (like Vercel)
 const isVercel = process.env.VERCEL || process.env.NOW_BUILDER;
+const useKV = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
 let dbInMemory = null;
 let dbLoadPromise = null;
-const CLOUD_BLOB_ID = '019f8917-482d-7268-868c-17c83a16f2ad';
 
-function loadDatabaseFromCloud() {
+function readDBFromFileSync() {
+  try {
+    if (!fs.existsSync(DB_FILE)) {
+      fs.writeFileSync(DB_FILE, JSON.stringify(defaultSchema, null, 2), 'utf-8');
+      return defaultSchema;
+    }
+    const data = fs.readFileSync(DB_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("DB File Read Error:", error);
+    return defaultSchema;
+  }
+}
+
+function loadDatabaseFromKV() {
   const https = require('https');
+  const url = `${process.env.KV_REST_API_URL}/get/aismartkids_db`;
   return new Promise((resolve, reject) => {
-    const url = `https://jsonblob.com/api/jsonBlob/${CLOUD_BLOB_ID}`;
-    https.get(url, (res) => {
+    https.get(url, {
+      headers: {
+        'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`
+      }
+    }, (res) => {
       let body = '';
       res.on('data', (chunk) => body += chunk);
       res.on('end', () => {
         if (res.statusCode === 200) {
           try {
-            dbInMemory = JSON.parse(body);
-            console.log("Successfully fetched database from jsonblob cloud storage.");
-            // Keep local /tmp file in sync on boot
-            fs.writeFileSync(DB_FILE, JSON.stringify(dbInMemory, null, 2), 'utf-8');
-            resolve(dbInMemory);
+            const parsed = JSON.parse(body);
+            let dbData = parsed.result;
+            if (typeof dbData === 'string') {
+              dbData = JSON.parse(dbData);
+            }
+            if (dbData && typeof dbData === 'object') {
+              dbInMemory = dbData;
+              console.log("Successfully fetched database from Vercel KV.");
+              fs.writeFileSync(DB_FILE, JSON.stringify(dbInMemory, null, 2), 'utf-8');
+              resolve(dbInMemory);
+            } else {
+              // KV key is empty, initialize it
+              dbInMemory = readDBFromFileSync();
+              saveDatabaseToKV(dbInMemory);
+              resolve(dbInMemory);
+            }
           } catch (e) {
             reject(e);
           }
         } else {
-          reject(new Error(`Failed to fetch database from cloud: ${res.statusCode}`));
+          reject(new Error(`Failed to fetch from KV: ${res.statusCode} ${body}`));
         }
       });
     }).on('error', reject);
   });
+}
+
+function saveDatabaseToKV(data) {
+  try {
+    const https = require('https');
+    const payload = JSON.stringify(data);
+    const url = `${process.env.KV_REST_API_URL}/set/aismartkids_db`;
+    const req = https.request(
+      url,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payload)
+        }
+      },
+      (res) => {
+        let body = '';
+        res.on('data', (chunk) => body += chunk);
+        res.on('end', () => {
+          if (res.statusCode !== 200) {
+            console.error("Vercel KV write error:", res.statusCode, body);
+          }
+        });
+      }
+    );
+    req.on('error', (e) => console.error("Vercel KV sync error:", e));
+    req.write(payload);
+    req.end();
+  } catch (err) {
+    console.error("Failed to write to Vercel KV:", err);
+  }
 }
 
 if (isVercel) {
@@ -113,26 +175,20 @@ if (isVercel) {
     console.error("Vercel /tmp database initialization error:", err);
   }
   DB_FILE = tmpDB;
-  dbLoadPromise = loadDatabaseFromCloud();
+
+  if (useKV) {
+    dbLoadPromise = loadDatabaseFromKV();
+  } else {
+    console.log("Vercel KV is not connected. Database running in temporary session mode.");
+    dbInMemory = readDBFromFileSync();
+  }
 }
 
 function readDB() {
   if (isVercel && dbInMemory) {
     return dbInMemory;
   }
-  try {
-    if (!fs.existsSync(DB_FILE)) {
-      fs.writeFileSync(DB_FILE, JSON.stringify(defaultSchema, null, 2), 'utf-8');
-      return defaultSchema;
-    }
-    const data = fs.readFileSync(DB_FILE, 'utf-8');
-    const parsed = JSON.parse(data);
-    if (isVercel) dbInMemory = parsed;
-    return parsed;
-  } catch (error) {
-    console.error("DB Read Error:", error);
-    return defaultSchema;
-  }
+  return readDBFromFileSync();
 }
 
 function writeDB(data) {
@@ -145,27 +201,9 @@ function writeDB(data) {
     console.error("DB Write Error:", error);
   }
 
-  // Asynchronously synchronize to cloud database in production serverless
-  if (isVercel) {
-    try {
-      const https = require('https');
-      const payload = JSON.stringify(data);
-      const req = https.request(
-        `https://jsonblob.com/api/jsonBlob/${CLOUD_BLOB_ID}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(payload)
-          }
-        }
-      );
-      req.on('error', (e) => console.error("Cloud database sync error:", e));
-      req.write(payload);
-      req.end();
-    } catch (err) {
-      console.error("Failed to initiate cloud database sync:", err);
-    }
+  // Synchronize to Vercel KV if connected
+  if (isVercel && useKV) {
+    saveDatabaseToKV(data);
   }
 }
 
@@ -770,6 +808,14 @@ app.post('/api/settings', requireAuth, (req, res) => {
   db.settings = { ...db.settings, ...req.body };
   writeDB(db);
   return res.json({ success: true, data: db.settings });
+});
+
+app.get('/api/db-status', requireAuth, (req, res) => {
+  return res.json({
+    useKV: !!useKV,
+    isVercel: !!isVercel,
+    status: useKV ? 'Connected (Persistent Vercel KV)' : (isVercel ? 'Temporary (Vercel /tmp)' : 'Connected (Persistent Local Disk)')
+  });
 });
 
 // ----------------------------------------
