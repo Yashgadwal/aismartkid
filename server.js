@@ -820,6 +820,13 @@ app.get('/api/db-status', requireAuth, (req, res) => {
   });
 });
 
+app.get('/api/test-env', (req, res) => {
+  const keys = Object.keys(process.env).filter(key => 
+    key.includes('KV') || key.includes('REDIS') || key.includes('UPSTASH') || key.includes('VERCEL')
+  );
+  return res.json({ envKeys: keys });
+});
+
 // ----------------------------------------
 // BLOG CMS API
 // ----------------------------------------
