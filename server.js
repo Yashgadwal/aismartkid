@@ -117,30 +117,105 @@ function loadDatabaseFromKV() {
               dbData = JSON.parse(dbData);
             }
             if (dbData && typeof dbData === 'object') {
-              // Merge repository db.json leads with Vercel KV (to sync git-committed CSV imports)
               const repoDb = readDBFromFileSync();
-              const mergeLeads = (kvLeads, repoLeads) => {
-                const merged = [...kvLeads];
-                repoLeads.forEach(repoL => {
-                  const exists = merged.some(kvL => 
+              let needsWrite = false;
+
+              // 1. Merge Leads
+              if (repoDb.leads && repoDb.leads.length > 0) {
+                if (!dbData.leads) dbData.leads = [];
+                const originalLength = dbData.leads.length;
+                repoDb.leads.forEach(repoL => {
+                  const exists = dbData.leads.some(kvL => 
                     (kvL.id && kvL.id === repoL.id) || 
                     (kvL.phone && repoL.phone && kvL.phone.replace(/\s+/g, '') === repoL.phone.replace(/\s+/g, ''))
                   );
                   if (!exists) {
-                    merged.push(repoL);
+                    dbData.leads.push(repoL);
                   }
                 });
-                return merged;
-              };
-
-              if (repoDb && repoDb.leads && repoDb.leads.length > 0) {
-                const originalLength = dbData.leads ? dbData.leads.length : 0;
-                dbData.leads = mergeLeads(dbData.leads || [], repoDb.leads);
-                const addedCount = dbData.leads.length - originalLength;
-                if (addedCount > 0) {
-                  console.log(`Merged ${addedCount} new leads from git repository into Vercel KV.`);
-                  saveDatabaseToKV(dbData);
+                if (dbData.leads.length > originalLength) {
+                  needsWrite = true;
                 }
+              }
+
+              // 2. Merge Blogs
+              if (repoDb.blogs && repoDb.blogs.length > 0) {
+                if (!dbData.blogs) dbData.blogs = [];
+                const originalLength = dbData.blogs.length;
+                repoDb.blogs.forEach(repoB => {
+                  const exists = dbData.blogs.some(kvB => kvB.id === repoB.id || kvB.slug === repoB.slug);
+                  if (!exists) {
+                    dbData.blogs.push(repoB);
+                  }
+                });
+                if (dbData.blogs.length > originalLength) {
+                  needsWrite = true;
+                }
+              }
+
+              // 3. Merge Testimonials
+              if (repoDb.testimonials && repoDb.testimonials.length > 0) {
+                if (!dbData.testimonials) dbData.testimonials = [];
+                const originalLength = dbData.testimonials.length;
+                repoDb.testimonials.forEach(repoT => {
+                  const exists = dbData.testimonials.some(kvT => kvT.id === repoT.id);
+                  if (!exists) {
+                    dbData.testimonials.push(repoT);
+                  }
+                });
+                if (dbData.testimonials.length > originalLength) {
+                  needsWrite = true;
+                }
+              }
+
+              // 4. Merge Gallery
+              if (repoDb.gallery && repoDb.gallery.length > 0) {
+                if (!dbData.gallery) dbData.gallery = [];
+                const originalLength = dbData.gallery.length;
+                repoDb.gallery.forEach(repoG => {
+                  const exists = dbData.gallery.some(kvG => kvG.id === repoG.id);
+                  if (!exists) {
+                    dbData.gallery.push(repoG);
+                  }
+                });
+                if (dbData.gallery.length > originalLength) {
+                  needsWrite = true;
+                }
+              }
+
+              // 5. Merge Batches
+              if (repoDb.batches && repoDb.batches.length > 0) {
+                if (!dbData.batches) dbData.batches = [];
+                const originalLength = dbData.batches.length;
+                repoDb.batches.forEach(repoBt => {
+                  const exists = dbData.batches.some(kvBt => kvBt.id === repoBt.id);
+                  if (!exists) {
+                    dbData.batches.push(repoBt);
+                  }
+                });
+                if (dbData.batches.length > originalLength) {
+                  needsWrite = true;
+                }
+              }
+
+              // 6. Merge Settings
+              if (repoDb.settings) {
+                if (!dbData.settings) {
+                  dbData.settings = { ...repoDb.settings };
+                  needsWrite = true;
+                } else {
+                  Object.keys(repoDb.settings).forEach(key => {
+                    if (dbData.settings[key] === undefined) {
+                      dbData.settings[key] = repoDb.settings[key];
+                      needsWrite = true;
+                    }
+                  });
+                }
+              }
+
+              if (needsWrite) {
+                console.log("Merged repository database updates into Vercel KV / Upstash.");
+                saveDatabaseToKV(dbData);
               }
 
               dbInMemory = dbData;
@@ -1341,9 +1416,112 @@ function parseMarkdown(text) {
   res.send(html);
 });
 
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Static Pages -->
+  <url>
+    <loc>https://aismartkid.vercel.app/</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/landing.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/privacy.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/terms.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Dynamic Blog Posts (SSR Slugs) -->
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/ai-classes-for-kids-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/why-every-child-in-ujjain-should-learn-artificial-intelligence-before-2030</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/top-coding-classes-for-kids-in-ujjain-which-one-should-you-choose</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/10-future-skills-every-student-in-ujjain-must-learn</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/how-ai-helps-children-improve-creativity-and-problem-solving</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/parents-guide-to-choosing-the-best-ai-coding-institute-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/screen-time-vs-smart-learning-how-ai-education-benefits-kids</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/top-7-career-opportunities-your-child-can-prepare-for-with-ai-skills</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/how-ai-classes-build-confidence-logic-communication-skills-in-kids</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/why-ai-smart-kids-is-becoming-the-preferred-ai-learning-center-in-ujjain</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>`;
+
 app.get(['/sitemap.xml', '/sitemap-main.xml'], (req, res) => {
   res.header('Content-Type', 'application/xml');
-  res.sendFile(path.join(__dirname, 'public/sitemap-main.xml'));
+  res.send(sitemapXml);
 });
 
 app.get('*', (req, res) => {
