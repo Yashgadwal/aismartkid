@@ -1517,6 +1517,18 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/top-extracurricular-activities-in-ujjain-why-coding-and-ai-are-replacing-traditional-tuition</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/blog/how-to-prepare-your-child-for-the-ai-revolution-a-practical-guide-for-parents-in-ujjain</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>`;
 
 app.get(['/sitemap.xml', '/sitemap-main.xml'], (req, res) => {
