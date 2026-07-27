@@ -318,6 +318,20 @@ function writeDB(data) {
   }
 }
 
+// Database Load Synchronizer Middleware
+async function ensureDbLoaded(req, res, next) {
+  if (isVercel && useKV && dbLoadPromise) {
+    try {
+      await dbLoadPromise;
+    } catch (err) {
+      console.error("Failed to load database from KV in middleware:", err);
+    }
+  }
+  next();
+}
+
+app.use(ensureDbLoaded);
+
 // Authentication Check Middleware
 function requireAuth(req, res, next) {
   const token = req.cookies.admin_token;
