@@ -1423,6 +1423,10 @@ app.get('/landing', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/landing.html'));
 });
 
+app.get('/professionals', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/professionals.html'));
+});
+
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/admin/index.html'));
 });
