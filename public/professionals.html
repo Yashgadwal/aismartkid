@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Workshop for Working Professionals in Ujjain | AI Smart Institute</title>
+  <meta name="description" content="3-hour hands-on AI workshop in Ujjain for business owners, teachers, sales professionals and freelancers. Learn on your own phone. No coding. Rs. 599.">
+  
+  <!-- OG / Meta tags -->
+  <meta property="og:title" content="AI Workshop for Working Professionals in Ujjain | AI Smart Institute">
+  <meta property="og:description" content="3-hour hands-on AI workshop in Ujjain. Learn on your own phone. No coding. Rs. 599.">
+  <meta property="og:image" content="/images/logoai.jpeg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/style.min.css">
+  
+  <style>
+    /* Corporate, mature style overrides */
+    body {
+      font-family: var(--font-sans);
+      color: #1E293B;
+      background-color: #F8FAFC;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      color: #0F172A;
+      font-weight: 700;
+    }
+    
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .header-logo img {
+      height: 40px;
+      border-radius: 8px;
+    }
+    
+    .header-logo h1 {
+      font-size: 18px;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    
+    .header-logo span {
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: block;
+    }
+    
+    .btn-nav-back {
+      font-size: 13px;
+      color: #475569;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    
+    .btn-nav-back:hover {
+      color: var(--color-primary);
+    }
+    
+    .hero-section {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+      padding: 80px 0 60px 0;
+      border-bottom: 1px solid #E2E8F0;
+      text-align: center;
+    }
+    
+    .badge-tag-corp {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--color-primary);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero-title {
+      font-size: 42px;
+      line-height: 1.15;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      letter-spacing: -0.03em;
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      color: #475569;
+      max-width: 600px;
+      margin: 0 auto 32px auto;
+      font-weight: 400;
+    }
+    
+    .facts-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+      background: #FFFFFF;
+      padding: 20px 32px;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid #E2E8F0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .fact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #334155;
+    }
+    
+    .fact-item i {
+      color: var(--color-primary);
+    }
+    
+    .seats-counter-box {
+      margin-bottom: 32px;
+    }
+    
+    .seats-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FEF2F2;
+      color: #DC2626;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: 1px solid #FEE2E2;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--color-accent-orange);
+      margin: 12px auto 0 auto;
+      border-radius: 2px;
+    }
+    
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .learn-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .learn-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+    }
+    
+    .learn-icon {
+      background: rgba(37, 99, 235, 0.06);
+      color: var(--color-primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .learn-info h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #0F172A;
+    }
+    
+    .learn-info p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #475569;
+    }
+    
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .who-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .who-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #0F172A;
+    }
+    
+    .who-card p {
+      font-size: 13px;
+      color: #64748B;
+    }
+    
+    .trainer-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    }
+    
+    .trainer-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #E2E8F0;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    
+    .trainer-info h3 {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    
+    .trainer-creds {
+      font-size: 14px;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .trainer-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #475569;
+    }
+    
+    .takehome-box {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .takehome-box h3 {
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      font-size: 22px;
+    }
+    
+    .takehome-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    .takehome-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    .takehome-item i {
+      color: var(--color-accent-orange);
+    }
+    
+    .details-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    }
+    
+    .details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .detail-row {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .detail-row i {
+      color: var(--color-primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    
+    .detail-row h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    
+    .detail-row p {
+      font-size: 13px;
+      color: #475569;
+    }
+    
+    .price-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .price-original {
+      font-size: 16px;
+      color: #94A3B8;
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    
+    .price-current {
+      font-size: 36px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    
+    .price-tag {
+      font-size: 11px;
+      background: #FEF3C7;
+      color: #D97706;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+    
+    .faq-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0 24px;
+    }
+    
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .faq-header {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #0F172A;
+    }
+    
+    .faq-header i {
+      color: #94A3B8;
+      transition: transform 0.2s;
+    }
+    
+    .faq-item.active .faq-header i {
+      transform: rotate(180deg);
+    }
+    
+    .faq-body {
+      display: none;
+      padding: 0 24px 20px 24px;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      border-top: 1px solid #F1F5F9;
+    }
+    
+    .faq-item.active .faq-body {
+      display: block;
+    }
+    
+    .cta-container {
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      padding: 80px 0;
+      border-top: 1px solid #E2E8F0;
+    }
+    
+    .cta-box {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+    }
+    
+    .cta-box h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .cta-box p {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 24px;
+      color: #64748B;
+    }
+    
+    .form-group {
+      margin-bottom: 18px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: #0F172A;
+      background-color: #FFFFFF;
+      transition: border-color 0.2s;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+      border-top: 1px solid #E2E8F0;
+      padding: 12px 24px;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 99;
+    }
+    
+    .sticky-bar-price {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sticky-bar-price span {
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .sticky-bar-price h4 {
+      font-size: 20px;
+      color: #0F172A;
+    }
+    
+    .sticky-bar-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    /* Responsive breakpoints */
+    @media (max-width: 767px) {
+      .hero-title {
+        font-size: 28px;
+        padding: 0 16px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+        padding: 0 16px;
+      }
+      .learn-grid {
+        grid-template-columns: 1fr;
+      }
+      .who-grid {
+        grid-template-columns: 1fr;
+      }
+      .trainer-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+      }
+      .takehome-list {
+        grid-template-columns: 1fr;
+      }
+      .details-box {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+      .cta-box {
+        padding: 24px;
+      }
+      .sticky-bar {
+        display: flex;
+      }
+      body {
+        padding-bottom: 70px;
+      }
+    }
+    
+    /* Confetti Modal Overlay */
+    .thankyou-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+    }
+    
+    .thankyou-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+    
+    .thankyou-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--color-success-green);
+    }
+    
+    .qr-placeholder {
+      width: 160px;
+      height: 160px;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      margin: 20px auto;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 11px;
+      color: #64748B;
+    }
+    
+    .upi-id-box {
+      background: #F8FAFC;
+      border: 1px dashed var(--color-primary);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-primary);
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="header-logo">
+        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo">
+        <div>
+          <h1>AI SMART INSTITUTE</h1>
+          <span>UJJAIN'S FIRST AI INSTITUTE</span>
+        </div>
+      </a>
+      <a href="/" class="btn-nav-back">
+        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Back to Kids Site
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="badge-tag-corp">Ujjain ka pehla AI institute — ab professionals ke liye</div>
+      <h1 class="hero-title">Aapka competitor AI seekh raha hai. Aur aap?</h1>
+      <p class="hero-subtitle">3 ghante ka hands-on workshop — apne phone se, bina coding.</p>
+      
+      <div class="seats-counter-box">
+        <div class="seats-counter" id="seats-banner">
+          <i data-lucide="alert-circle" style="width: 16px; height: 16px;"></i>
+          <span id="seats-text">Only 12 of 12 seats left for this Sunday</span>
+        </div>
+      </div>
+      
+      <div class="facts-strip">
+        <div class="fact-item">
+          <i data-lucide="calendar" style="width: 18px; height: 18px;"></i>
+          <span id="fact-date">Sunday, 3:00 PM – 6:00 PM</span>
+        </div>
+        <div class="fact-item">
+          <i data-lucide="indian-rupee" style="width: 18px; height: 18px;"></i>
+          <span>Rs. <span id="fact-fee">599</span> (Launch Offer)</span>
+        </div>
+        <div class="fact-item">
+          <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+          <span>12 Seats Capped</span>
+        </div>
+        <div class="fact-item">
+          <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+          <span>Nanakheda, Ujjain</span>
+        </div>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#enroll-section" class="btn btn-primary" id="btn-reserve-hero">Reserve My Seat</a>
+        <a href="https://wa.me/918308507820?text=SEAT%20-%20mujhe%20AI%20workshop%20ki%20jaankari%20chahiye" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background:#FFFFFF; color:#25D366; border: 1px solid #25D366; display:inline-flex; align-items:center; gap:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.949h.004c4.368 0 7.92-3.56 7.924-7.928a7.821 7.821 0 0 0-2.322-5.597H13.6zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.048.098.133 1.393 2.132 3.377 2.988.472.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+          </svg> WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU WILL LEARN -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <h2 class="section-title">What you will learn</h2>
+      
+      <div class="learn-grid">
+        <!-- Card 1 -->
+        <div class="learn-card">
+          <div class="learn-icon">
+            <i data-lucide="camera" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="learn-info">
+            <h3>1. PHOTO SE FILE</h3>
+            <p>Kisi bhi handwritten register, bill ya diary ki photo se turant Excel ya Word file banaiye.</p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="learn-card">
+          <div class="learn-icon">
+            <i data-lucide="file-text" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="learn-info">
+            <h3>2. LAMBA DOCUMENT, 2 MINUTE MEIN</h3>
+            <p>40-page circular, tender ya policy se zaroori points aur deadlines nikaaliye.</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="learn-card">
+          <div class="learn-icon">
+            <i data-lucide="smartphone" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="learn-info">
+            <h3>3. APNI KHUD KI MOBILE APP</h3>
+            <p>Quotation, receipt ya attendance ka apna tool khud banaiye - bina coding.</p>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="learn-card">
+          <div class="learn-icon">
+            <i data-lucide="pen-tool" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="learn-info">
+            <h3>4. PROFESSIONAL WRITING, MINUTE BHAR MEIN</h3>
+            <p>Letters, emails, proposals aur reports - apni bhasha se, professional English mein.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IS THIS FOR -->
+  <section style="padding: 80px 0; background: #F1F5F9;">
+    <div class="container">
+      <h2 class="section-title">Who is this for</h2>
+      
+      <div class="who-grid">
+        <div class="who-card">
+          <h3>Business Owners</h3>
+          <p>Quotation aur billing ka apna tool</p>
+        </div>
+        <div class="who-card">
+          <h3>Teachers</h3>
+          <p>Question paper, marksheet, notices</p>
+        </div>
+        <div class="who-card">
+          <h3>Sales Professionals</h3>
+          <p>Follow-ups aur client reports</p>
+        </div>
+        <div class="who-card">
+          <h3>Freelancers</h3>
+          <p>Proposals aur payment reminders</p>
+        </div>
+        <div class="who-card">
+          <h3>Contractors</h3>
+          <p>Site reports aur material hisaab</p>
+        </div>
+        <div class="who-card">
+          <h3>Office & Govt</h3>
+          <p>Notes, minutes, file summaries</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINER SECTION -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <h2 class="section-title">Your Mentor</h2>
+      
+      <div class="trainer-card">
+        <img src="/images/founder_avatar.jpg" alt="Saurabh Singhal" class="trainer-img">
+        <div class="trainer-info">
+          <h3>Saurabh Singhal</h3>
+          <div class="trainer-creds">B.Tech + MBA | 6+ years Analytics Manager, Gurgaon</div>
+          <p class="trainer-desc">"Corporate analytics mein 6 saal kaam karne ke baad, ab Ujjain mein professionals ko AI sikha raha hun — wahi tools jo bade sheher ke offices mein roz use hote hain, aapke kaam ke liye."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU TAKE HOME -->
+  <section style="padding: 80px 0; background: #0F172A; border-top: 1px solid #1E293B;">
+    <div class="container">
+      <div class="takehome-box">
+        <h3>What you take home</h3>
+        <div class="takehome-list">
+          <div class="takehome-item">
+            <i data-lucide="check-circle-2"></i>
+            <span>A working mobile app you built yourself</span>
+          </div>
+          <div class="takehome-item">
+            <i data-lucide="check-circle-2"></i>
+            <span>Real Excel, Word and PDF files created during the session</span>
+          </div>
+          <div class="takehome-item">
+            <i data-lucide="check-circle-2"></i>
+            <span>A ready-to-use prompt pack on WhatsApp</span>
+          </div>
+          <div class="takehome-item">
+            <i data-lucide="check-circle-2"></i>
+            <span>Certificate of participation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOP DETAILS BLOCK -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <h2 class="section-title">Workshop Details</h2>
+      
+      <div class="details-box">
+        <div class="details-list">
+          <div class="detail-row">
+            <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
+            <div>
+              <h4>Date & Time</h4>
+              <p id="details-date">Sunday, 3:00 PM – 6:00 PM</p>
+            </div>
+          </div>
+          <div class="detail-row">
+            <i data-lucide="map-pin" style="width: 20px; height: 20px;"></i>
+            <div>
+              <h4>Venue</h4>
+              <p>9/8 Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain</p>
+            </div>
+          </div>
+          <div class="detail-row">
+            <i data-lucide="smartphone" style="width: 20px; height: 20px;"></i>
+            <div>
+              <h4>What to bring</h4>
+              <p>Only your smartphone (fully charged)</p>
+            </div>
+          </div>
+          <div class="detail-row">
+            <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+            <div>
+              <h4>Batch Size</h4>
+              <p>Capped at 12 seats only</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="price-card">
+          <div class="price-original">Rs. 999</div>
+          <div class="price-current">Rs. <span id="details-fee">599</span></div>
+          <div class="price-tag">Launch Price</div>
+          
+          <div style="margin-top: 24px; width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #E2E8F0;">
+            <iframe 
+              src="https://maps.google.com/maps?q=Cosmos%20Mall,%20Ujjain&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="150" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS -->
+  <section style="padding: 80px 0; background: #F1F5F9;">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Kya mujhe coding aani chahiye?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Bilkul nahi. Yeh workshop un logon ke liye hai jinhone AI kabhi use nahi kiya.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Laptop laana hoga?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Nahi. Sirf apna smartphone laayein — poora kaam phone par hoga.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Kya yeh sirf theory hai?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Nahi. Yeh hands-on hai — aap khud apne kaam ke liye tools banayenge.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Kya certificate milega?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Haan, workshop ke ant mein certificate diya jayega.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Payment kaise karein?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Form bharne ke baad WhatsApp par UPI details bhej di jayengi. Seat payment ke baad confirm hoti hai.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-header" onclick="toggleFaq(this)">
+            <span>Agli batch kab hai?</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </button>
+          <div class="faq-body">
+            Har batch mein sirf 12 seats hoti hain. Seats bharne par agli batch ki jaankari WhatsApp par bhej di jayegi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD CAPTURE FORM SECTION -->
+  <section class="cta-container" id="enroll-section">
+    <div class="container">
+      <div class="cta-box">
+        <h3 id="form-heading">Reserve Your Seat</h3>
+        <p id="form-subheading">Fill details to get payment instructions via WhatsApp.</p>
+        
+        <form id="lead-form" onsubmit="handleFormSubmit(event)">
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="honeypot" style="display:none;" id="honeypot">
+          
+          <div class="form-group">
+            <label class="form-label" for="full-name">Full Name *</label>
+            <input type="text" id="full-name" class="form-control" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="whatsapp-no">WhatsApp Number (10 Digits) *</label>
+            <input type="tel" id="whatsapp-no" class="form-control" placeholder="10-digit WhatsApp number" pattern="[0-9]{10}" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="profession">Profession *</label>
+            <select id="profession" class="form-control" required>
+              <option value="" disabled selected>Select your profession</option>
+              <option value="Business Owner">Business Owner</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Sales Professional">Sales Professional</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Contractor">Contractor</option>
+              <option value="Office or Govt Employee">Office or Govt Employee</option>
+              <option value="Student">Student</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="city">City *</label>
+            <input type="text" id="city" class="form-control" value="Ujjain" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="source">How did you hear about us? *</label>
+            <select id="source" class="form-control" required>
+              <option value="" disabled selected>Select source</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Friend or Family">Friend or Family</option>
+              <option value="Walk-in">Walk-in</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-submit" id="btn-submit-form">Reserve My Seat — Rs. 599</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="https://wa.me/918308507820?text=SEAT%20-%20mujhe%20AI%20workshop%20ki%20jaankari%20chahiye" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+              <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.949h.004c4.368 0 7.92-3.56 7.924-7.928a7.821 7.821 0 0 0-2.322-5.597H13.6zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.048.098.133 1.393 2.132 3.377 2.988.472.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+            </svg> Direct WhatsApp Enquiries
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY MOBILE CTA BAR -->
+  <div class="sticky-bar">
+    <div class="sticky-bar-price">
+      <span>AI Workshop Seat</span>
+      <h4>Rs. <span id="sticky-fee">599</span></h4>
+    </div>
+    <div class="sticky-bar-actions">
+      <a href="#enroll-section" class="btn btn-primary" style="padding: 10px 18px; font-size: 13px; font-weight: 700;">Reserve Seat</a>
+      <a href="https://wa.me/918308507820?text=SEAT%20-%20mujhe%20AI%20workshop%20ki%20jaankari%20chahiye" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background:#25D366; color:#FFFFFF; border:none; padding: 10px; border-radius: 8px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.949h.004c4.368 0 7.92-3.56 7.924-7.928a7.821 7.821 0 0 0-2.322-5.597H13.6zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.048.098.133 1.393 2.132 3.377 2.988.472.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- THANK YOU MODAL -->
+  <div class="thankyou-overlay" id="thankyou-modal">
+    <div class="thankyou-card">
+      <div style="background: rgba(34, 197, 94, 0.08); width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
+        <i data-lucide="check" style="width: 32px; height: 32px; color: var(--color-success-green);"></i>
+      </div>
+      <h3 class="thankyou-title">Seat Reserved!</h3>
+      <p style="font-size: 14px; color: #475569; margin-bottom: 20px;">Apni seat confirm karne ke liye <b>Rs. <span id="modal-payment-fee">599</span></b> pay karein aur screenshot WhatsApp par share karein.</p>
+      
+      <div style="margin: 20px auto; width: 160px; height: 160px; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; background: #FFFFFF;">
+        <img src="/images/upi_qr.jpg" alt="UPI Payment QR Code" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+      </div>
+      
+      <div class="upi-id-box">
+        UPI ID: <b>8308507820@paytm</b>
+      </div>
+      
+      <a href="" id="whatsapp-btn-confirmation" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; justify-content:center; gap:8px; display:inline-flex; align-items:center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.949h.004c4.368 0 7.92-3.56 7.924-7.928a7.821 7.821 0 0 0-2.322-5.597H13.6zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.048.098.133 1.393 2.132 3.377 2.988.472.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg> Send Payment Screenshot
+      </a>
+      <button class="btn btn-secondary" onclick="closeThankYouModal()" style="margin-top: 12px; width: 100%; border: 1px solid #CBD5E1; color:#475569;">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Lucide initialization
+    lucide.createIcons();
+    
+    // Global batch settings variables
+    let workshopFee = 599;
+    let registrationMode = "open";
+
+    // Load Counter details on page ready
+    async function loadSeatsCounter() {
+      try {
+        const res = await fetch('/api/professional-seats');
+        if (!res.ok) throw new Error("Seat fetch failed");
+        
+        const data = await res.json();
+        
+        workshopFee = data.fee || 599;
+        registrationMode = data.registrationMode || "open";
+
+        // Update elements
+        document.getElementById('fact-date').innerText = data.batchDate;
+        document.getElementById('details-date').innerText = data.batchDate;
+        
+        document.getElementById('fact-fee').innerText = data.fee;
+        document.getElementById('details-fee').innerText = data.fee;
+        document.getElementById('sticky-fee').innerText = data.fee;
+        document.getElementById('modal-payment-fee').innerText = data.fee;
+        
+        document.getElementById('btn-submit-form').innerText = registrationMode === 'open' 
+          ? `Reserve My Seat — Rs. ${data.fee}`
+          : `Join the Waiting List`;
+          
+        const seatsText = document.getElementById('seats-text');
+        const seatsBanner = document.getElementById('seats-banner');
+        
+        if (data.seatsRemaining > 0 && registrationMode === 'open') {
+          seatsText.innerText = `Only ${data.seatsRemaining} of ${data.totalSeats} seats left for this Sunday`;
+          seatsBanner.style.background = '#FEF2F2';
+          seatsBanner.style.color = '#DC2626';
+          seatsBanner.style.borderColor = '#FEE2E2';
+          
+          document.getElementById('form-heading').innerText = "Reserve Your Seat";
+          document.getElementById('form-subheading').innerText = "Fill details to get payment instructions via WhatsApp.";
+          document.getElementById('btn-reserve-hero').innerText = "Reserve My Seat";
+        } else {
+          seatsText.innerText = `This batch is full — join the waiting list`;
+          seatsBanner.style.background = '#F1F5F9';
+          seatsBanner.style.color = '#475569';
+          seatsBanner.style.borderColor = '#E2E8F0';
+          
+          document.getElementById('form-heading').innerText = "Join Waiting List";
+          document.getElementById('form-subheading').innerText = "No payment required now. We will notify you when a seat opens.";
+          document.getElementById('btn-reserve-hero').innerText = "Join Waiting List";
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadSeatsCounter();
+
+    // Toggle FAQ elements
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      // Close all items
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+
+    // Handle Form Submit
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      // Anti-spam honeypot check
+      if (document.getElementById('honeypot').value) {
+        console.warn("Spam detected!");
+        return;
+      }
+      
+      const submitBtn = document.getElementById('btn-submit-form');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Processing...";
+      
+      const payload = {
+        name: document.getElementById('full-name').value.trim(),
+        phone: document.getElementById('whatsapp-no').value.trim(),
+        profession: document.getElementById('profession').value,
+        city: document.getElementById('city').value.trim(),
+        source: document.getElementById('source').value
+      };
+      
+      try {
+        const res = await fetch('/api/professional-leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        const resData = await res.json();
+        
+        if (!res.ok) {
+          throw new Error(resData.message || "Failed to submit lead");
+        }
+        
+        // Trigger confetti
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        
+        // Build whatsapp prefilled message
+        const waText = registrationMode === 'open'
+          ? `Hello Saurabh, maine abhi AI Power Professional Workshop ke liye register kiya hai. Mera naam ${payload.name} hai aur phone number ${payload.phone} hai. Mujhe UPI payment details confirm karni hain.`
+          : `Hello Saurabh, maine abhi AI workshop waiting list ke liye register kiya hai. Mera naam ${payload.name} hai.`;
+        
+        document.getElementById('whatsapp-btn-confirmation').href = `https://wa.me/918308507820?text=${encodeURIComponent(waText)}`;
+        
+        // Show thank you modal
+        document.getElementById('thankyou-modal').style.display = 'flex';
+        
+        // Reset form
+        document.getElementById('lead-form').reset();
+        document.getElementById('city').value = "Ujjain";
+        
+        // Reload seat remaining counter
+        loadSeatsCounter();
+        
+      } catch (err) {
+        alert(err.message || "Something went wrong. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = registrationMode === 'open' 
+          ? `Reserve My Seat — Rs. ${workshopFee}`
+          : `Join the Waiting List`;
+      }
+    }
+
+    function closeThankYouModal() {
+      document.getElementById('thankyou-modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

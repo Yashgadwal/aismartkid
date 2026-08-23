@@ -1,4 +1,4 @@
-// AI Smart Kids - Vanilla Landing Page Logic
+// AI Smart Institute - Vanilla Landing Page Logic
 
 let currentStep = 1;
 const projectData = {
@@ -1207,3 +1207,23 @@ function initScrollReveal() {
     observer.observe(el);
   });
 }
+
+// Mobile navigation drawer toggle
+function toggleMobileNav() {
+  const nav = document.querySelector('header nav');
+  if (nav) {
+    nav.classList.toggle('active');
+  }
+}
+
+// Auto close mobile nav drawer when link is clicked
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      const nav = document.querySelector('header nav');
+      if (nav) {
+        nav.classList.remove('active');
+      }
+    });
+  });
+});

@@ -1,10 +1,11 @@
 {
   "name": "ai-smart-kids",
   "version": "1.0.0",
-  "description": "AI Smart Kids Institute - Node.js Backend & Vanilla Static Frontend",
+  "description": "AI Smart Institute Institute - Node.js Backend & Vanilla Static Frontend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node minify.js"
   },
   "dependencies": {
     "clean-css": "^5.3.3",

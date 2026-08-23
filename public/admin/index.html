@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Workspace | AI Smart Kids</title>
+  <title>Admin Workspace | AI Smart Institute</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,9 +23,9 @@
     <div class="login-card">
       <div class="login-logo">
         <div class="login-logo-icon" style="background: transparent; border: none; padding: 0;">
-          <img src="/images/logoai.jpeg" alt="AI Smart Kids Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: contain;">
+          <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: contain;">
         </div>
-        <h3>AI SMART KIDS</h3>
+        <h3>AI SMART INSTITUTE</h3>
         <p>Institute Administration Portal</p>
       </div>
       
@@ -55,7 +55,7 @@
       <button class="menu-toggle-btn" onclick="toggleSidebar()">
         <i data-lucide="menu"></i>
       </button>
-      <div class="mobile-logo-text">AI Smart Kids Admin</div>
+      <div class="mobile-logo-text">AI Smart Institute Admin</div>
       <div style="width: 24px;"></div> <!-- Spacer to center title -->
     </div>
 
@@ -66,10 +66,10 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="logo-icon" style="background: transparent; border: none; padding: 0;">
-          <img src="/images/logoai.jpeg" alt="AI Smart Kids Logo" style="width: 32px; height: 32px; border-radius: 6px; object-fit: contain;">
+          <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo" style="width: 32px; height: 32px; border-radius: 6px; object-fit: contain;">
         </div>
         <div class="logo-text">
-          <h1>AI Smart Kids</h1>
+          <h1>AI Smart Institute</h1>
           <span>ADMIN WORKSPACE</span>
         </div>
       </div>
@@ -80,6 +80,9 @@
         </button>
         <button class="nav-item" onclick="switchTab('leads', this)">
           <i data-lucide="user-check"></i> Inquiries & Leads
+        </button>
+        <button class="nav-item" onclick="switchTab('professionals', this)">
+          <i data-lucide="briefcase"></i> Pro Workshop
         </button>
         <button class="nav-item" onclick="switchTab('students', this)">
           <i data-lucide="users"></i> Student Roster
@@ -295,6 +298,132 @@
                 </tr>
               </thead>
               <tbody id="leads-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2.5: PROFESSIONAL WORKSHOP LEADS -->
+      <section class="tab-panel" id="panel-professionals">
+        <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2>Professional Workshop Leads</h2>
+            <p>Track professional registrations, confirm fees, and manage batch settings.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-secondary" onclick="exportProfessionalLeadsCsv()">
+              <i data-lucide="download"></i> Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Metric Cards -->
+        <div class="metrics-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px;">
+          <div class="metric-card" style="background:#FFFFFF; padding: 20px; border-radius:12px; border:1px solid #E2E8F0; display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:12px; color:#64748B; font-weight:600; text-transform:uppercase;">Total Leads</span>
+            <h3 style="font-size:28px; margin:0;" id="prof-metric-total">0</h3>
+          </div>
+          <div class="metric-card" style="background:#FFFFFF; padding: 20px; border-radius:12px; border:1px solid #E2E8F0; display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:12px; color:#64748B; font-weight:600; text-transform:uppercase;">Confirmed (Paid)</span>
+            <h3 style="font-size:28px; margin:0; color:#22C55E;" id="prof-metric-confirmed">0</h3>
+          </div>
+          <div class="metric-card" style="background:#FFFFFF; padding: 20px; border-radius:12px; border:1px solid #E2E8F0; display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:12px; color:#64748B; font-weight:600; text-transform:uppercase;">Seats Remaining</span>
+            <h3 style="font-size:28px; margin:0; color:#EF4444;" id="prof-metric-seats">12</h3>
+          </div>
+          <div class="metric-card" style="background:#FFFFFF; padding: 20px; border-radius:12px; border:1px solid #E2E8F0; display:flex; flex-direction:column; gap:6px;">
+            <span style="font-size:12px; color:#64748B; font-weight:600; text-transform:uppercase;">Sources</span>
+            <div id="prof-metric-sources" style="font-size:11px; color:#475569;">
+              FB: 0 | IG: 0 | WA: 0 | Friend: 0
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch Settings Panel -->
+        <div class="table-card" style="margin-bottom: 24px; padding: 24px;">
+          <h3 style="font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid #E2E8F0; padding-bottom: 8px;">Workshop Batch Settings</h3>
+          <form id="prof-settings-form" onsubmit="saveProfessionalSettings(event)" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: end;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" style="display:block; font-size:12px; font-weight:600; margin-bottom:4px;">Current Batch Date & Time</label>
+              <input type="text" id="prof-sett-date" class="form-control" style="padding:8px 12px; font-size:13px;" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" style="display:block; font-size:12px; font-weight:600; margin-bottom:4px;">Total Seats Capped</label>
+              <input type="number" id="prof-sett-seats" class="form-control" style="padding:8px 12px; font-size:13px;" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" style="display:block; font-size:12px; font-weight:600; margin-bottom:4px;">Fee Amount (Rs.)</label>
+              <input type="number" id="prof-sett-fee" class="form-control" style="padding:8px 12px; font-size:13px;" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" style="display:block; font-size:12px; font-weight:600; margin-bottom:4px;">Registration Status</label>
+              <select id="prof-sett-mode" class="form-control" style="padding:8px 12px; font-size:13px;">
+                <option value="open">Open (Accept Reservations)</option>
+                <option value="waiting-list">Waiting List Only</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0; display: flex; align-items: center; gap: 8px; height: 38px;">
+              <input type="checkbox" id="prof-sett-live" style="width:16px; height:16px;">
+              <label for="prof-sett-live" style="font-size:13px; font-weight:600; cursor:pointer;">Workshop Page Live</label>
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 10px 16px; font-size:13px; font-weight:700; height: 38px; justify-content:center;">
+              Save Workshop Settings
+            </button>
+          </form>
+        </div>
+
+        <!-- Filters Toolbar -->
+        <div class="filter-toolbar">
+          <input type="text" id="prof-leads-search" placeholder="Search name or WhatsApp number..." oninput="filterProfessionalLeads()">
+          <select id="prof-filter-profession" onchange="filterProfessionalLeads()">
+            <option value="All">All Professions</option>
+            <option value="Business Owner">Business Owner</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Sales Professional">Sales Professional</option>
+            <option value="Freelancer">Freelancer</option>
+            <option value="Contractor">Contractor</option>
+            <option value="Office or Govt Employee">Office or Govt Employee</option>
+            <option value="Student">Student</option>
+            <option value="Other">Other</option>
+          </select>
+          <select id="prof-filter-source" onchange="filterProfessionalLeads()">
+            <option value="All">All Sources</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Friend or Family">Friend or Family</option>
+            <option value="Walk-in">Walk-in</option>
+            <option value="Other">Other</option>
+          </select>
+          <select id="prof-filter-status" onchange="filterProfessionalLeads()">
+            <option value="All">All Statuses</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Payment Link Sent">Payment Link Sent</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Attended">Attended</option>
+            <option value="Not Interested">Not Interested</option>
+          </select>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lead Info</th>
+                  <th>WhatsApp Number</th>
+                  <th>Profession & City</th>
+                  <th>Source</th>
+                  <th>Pipeline Status</th>
+                  <th>Admin Notes</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="prof-leads-tbody">
                 <!-- Rendered dynamically -->
               </tbody>
             </table>

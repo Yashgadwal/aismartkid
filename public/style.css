@@ -1,4 +1,4 @@
-/* Luxury Light Theme CSS Design System for AI Smart Kids */
+/* Luxury Light Theme CSS Design System for AI Smart Institute */
 
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -2747,6 +2747,50 @@ body.loaded .hero-image-wrap {
 /* Hide card project titles in Creations grid */
 .project-info h4 {
   display: none !important;
+}
+
+/* Mobile Navigation Hamburger Menu Styles */
+.mobile-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--color-text-dark);
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+  }
+  
+  header nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    flex-direction: column;
+    padding: 24px;
+    z-index: 105;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  header nav.active {
+    display: flex;
+  }
+  
+  header nav a {
+    margin: 12px 0;
+    font-size: 16px !important;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 

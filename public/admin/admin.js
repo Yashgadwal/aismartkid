@@ -228,6 +228,9 @@ function loadPanelData(tabName) {
     case 'leads':
       loadLeadsPipeline();
       break;
+    case 'professionals':
+      loadProfessionalPanel();
+      break;
     case 'students':
       loadStudentsRoster();
       break;
@@ -1959,4 +1962,276 @@ async function processImportLeads() {
     alert("Network error: Could not complete CSV import.");
     resetImportModal();
   }
+}
+
+// ----------------------------------------
+// TAB: PROFESSIONAL WORKSHOP MANAGEMENT
+// ----------------------------------------
+let allProfessionalLeads = [];
+
+async function loadProfessionalPanel() {
+  try {
+    // 1. Fetch current settings
+    const seatsRes = await fetch('/api/professional-seats');
+    if (seatsRes.ok) {
+      const settings = await seatsRes.json();
+      document.getElementById('prof-sett-date').value = settings.batchDate || '';
+      document.getElementById('prof-sett-seats').value = settings.totalSeats || 12;
+      document.getElementById('prof-sett-fee').value = settings.fee || 599;
+      document.getElementById('prof-sett-mode').value = settings.registrationMode || 'open';
+      document.getElementById('prof-sett-live').checked = settings.pageLive !== false;
+      document.getElementById('prof-metric-seats').innerText = settings.seatsRemaining;
+    }
+
+    // 2. Fetch leads
+    const leadsRes = await fetch('/api/professional-leads');
+    if (leadsRes.ok) {
+      allProfessionalLeads = await leadsRes.json();
+      renderProfessionalLeads();
+    }
+  } catch (err) {
+    console.error("Error loading professional panel data:", err);
+  }
+}
+
+function renderProfessionalLeads() {
+  // Update Metrics
+  const totalLeads = allProfessionalLeads.length;
+  const confirmedCount = allProfessionalLeads.filter(l => (l.status || '').toLowerCase().includes('confirmed')).length;
+  
+  document.getElementById('prof-metric-total').innerText = totalLeads;
+  document.getElementById('prof-metric-confirmed').innerText = confirmedCount;
+  
+  // Seats remaining is computed based on current setting vs confirmed leads
+  const maxSeats = Number(document.getElementById('prof-sett-seats').value) || 12;
+  const seatsRemaining = Math.max(0, maxSeats - confirmedCount);
+  document.getElementById('prof-metric-seats').innerText = seatsRemaining;
+  
+  // Sources breakdown
+  const sources = { FB: 0, IG: 0, WA: 0, Friend: 0, Other: 0 };
+  allProfessionalLeads.forEach(l => {
+    const src = (l.source || '').toLowerCase();
+    if (src.includes('facebook')) sources.FB++;
+    else if (src.includes('instagram')) sources.IG++;
+    else if (src.includes('whatsapp')) sources.WA++;
+    else if (src.includes('friend')) sources.Friend++;
+    else sources.Other++;
+  });
+  document.getElementById('prof-metric-sources').innerText = 
+    `FB: ${sources.FB} | IG: ${sources.IG} | WA: ${sources.WA} | Friend: ${sources.Friend} | Other: ${sources.Other}`;
+
+  // Filter & Render List
+  filterProfessionalLeads();
+}
+
+function filterProfessionalLeads() {
+  const query = document.getElementById('prof-leads-search').value.toLowerCase().trim();
+  const professionFilter = document.getElementById('prof-filter-profession').value;
+  const sourceFilter = document.getElementById('prof-filter-source').value;
+  const statusFilter = document.getElementById('prof-filter-status').value;
+  
+  const filtered = allProfessionalLeads.filter(l => {
+    // Search filter
+    const matchesSearch = 
+      (l.name || '').toLowerCase().includes(query) ||
+      (l.phone || '').toLowerCase().includes(query) ||
+      (l.city || '').toLowerCase().includes(query);
+      
+    // Dropdown filters
+    const matchesProfession = professionFilter === 'All' || l.profession === professionFilter;
+    const matchesSource = sourceFilter === 'All' || l.source === sourceFilter;
+    const matchesStatus = statusFilter === 'All' || l.status === statusFilter;
+    
+    return matchesSearch && matchesProfession && matchesSource && matchesStatus;
+  });
+  
+  const tbody = document.getElementById('prof-leads-tbody');
+  tbody.innerHTML = '';
+  
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748B;">No professional leads found matching current filters.</td></tr>`;
+    return;
+  }
+  
+  filtered.forEach(l => {
+    const tr = document.createElement('tr');
+    
+    const formattedDate = l.createdAt ? new Date(l.createdAt).toLocaleString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    }) : 'N/A';
+    
+    // Duplicate badge markup
+    const duplicateBadge = l.isDuplicate 
+      ? `<span class="badge" style="background:#FEE2E2; color:#EF4444; border:1px solid #FCA5A5; font-size:10px; padding:2px 6px; margin-top:4px; display:inline-block; border-radius:4px;">DUPLICATE</span>` 
+      : '';
+      
+    const cleanPhone = (l.phone || '').replace(/\D/g, '');
+    
+    tr.innerHTML = `
+      <td>
+        <div style="font-weight:600; color:#0F172A;">${escapeHtml(l.name)}</div>
+        <div style="font-size:11px; color:#64748B;">${formattedDate}</div>
+        ${duplicateBadge}
+      </td>
+      <td>
+        <a href="https://wa.me/${cleanPhone}" target="_blank" style="display:flex; align-items:center; gap:6px; color:#25D366; text-decoration:none; font-weight:600;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.949h.004c4.368 0 7.92-3.56 7.924-7.928a7.821 7.821 0 0 0-2.322-5.597H13.6zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.048.098.133 1.393 2.132 3.377 2.988.472.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+          ${l.phone}
+        </a>
+      </td>
+      <td>
+        <div style="font-weight:600; color:#334155;">${escapeHtml(l.profession)}</div>
+        <div style="font-size:11px; color:#64748B;">${escapeHtml(l.city)}</div>
+      </td>
+      <td>
+        <span style="font-size:12px; font-weight:500;">${escapeHtml(l.source)}</span>
+      </td>
+      <td>
+        <select class="form-control" style="padding:4px 8px; font-size:12px; width:auto; height:auto; display:inline-block;" onchange="updateProfessionalLeadStatus('${l.id}', this.value)">
+          <option value="New" ${l.status === 'New' ? 'selected' : ''}>New</option>
+          <option value="Contacted" ${l.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
+          <option value="Payment Link Sent" ${l.status === 'Payment Link Sent' ? 'selected' : ''}>Payment Link Sent</option>
+          <option value="Confirmed" ${l.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+          <option value="Attended" ${l.status === 'Attended' ? 'selected' : ''}>Attended</option>
+          <option value="Not Interested" ${l.status === 'Not Interested' ? 'selected' : ''}>Not Interested</option>
+        </select>
+      </td>
+      <td>
+        <input type="text" class="form-control" style="padding:4px 8px; font-size:12px; width:220px;" value="${escapeHtml(l.notes || '')}" onchange="updateProfessionalLeadNotes('${l.id}', this.value)" placeholder="Click to add note...">
+      </td>
+      <td>
+        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px; color:#EF4444; border-color:#FCA5A5; display:inline-flex; align-items:center;" onclick="deleteProfessionalLead('${l.id}')">
+          <i data-lucide="trash-2" style="width:12px; height:12px; margin-right:4px;"></i> Delete
+        </button>
+      </td>
+    `;
+    
+    tbody.appendChild(tr);
+  });
+  
+  // Re-init lucide icons inside dynamically rendered rows
+  lucide.createIcons();
+}
+
+async function saveProfessionalSettings(e) {
+  e.preventDefault();
+  
+  const payload = {
+    batchDate: document.getElementById('prof-sett-date').value.trim(),
+    totalSeats: Number(document.getElementById('prof-sett-seats').value),
+    fee: Number(document.getElementById('prof-sett-fee').value),
+    registrationMode: document.getElementById('prof-sett-mode').value,
+    pageLive: document.getElementById('prof-sett-live').checked
+  };
+  
+  try {
+    const res = await fetch('/api/professional-settings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (res.ok) {
+      alert("Professional workshop settings updated successfully!");
+      loadProfessionalPanel();
+    } else {
+      const err = await res.json();
+      alert(`Save failed: ${err.error || 'Server error'}`);
+    }
+  } catch (err) {
+    console.error("Save error:", err);
+    alert("Network error: Could not save settings.");
+  }
+}
+
+async function updateProfessionalLeadStatus(id, status) {
+  try {
+    const res = await fetch('/api/professional-leads', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, status })
+    });
+    
+    if (res.ok) {
+      // Update local memory list item
+      const idx = allProfessionalLeads.findIndex(l => l.id === id);
+      if (idx !== -1) {
+        allProfessionalLeads[idx].status = status;
+      }
+      renderProfessionalLeads();
+    } else {
+      alert("Failed to update status.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function updateProfessionalLeadNotes(id, notes) {
+  try {
+    const res = await fetch('/api/professional-leads', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, notes })
+    });
+    
+    if (res.ok) {
+      const idx = allProfessionalLeads.findIndex(l => l.id === id);
+      if (idx !== -1) {
+        allProfessionalLeads[idx].notes = notes;
+      }
+      console.log(`Notes saved for ${id}`);
+    } else {
+      alert("Failed to save notes.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deleteProfessionalLead(id) {
+  if (!confirm("Are you sure you want to delete this professional lead? This action is irreversible.")) {
+    return;
+  }
+  
+  try {
+    const res = await fetch('/api/professional-leads/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    
+    if (res.ok) {
+      allProfessionalLeads = allProfessionalLeads.filter(l => l.id !== id);
+      renderProfessionalLeads();
+    } else {
+      alert("Failed to delete lead.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function exportProfessionalLeadsCsv() {
+  window.location.href = `/api/professional-leads?export=csv`;
+}
+
+function escapeHtml(unsafe) {
+  return (unsafe || '')
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

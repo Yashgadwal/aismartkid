@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Database helper functions
 const defaultSchema = {
   leads: [],
+  professional_leads: [],
   students: [],
   batches: [],
   blogs: [],
@@ -45,7 +46,7 @@ const defaultSchema = {
   gallery: [],
   attendance: [],
   settings: {
-    instituteName: "AI Smart Kids",
+    instituteName: "AI Smart Institute",
     tagline: "Ujjain's First AI Institute for Kids",
     phone: "+91 83085 07820",
     whatsapp: "+918308507820",
@@ -57,7 +58,14 @@ const defaultSchema = {
     emailNotificationActive: false,
     razorpayActive: false,
     cohortDateJunior: "2026-08-01T16:00",
-    cohortDateSenior: "2026-08-01T18:00"
+    cohortDateSenior: "2026-08-01T18:00",
+    professional: {
+      batchDate: "Sunday, 3:00 PM – 6:00 PM",
+      totalSeats: 12,
+      fee: 599,
+      pageLive: true,
+      registrationMode: "open"
+    }
   },
   analytics: {
     dailyVisits: [],
@@ -134,6 +142,24 @@ function loadDatabaseFromKV() {
                   }
                 });
                 if (dbData.leads.length > originalLength) {
+                  needsWrite = true;
+                }
+              }
+
+              // Merge Professional Leads
+              if (repoDb.professional_leads && repoDb.professional_leads.length > 0) {
+                if (!dbData.professional_leads) dbData.professional_leads = [];
+                const originalLength = dbData.professional_leads.length;
+                repoDb.professional_leads.forEach(repoL => {
+                  const exists = dbData.professional_leads.some(kvL => 
+                    (kvL.id && kvL.id === repoL.id) ||
+                    (kvL.phone && repoL.phone && kvL.phone.replace(/\s+/g, '') === repoL.phone.replace(/\s+/g, ''))
+                  );
+                  if (!exists) {
+                    dbData.professional_leads.push(repoL);
+                  }
+                });
+                if (dbData.professional_leads.length > originalLength) {
                   needsWrite = true;
                 }
               }
@@ -613,6 +639,166 @@ app.post('/api/leads/import', requireAuth, (req, res) => {
     countUpdated,
     countSkipped
   });
+});
+
+// ----------------------------------------
+// PROFESSIONAL WORKSHOP API
+// ----------------------------------------
+app.get('/api/professional-seats', (req, res) => {
+  const db = readDB();
+  const settings = db.settings.professional || {
+    batchDate: "Sunday, 3:00 PM – 6:00 PM",
+    totalSeats: 12,
+    fee: 599,
+    pageLive: true,
+    registrationMode: "open"
+  };
+  const leads = db.professional_leads || [];
+  const confirmedCount = leads.filter(l => (l.status || '').toLowerCase().includes('confirmed')).length;
+  const seatsRemaining = Math.max(0, settings.totalSeats - confirmedCount);
+  
+  return res.json({
+    totalSeats: settings.totalSeats,
+    confirmedCount,
+    seatsRemaining,
+    batchDate: settings.batchDate,
+    fee: settings.fee,
+    pageLive: settings.pageLive,
+    registrationMode: settings.registrationMode
+  });
+});
+
+app.post('/api/professional-leads', (req, res) => {
+  const { name, phone, profession, city, source } = req.body;
+  if (!name || !phone || !city) {
+    return res.status(400).json({ success: false, message: 'Name, Phone, and City are required' });
+  }
+  
+  const cleanPhone = phone.replace(/\D/g, '');
+  if (cleanPhone.length < 10) {
+    return res.status(400).json({ success: false, message: 'Please enter a valid 10-digit WhatsApp number' });
+  }
+  
+  const db = readDB();
+  if (!db.professional_leads) db.professional_leads = [];
+  
+  const isDuplicate = db.professional_leads.some(l => {
+    const existingPhone = (l.phone || '').replace(/\D/g, '');
+    return existingPhone === cleanPhone || (existingPhone.endsWith(cleanPhone) && cleanPhone.length >= 10);
+  });
+  
+  const newLead = {
+    id: `prof_lead_${Date.now()}`,
+    name,
+    phone: cleanPhone.length === 10 ? `+91${cleanPhone}` : phone,
+    profession: profession || 'Other',
+    city: city || 'Ujjain',
+    source: source || 'Other',
+    status: 'New',
+    notes: '',
+    isDuplicate,
+    createdAt: new Date().toISOString()
+  };
+  
+  db.professional_leads.unshift(newLead);
+  
+  // Increment Analytics lead count
+  if (!db.analytics) {
+    db.analytics = { dailyVisits: [] };
+  }
+  if (!db.analytics.dailyVisits) {
+    db.analytics.dailyVisits = [];
+  }
+  const today = new Date().toISOString().split('T')[0];
+  const visitObj = db.analytics.dailyVisits.find(v => v.date === today);
+  if (visitObj) {
+    visitObj.leads = (visitObj.leads || 0) + 1;
+  } else {
+    db.analytics.dailyVisits.push({ date: today, visits: 1, leads: 1 });
+  }
+  
+  writeDB(db);
+  
+  console.log(`[PROFESSIONAL LEAD] New registration: ${name} (${profession})`);
+  
+  return res.json({
+    success: true,
+    data: newLead,
+    notificationLogs: [
+      `WhatsApp lead notification sent to admin (+918308507820)`,
+      `Direct WhatsApp chat initialized for +91${cleanPhone}`
+    ]
+  });
+});
+
+app.get('/api/professional-leads', requireAuth, (req, res) => {
+  const isExport = req.query.export === 'csv';
+  const db = readDB();
+  const leads = db.professional_leads || [];
+  
+  if (isExport) {
+    const headers = ['Date & Time', 'Name', 'WhatsApp Number', 'Profession', 'City', 'Source', 'Status', 'Notes', 'Duplicate Flag'];
+    const rows = leads.map(l => [
+      l.createdAt || '',
+      `"${(l.name || '').replace(/"/g, '""')}"`,
+      `"${l.phone || ''}"`,
+      `"${l.profession || ''}"`,
+      `"${l.city || ''}"`,
+      `"${l.source || ''}"`,
+      l.status || 'New',
+      `"${(l.notes || '').replace(/"/g, '""')}"`,
+      l.isDuplicate ? 'Yes' : 'No'
+    ]);
+    
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="professional_leads.csv"');
+    return res.send(csvContent);
+  }
+  
+  return res.json(leads);
+});
+
+app.put('/api/professional-leads', requireAuth, (req, res) => {
+  const { id, status, notes } = req.body;
+  if (!id) return res.status(400).json({ error: 'Missing lead ID' });
+  
+  const db = readDB();
+  const index = db.professional_leads.findIndex(l => l.id === id);
+  if (index === -1) return res.status(404).json({ error: 'Lead not found' });
+  
+  if (status !== undefined) db.professional_leads[index].status = status;
+  if (notes !== undefined) db.professional_leads[index].notes = notes;
+  
+  writeDB(db);
+  return res.json({ success: true, data: db.professional_leads[index] });
+});
+
+app.post('/api/professional-leads/delete', requireAuth, (req, res) => {
+  const id = req.body.id || req.query.id;
+  if (!id) return res.status(400).json({ error: 'Missing ID' });
+  
+  const db = readDB();
+  if (!db.professional_leads) db.professional_leads = [];
+  db.professional_leads = db.professional_leads.filter(l => l.id !== id);
+  writeDB(db);
+  return res.json({ success: true });
+});
+
+app.post('/api/professional-settings', requireAuth, (req, res) => {
+  const { batchDate, totalSeats, fee, pageLive, registrationMode } = req.body;
+  const db = readDB();
+  
+  if (!db.settings.professional) db.settings.professional = {};
+  
+  if (batchDate !== undefined) db.settings.professional.batchDate = batchDate;
+  if (totalSeats !== undefined) db.settings.professional.totalSeats = Number(totalSeats) || 12;
+  if (fee !== undefined) db.settings.professional.fee = Number(fee) || 599;
+  if (pageLive !== undefined) db.settings.professional.pageLive = !!pageLive;
+  if (registrationMode !== undefined) db.settings.professional.registrationMode = registrationMode;
+  
+  writeDB(db);
+  return res.json({ success: true, data: db.settings.professional });
 });
 
 // ----------------------------------------
@@ -1418,7 +1604,7 @@ function parseMarkdown(text) {
     `;
   }).join('\n');
   
-  html = html.replace(/{{SEO_TITLE}}/g, post.seoTitle || `${post.title} | AI Smart Kids Ujjain`);
+  html = html.replace(/{{SEO_TITLE}}/g, post.seoTitle || `${post.title} | AI Smart Institute Ujjain`);
   html = html.replace(/{{SEO_DESCRIPTION}}/g, post.seoDescription || post.excerpt);
   html = html.replace(/{{BLOG_TITLE}}/g, post.title);
   html = html.replace(/{{BLOG_CATEGORY}}/g, post.category);
