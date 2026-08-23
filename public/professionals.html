@@ -591,35 +591,119 @@
     }
     
     /* Responsive breakpoints */
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .hero-title {
-        font-size: 28px;
+        font-size: 34px;
         padding: 0 16px;
       }
       .hero-subtitle {
-        font-size: 16px;
+        font-size: 18px;
         padding: 0 16px;
       }
-      .learn-grid {
-        grid-template-columns: 1fr;
-      }
       .who-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
       }
       .trainer-card {
         flex-direction: column;
         text-align: center;
+        padding: 30px;
+        gap: 20px;
+      }
+      .details-box {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+      }
+      .learn-grid {
+        gap: 16px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      header {
+        padding: 12px 0;
+      }
+      .nav-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+      }
+      .btn-nav-back {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 16px;
+        background: #F1F5F9;
+        border-radius: 8px;
+      }
+      .hero-section {
+        padding: 40px 0;
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+      }
+      .facts-strip {
+        padding: 16px 12px;
+        gap: 16px;
+        margin: 0 16px 32px 16px;
+      }
+      .fact-item {
+        font-size: 13px;
+      }
+      .learn-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+      .learn-card {
         padding: 24px;
+        gap: 16px;
+      }
+      .who-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+      .trainer-card {
+        padding: 24px;
+        margin: 0 16px;
+      }
+      .trainer-img {
+        width: 120px;
+        height: 120px;
+      }
+      .takehome-box {
+        padding: 24px;
+        margin: 0 16px;
       }
       .takehome-list {
         grid-template-columns: 1fr;
       }
       .details-box {
-        grid-template-columns: 1fr;
+        margin: 0 16px;
         padding: 24px;
+      }
+      .price-card {
+        padding: 20px;
+      }
+      .faq-accordion {
+        padding: 0 16px;
+      }
+      .faq-header {
+        padding: 16px;
+        font-size: 14px;
+      }
+      .faq-body {
+        padding: 0 16px 16px 16px;
+      }
+      .cta-container {
+        padding: 40px 0;
       }
       .cta-box {
         padding: 24px;
+        margin: 0 16px;
       }
       .sticky-bar {
         display: flex;
