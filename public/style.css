@@ -3048,6 +3048,11 @@ body.loaded .hero-image-wrap {
   border-bottom: 1px solid var(--color-border);
 }
 
+.programs-section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
 .programs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3139,16 +3144,119 @@ body.loaded .hero-image-wrap {
 }
 
 @media (max-width: 991px) {
-  .programs-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .programs-grid,
+  .programs-grid.grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 20px;
   }
 }
 
-@media (max-width: 600px) {
-  .programs-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .programs-section,
+  section.programs-section {
+    padding: 44px 0 !important;
+  }
+  .programs-section-header {
+    margin-bottom: 24px;
+  }
+  .programs-section-header h3 {
+    font-size: 22px !important;
+  }
+  .programs-grid,
+  .programs-grid.grid-3 {
+    grid-template-columns: 1fr !important;
     gap: 16px;
+  }
+  .program-card {
+    padding: 22px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  }
+  .program-card:active {
+    background: #F8FAFC;
+    transform: scale(0.99);
+  }
+  .program-card-header {
+    margin-bottom: 14px;
+  }
+  .program-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .program-card-icon i,
+  .program-card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .program-card-title {
+    font-size: 18.5px;
+    line-height: 1.28;
+    margin-bottom: 6px;
+  }
+  .program-card-facts {
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+  .program-card-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .program-card-btn {
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-section,
+  section.programs-section {
+    padding: 36px 0 !important;
+  }
+  .programs-section-header {
+    margin-bottom: 20px;
+  }
+  .programs-section-header h3 {
+    font-size: 20px !important;
+  }
+  .programs-section-header p {
+    font-size: 13px !important;
+  }
+  .programs-grid,
+  .programs-grid.grid-3 {
+    gap: 14px;
+  }
+  .program-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+  .program-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .program-card-icon i,
+  .program-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .program-card-title {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  .program-card-facts {
+    font-size: 11.5px;
+    margin-bottom: 8px;
+  }
+  .program-card-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .program-card-btn {
+    font-size: 13px;
   }
 }
 
