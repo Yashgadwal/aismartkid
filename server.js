@@ -437,23 +437,38 @@ app.get('/api/leads', requireAuth, (req, res) => {
 });
 
 app.post('/api/leads', (req, res) => {
-  const { parentName, childName, age, school, class: childClass, phone, email, preferredBatch, message, status, notes, followUpDate } = req.body;
+  const {
+    parentName, childName, name, age, school, class: childClass,
+    phone, parentPhone, email, preferredBatch, message, status, notes, followUpDate,
+    course, source, consent, ageGroup, currently, laptopAvailable, targetExam, city
+  } = req.body;
 
-  if (!parentName || !childName || !phone) {
-    return res.status(400).json({ success: false, message: 'Parent Name, Child Name, and Phone are required' });
+  const leadName = name || childName || parentName;
+  if (!leadName || !phone) {
+    return res.status(400).json({ success: false, message: 'Name and Phone number are required' });
   }
 
   const db = readDB();
   const newLead = {
     id: `lead_${Date.now()}`,
-    parentName,
-    childName,
-    age: Number(age) || 0,
+    course: course || 'AI for Kids',
+    name: leadName,
+    parentName: parentName || '',
+    childName: childName || name || '',
+    age: Number(age) || (ageGroup === '18+' ? 18 : (ageGroup === '13-17' ? 15 : 0)),
+    ageGroup: ageGroup || '',
     school: school || '',
     class: childClass || '',
-    phone,
+    phone: phone,
+    parentPhone: parentPhone || '',
     email: email || '',
     preferredBatch: preferredBatch || '',
+    currently: currently || '',
+    laptopAvailable: laptopAvailable || '',
+    targetExam: targetExam || '',
+    city: city || 'Ujjain',
+    source: source || 'Website Direct',
+    consent: consent === true || consent === 'true' || consent === 'on',
     status: status || 'New',
     notes: notes || (message ? `Initial enquiry: ${message}` : ''),
     followUpDate: followUpDate || '',
@@ -689,13 +704,14 @@ app.post('/api/professional-leads', (req, res) => {
   
   const newLead = {
     id: `prof_lead_${Date.now()}`,
+    course: req.body.course || 'Professionals Workshop',
     name,
     phone: cleanPhone.length === 10 ? `+91${cleanPhone}` : phone,
     profession: profession || 'Other',
     city: city || 'Ujjain',
     source: source || 'Other',
     status: 'New',
-    notes: '',
+    notes: req.body.notes || '',
     isDuplicate,
     createdAt: new Date().toISOString()
   };
@@ -1427,6 +1443,14 @@ app.get('/professionals', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/professionals.html'));
 });
 
+app.get('/web-pro', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/web-pro.html'));
+});
+
+app.get('/competitive-exams', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/competitive-exams.html'));
+});
+
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/admin/index.html'));
 });
@@ -1630,10 +1654,22 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://aismartkid.vercel.app/landing.html</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://aismartkid.vercel.app/professionals</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/web-pro</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aismartkid.vercel.app/competitive-exams</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aismartkid.vercel.app/blog.html</loc>

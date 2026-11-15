@@ -1707,6 +1707,11 @@
       {
         "date": "2026-08-23",
         "visits": 1,
+        "leads": 4
+      },
+      {
+        "date": "2026-11-15",
+        "visits": 1,
         "leads": 2
       }
     ],
@@ -1715,6 +1720,30 @@
     "pageViews": []
   },
   "professional_leads": [
+    {
+      "id": "prof_lead_1787472109273",
+      "name": "testlandingpageq",
+      "phone": "+919575131553",
+      "profession": "Teacher",
+      "city": "Ujjain",
+      "source": "Facebook",
+      "status": "New",
+      "notes": "",
+      "isDuplicate": false,
+      "createdAt": "2026-08-23T08:01:49.274Z"
+    },
+    {
+      "id": "prof_lead_1787471851547",
+      "name": "testlandingpage",
+      "phone": "+919713121212",
+      "profession": "Business Owner",
+      "city": "Ujjain",
+      "source": "Instagram",
+      "status": "New",
+      "notes": "",
+      "isDuplicate": false,
+      "createdAt": "2026-08-23T07:57:31.547Z"
+    },
     {
       "id": "prof_lead_1787471228883",
       "name": "Yash Gadwal",

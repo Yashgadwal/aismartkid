@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | AI Smart Institute Ujjain</title>
-  <meta name="description" content="Privacy Policy for AI Smart Institute, Ujjain. Learn how we collect, protect, and use student and parent inquiry data.">
+  <meta name="description" content="Privacy Policy for AI Smart Institute, Ujjain. Learn how we collect, protect, and use student and parent inquiry data under DPDP Rules.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,17 +12,17 @@
   <style>
     .legal-container {
       max-width: 800px;
-      margin: 120px auto 60px auto;
+      margin: 60px auto;
       padding: 0 16px;
     }
     .legal-card {
       padding: 40px;
       line-height: 1.8;
       color: var(--color-text-gray);
-      background: rgba(255, 255, 255, 0.65);
-      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(226, 232, 240, 0.8);
       border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
     }
     .legal-card h2 {
       font-size: 20px;
@@ -32,7 +32,7 @@
       font-family: var(--font-display);
     }
     .legal-card p, .legal-card ul {
-      font-size: 13.5px;
+      font-size: 14px;
       margin-bottom: 16px;
     }
     .legal-card ul {
@@ -41,10 +41,14 @@
     .legal-card li {
       margin-bottom: 8px;
     }
+    @media (max-width: 600px) {
+      .legal-card {
+        padding: 24px 18px;
+      }
+    }
   </style>
 
   <link rel="icon" type="image/png" href="/favicon.png">
-
   <script src="/analytics-tracker.js" defer></script>
 <!-- Meta Pixel Code -->
 <script>
@@ -66,21 +70,41 @@ src="https://www.facebook.com/tr?id=1568027588232967&ev=PageView&noscript=1"
 </head>
 <body class="mesh-glow default-cursor-page">
 
-  <!-- HEADER -->
+  <!-- SHARED HEADER -->
   <header>
-    <div class="container header-container">
-      <a href="/" class="logo-block">
-        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo" style="height: 38px; width: auto; border-radius: 8px; object-fit: contain;">
-        <div class="logo-text">
+    <div class="nav-container">
+      <a href="/" class="header-logo">
+        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo">
+        <div>
           <h1>AI SMART INSTITUTE</h1>
           <span>UJJAIN'S FIRST AI INSTITUTE</span>
         </div>
       </a>
+      
       <nav>
-        <a href="/">Home</a>
-        <a href="/#courses">Courses</a>
-        <a href="tel:+918308507820" class="btn btn-orange" style="padding: 8px 16px; font-size:12px;">Call Mentor</a>
+        <a href="/#about">Founder</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" onclick="toggleNavDropdown(event)">
+            Courses <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/#courses" class="nav-dropdown-item">AI for Kids (Ages 9–16)</a>
+            <a href="/web-pro" class="nav-dropdown-item">Advance AI Web Pro (13+) <span class="badge-new-gold">New</span></a>
+            <a href="/professionals" class="nav-dropdown-item">AI for Working Professionals</a>
+            <a href="/competitive-exams" class="nav-dropdown-item">AI for Competitive Exams <span class="badge-new-gold">New</span></a>
+          </div>
+        </div>
+        <a href="/#projects">Student Projects</a>
+        <a href="/#why-us">Why Us</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/#faq">FAQs</a>
       </nav>
+      
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle Navigation">
+        <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+      </button>
+      
+      <a href="/#enroll-form" class="btn btn-primary">Enroll Now</a>
     </div>
   </header>
 
@@ -88,61 +112,153 @@ src="https://www.facebook.com/tr?id=1568027588232967&ev=PageView&noscript=1"
   <div class="legal-container">
     <div class="legal-card">
       <h1 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--color-text-dark); margin-bottom: 8px;">Privacy Policy</h1>
-      <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--color-primary); margin-bottom: 24px;">Last Updated: July 2, 2026</p>
+      <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--color-primary); margin-bottom: 24px;">Last Updated: November 15, 2026</p>
       
-      <p>Welcome to <strong>AI Smart Institute</strong>. We value the privacy of our students, parents, and website visitors. This Privacy Policy details how we collect, protect, and use information when you interact with our website (<a href="https://aismartkid.vercel.app/">aismartkid.vercel.app</a>) and our institute in Ujjain.</p>
+      <p>Welcome to <strong>AI Smart Institute</strong>. We value the privacy of our students, parents, workshop attendees, and website visitors. This Privacy Policy details how we collect, protect, and use information when you interact with our website (<a href="https://aismartkid.vercel.app/">aismartkid.vercel.app</a>) and our physical training studio in Ujjain.</p>
 
       <h2>1. Information We Collect</h2>
-      <p>We collect information you provide directly to us when booking a trial class or requesting info, which may include:</p>
+      <p>We collect information you provide directly to us when booking a trial class, workshop, or counselling call, which may include:</p>
       <ul>
-        <li><strong>Parent Details:</strong> Full Name, Mobile Number, Email Address.</li>
-        <li><strong>Student Details:</strong> Age, School, Class Standard, and learning interests.</li>
+        <li><strong>Parent & Guardian Details:</strong> Full Name, Mobile / WhatsApp Number, Email Address.</li>
+        <li><strong>Student Details:</strong> Full Name, Age Group, School / College, and learning goals.</li>
+        <li><strong>Professional & Aspirant Details:</strong> Profession, Target Examination, City, and contact details.</li>
         <li><strong>Technical Data:</strong> Browser type, operating system, and website usage statistics via analytics.</li>
       </ul>
 
-      <h2>2. How We Use Your Information</h2>
-      <p>We use the collected data solely for educational and administrative purposes, including:</p>
+      <h2>2. Children's Privacy & Parental Consent (DPDP Rules, 2025)</h2>
+      <p>In strict compliance with India's Digital Personal Data Protection (DPDP) Act and Rules 2025, we are deeply committed to safeguarding the privacy of minors:</p>
       <ul>
-        <li>Scheduling free trial sessions and enrolling students in cohorts.</li>
-        <li>Sending batch updates, educational reminders, or course brochures via WhatsApp or Email.</li>
-        <li>Improving website layout and course content relevance.</li>
+        <li>We collect personal details of individuals under 18 years of age only with verifiable consent from a parent or legal guardian.</li>
+        <li>All children's data is strictly utilized for educational counseling, batch scheduling, workshop access, and academic progress updates.</li>
+        <li>We never sell, rent, or commercialize children's personal data, nor do we track children across third-party websites for targeted behavioral advertising.</li>
+        <li>Parents and guardians hold the complete right to review, update, or request the immediate deletion of their child's records at any time by contacting our administration.</li>
       </ul>
 
-      <h2>3. Information Protection</h2>
-      <p>We implement a variety of security measures to maintain the safety of your personal information. We do not sell, trade, or transfer student or parent data to third parties. All lead details are stored securely inside our local database.</p>
+      <h2>3. How We Use Your Information</h2>
+      <p>We use the collected data solely for educational, counseling, and administrative purposes, including:</p>
+      <ul>
+        <li>Scheduling free trial sessions, workshops, and enrolling learners in batches.</li>
+        <li>Sending batch dates, schedules, payment receipts, or curriculum brochures via WhatsApp or Email.</li>
+        <li>Improving website usability, curriculum relevance, and educational material delivery.</li>
+      </ul>
 
-      <h2>4. Cookies</h2>
-      <p>We use cookies to analyze web traffic and help remember your preferences for future visits (such as login states for portals).</p>
+      <h2>4. Information Protection</h2>
+      <p>We implement robust security measures to maintain the safety of your personal information. We do not sell, trade, or transfer student or parent data to external commercial brokers. All lead submissions are stored securely and encrypted in transit.</p>
 
-      <h2>5. Contact Us</h2>
-      <p>If you have any questions regarding this privacy policy, you may contact our mentor team:</p>
-      <p style="font-weight: 700; color: var(--color-text-dark);">
-        AI Smart Institute Institute<br>
-        Cosmos Mall, Nanakheda, Ujjain (M.P.)<br>
-        Phone: +91 8308507820<br>
-        Email: Saurabh Singhal
+      <h2>5. Cookies & Analytics</h2>
+      <p>We use standard performance cookies and privacy-respecting analytics tools to understand website traffic and improve user experience across mobile and desktop devices.</p>
+
+      <h2>6. Contact Us</h2>
+      <p>If you have any questions or data requests regarding this privacy policy, you may contact our mentor team directly:</p>
+      <p style="font-weight: 600; color: var(--color-text-dark); line-height: 1.8;">
+        <strong>AI Smart Institute</strong><br>
+        B-9/8, Mahakal Vanijya Kendra, near Cosmos Mall,<br>
+        Ujjain, Madhya Pradesh 456010<br>
+        WhatsApp: <a href="https://wa.me/918308507820" style="color: #25D366; text-decoration: none;">+91 83085 07820</a><br>
+        Email: <a href="mailto:aismartkid@gmail.com" style="color: var(--color-primary); text-decoration: none;">aismartkid@gmail.com</a>
       </p>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-container">
-      <div class="footer-logo">
-        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo" style="height: 24px; width: auto; border-radius: 4px; object-fit: contain;">
-        <span>AI SMART INSTITUTE</span>
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col">
+          <div class="footer-brand" style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="/images/logoai.jpeg" alt="AI Smart Institute" style="height: 36px; border-radius: 6px;">
+              <div>
+                <h4 style="margin: 0; font-size: 16px; color: #FFFFFF; font-weight: 700;">AI SMART INSTITUTE</h4>
+                <span style="font-size: 10px; color: #94A3B8; text-transform: uppercase; font-weight: 700;">Ujjain's First AI Institute</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
+            Empowering students, professionals, and future innovators with practical, hands-on artificial intelligence education.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+              <i data-lucide="instagram" style="width: 18px; height: 18px;"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+              <i data-lucide="facebook" style="width: 18px; height: 18px;"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube">
+              <i data-lucide="youtube" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Our Courses</h4>
+          <ul>
+            <li><a href="/#courses">AI for Kids (Ages 9–16)</a></li>
+            <li><a href="/web-pro">Advance AI Web Pro (13+)</a></li>
+            <li><a href="/professionals">AI for Working Professionals</a></li>
+            <li><a href="/competitive-exams">AI for Competitive Exams</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Institute</h4>
+          <ul>
+            <li><a href="/#about">About Founder</a></li>
+            <li><a href="/#why-us">Why Choose Us</a></li>
+            <li><a href="/blog.html">Blog & Insights</a></li>
+            <li><a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Review us on Google</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="margin-bottom: 8px; font-size: 13px; color: #CBD5E1;">
+            <strong>Studio Address:</strong><br>
+            B-9/8, Mahakal Vanijya Kendra,<br>
+            near Cosmos Mall, Ujjain,<br>
+            Madhya Pradesh 456010
+          </p>
+          <p style="margin-bottom: 6px; font-size: 13px; color: #CBD5E1;">
+            <strong>WhatsApp:</strong> <a href="https://wa.me/918308507820" style="color: #25D366; text-decoration: none;">+91 83085 07820</a>
+          </p>
+          <p style="margin-bottom: 0; font-size: 13px; color: #CBD5E1;">
+            <strong>Email:</strong> <a href="mailto:aismartkid@gmail.com" style="color: #94A3B8; text-decoration: none;">aismartkid@gmail.com</a>
+          </p>
+        </div>
       </div>
-      <div style="text-align: center;">
-        <p style="margin: 0;">&copy; 2026 AI Smart Institute, Ujjain. All rights reserved.</p>
-      </div>
-      <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 AI Smart Institute, Ujjain. All rights reserved.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>lucide.createIcons();</script>
+  <script>
+    lucide.createIcons();
+
+    function toggleNavDropdown(e) {
+      e.stopPropagation();
+      const dropdown = e.currentTarget.closest('.nav-dropdown');
+      if (dropdown) dropdown.classList.toggle('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    function toggleMobileNav() {
+      const nav = document.querySelector('nav');
+      if (nav) nav.classList.toggle('mobile-open');
+    }
+  </script>
 </body>
 </html>

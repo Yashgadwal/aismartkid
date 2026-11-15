@@ -192,31 +192,41 @@ async function loadGlobalSettings() {
         whatsBtn.href = `https://wa.me/${cleanWa}?text=Hello%20AI%20Smart%20Kids%2C%20I%20would%20like%20to%20enquire%20about%20your%20AI%20batches%20for%20my%20child.`;
       }
 
-      // Initialize Dynamic Cohort Card Countdowns
-      if (data.cohortDateJunior) {
+      // Initialize Dynamic Cohort Card Countdowns or Ask for Batch Dates
+      const now = Date.now();
+      const jTime = data.cohortDateJunior ? new Date(data.cohortDateJunior).getTime() : 0;
+      const sTime = data.cohortDateSenior ? new Date(data.cohortDateSenior).getTime() : 0;
+
+      const juniorBox = document.getElementById('junior-countdown-box');
+      const juniorAsk = document.getElementById('junior-dates-ask');
+      if (jTime > now) {
+        if (juniorBox) juniorBox.style.display = 'block';
+        if (juniorAsk) juniorAsk.style.display = 'none';
         startCountdown(data.cohortDateJunior, 'junior');
+      } else {
+        if (juniorBox) juniorBox.style.display = 'none';
+        if (juniorAsk) juniorAsk.style.display = 'block';
       }
-      if (data.cohortDateSenior) {
+
+      const seniorBox = document.getElementById('senior-countdown-box');
+      const seniorAsk = document.getElementById('senior-dates-ask');
+      if (sTime > now) {
+        if (seniorBox) seniorBox.style.display = 'block';
+        if (seniorAsk) seniorAsk.style.display = 'none';
         startCountdown(data.cohortDateSenior, 'senior');
+      } else {
+        if (seniorBox) seniorBox.style.display = 'none';
+        if (seniorAsk) seniorAsk.style.display = 'block';
       }
       
-      // Update seats banner using the closest date
+      // Update seats banner if a real future date exists
       let bannerDate = null;
-      if (data.cohortDateJunior && data.cohortDateSenior) {
-        const jTime = new Date(data.cohortDateJunior).getTime();
-        const sTime = new Date(data.cohortDateSenior).getTime();
-        const now = Date.now();
-        
-        // Pick the closest future date
-        if (jTime > now && sTime > now) {
-          bannerDate = jTime < sTime ? data.cohortDateJunior : data.cohortDateSenior;
-        } else if (jTime > now) {
-          bannerDate = data.cohortDateJunior;
-        } else if (sTime > now) {
-          bannerDate = data.cohortDateSenior;
-        }
-      } else {
-        bannerDate = data.cohortDateJunior || data.cohortDateSenior;
+      if (jTime > now && sTime > now) {
+        bannerDate = jTime < sTime ? data.cohortDateJunior : data.cohortDateSenior;
+      } else if (jTime > now) {
+        bannerDate = data.cohortDateJunior;
+      } else if (sTime > now) {
+        bannerDate = data.cohortDateSenior;
       }
       
       if (bannerDate) {
@@ -482,19 +492,33 @@ async function submitBookingForm() {
     return;
   }
 
+  const sourceEl = document.getElementById('input-source');
+  const source = sourceEl ? sourceEl.value : 'Website Direct';
+  const consentEl = document.getElementById('input-consent');
+  if (consentEl && !consentEl.checked) {
+    alert("Please check the parental consent box to proceed.");
+    return;
+  }
+
   try {
     const res = await fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        parentName, phone, email, childName, age: ageNum, school, class: childClass, preferredBatch, message
+        parentName, phone, email, childName, age: ageNum, school, class: childClass, preferredBatch, message,
+        course: 'AI for Kids',
+        source,
+        consent: consentEl ? consentEl.checked : true
       })
     });
 
     if (res.ok) {
       const result = await res.json();
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', { content_name: 'Waitlist Booking' });
+        fbq('track', 'Lead', { content_name: 'AI for Kids' });
+      }
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', { event_category: 'form', event_label: 'AI for Kids' });
       }
       
       // Explosion celebration
@@ -607,8 +631,8 @@ async function submitExitInquiry(event) {
 
 // Live Booking Notifications toast loop
 const toastNames = [
-  "Rahul Sharma from Freeganj",
-  "Priyanka Vyas from Nanakheda",
+  "Rahul Sharma from Cosmos Mall Road",
+  "Priyanka Vyas from Mahakal Vanijya Kendra",
   "Sunita Patel from Rishi Nagar",
   "Meera Rathore from Mahananda Nagar",
   "Deepak Gupta from Sethi Nagar",
@@ -1213,6 +1237,18 @@ function toggleMobileNav() {
   const nav = document.querySelector('header nav');
   if (nav) {
     nav.classList.toggle('active');
+  }
+}
+
+// Mobile/tap Courses dropdown toggle
+function toggleNavDropdown(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (dropdown) {
+    dropdown.classList.toggle('open');
   }
 }
 

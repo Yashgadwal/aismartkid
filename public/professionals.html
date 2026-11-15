@@ -826,6 +826,31 @@
           <span>UJJAIN'S FIRST AI INSTITUTE</span>
         </div>
       </a>
+      
+      <nav>
+        <a href="/#about">Founder</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" onclick="toggleNavDropdown(event)">
+            Courses <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/#courses" class="nav-dropdown-item">AI for Kids (Ages 9–16)</a>
+            <a href="/web-pro" class="nav-dropdown-item">Advance AI Web Pro (13+) <span class="badge-new-gold">New</span></a>
+            <a href="/professionals" class="nav-dropdown-item" style="color: var(--color-primary); font-weight:700;">AI for Working Professionals</a>
+            <a href="/competitive-exams" class="nav-dropdown-item">AI for Competitive Exams <span class="badge-new-gold">New</span></a>
+          </div>
+        </div>
+        <a href="/#projects">Student Projects</a>
+        <a href="/#why-us">Why Us</a>
+        <a href="/blog.html">Blog</a>
+        <a href="#faq">FAQs</a>
+      </nav>
+      
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle Navigation">
+        <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+      </button>
+      
+      <a href="#enroll-section" class="btn btn-primary">Reserve Seat</a>
     </div>
   </header>
 
@@ -841,7 +866,7 @@
           <div class="seats-counter-box" style="margin-bottom: 24px; text-align: left;">
             <div class="seats-counter" id="seats-banner">
               <i data-lucide="alert-circle" style="width: 16px; height: 16px;"></i>
-              <span id="seats-text">Only 12 of 12 seats left for this Sunday</span>
+              <span id="seats-text">12 seats per batch</span>
             </div>
           </div>
           
@@ -860,7 +885,7 @@
             </div>
             <div class="fact-item">
               <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
-              <span>Nanakheda, Ujjain</span>
+              <span>Near Cosmos Mall, Ujjain</span>
             </div>
           </div>
           
@@ -1027,7 +1052,7 @@
             <i data-lucide="map-pin" style="width: 20px; height: 20px;"></i>
             <div>
               <h4>Venue</h4>
-              <p>9/8 Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain</p>
+              <p>B-9/8, Mahakal Vanijya Kendra, near Cosmos Mall, Ujjain, Madhya Pradesh 456010</p>
             </div>
           </div>
           <div class="detail-row">
@@ -1140,6 +1165,7 @@
         <form id="lead-form" onsubmit="handleFormSubmit(event)">
           <!-- Honeypot anti-spam -->
           <input type="text" name="honeypot" style="display:none;" id="honeypot">
+          <input type="hidden" name="course" id="course-name" value="Professionals Workshop">
           
           <div class="form-group">
             <label class="form-label" for="full-name">Full Name *</label>
@@ -1197,6 +1223,150 @@
       </div>
     </div>
   </section>
+
+  <!-- EXPLORE OTHER COURSES STRIP -->
+  <section class="programs-section" style="padding: 64px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <h3 style="font-size: 24px; margin-bottom: 8px;">Explore Other Courses</h3>
+        <p style="color: #64748B; font-size: 14px;">Find the right AI track for your age and career goals.</p>
+      </div>
+
+      <div class="programs-grid grid-3">
+        <!-- Card 1: AI for Kids -->
+        <a href="/#courses" class="program-card">
+          <div>
+            <div class="program-card-header">
+              <div class="program-card-icon">
+                <i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
+              </div>
+            </div>
+            <h3 class="program-card-title">AI for Kids</h3>
+            <div class="program-card-facts">Ages 9–16 · 3 months · Max 12 per batch</div>
+            <p class="program-card-desc">Two age-based cohorts: AI Junior Explorers (9–12) and AI Teen Creators (13–16). Kids create stories, art, apps and real projects with AI.</p>
+          </div>
+          <div class="program-card-btn">
+            View Kids Courses <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </div>
+        </a>
+
+        <!-- Card 2: Advance AI Web Pro -->
+        <a href="/web-pro" class="program-card">
+          <div>
+            <div class="program-card-header">
+              <div class="program-card-icon">
+                <i data-lucide="globe" style="width: 24px; height: 24px;"></i>
+              </div>
+              <span class="badge-new-gold">New</span>
+            </div>
+            <h3 class="program-card-title">Advance AI Web Pro</h3>
+            <div class="program-card-facts">Ages 13+ · 12 weeks · Bring your laptop</div>
+            <p class="program-card-desc">Build real websites and web apps with AI, finishing with a real client project and your own portfolio.</p>
+          </div>
+          <div class="program-card-btn">
+            Explore Web Pro <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </div>
+        </a>
+
+        <!-- Card 3: AI for Competitive Exams -->
+        <a href="/competitive-exams" class="program-card">
+          <div>
+            <div class="program-card-header">
+              <div class="program-card-icon">
+                <i data-lucide="book-open" style="width: 24px; height: 24px;"></i>
+              </div>
+              <span class="badge-new-gold">New</span>
+            </div>
+            <h3 class="program-card-title">AI for Competitive Exams</h3>
+            <div class="program-card-facts">SBI · IBPS · LIC · SSC · On your phone</div>
+            <p class="program-card-desc">Use AI to plan your preparation, clear doubts step by step and revise current affairs faster.</p>
+          </div>
+          <div class="program-card-btn">
+            View Workshop <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col">
+          <div class="footer-brand" style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="/images/logoai.jpeg" alt="AI Smart Institute" style="height: 36px; border-radius: 6px;">
+              <div>
+                <h4 style="margin: 0; font-size: 16px; color: #FFFFFF; font-weight: 700;">AI SMART INSTITUTE</h4>
+                <span style="font-size: 10px; color: #94A3B8; text-transform: uppercase; font-weight: 700;">Ujjain's First AI Institute</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
+            Empowering students, professionals, and future innovators with practical, hands-on artificial intelligence education.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+              <i data-lucide="instagram" style="width: 18px; height: 18px;"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+              <i data-lucide="facebook" style="width: 18px; height: 18px;"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube">
+              <i data-lucide="youtube" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Our Courses</h4>
+          <ul>
+            <li><a href="/#courses">AI for Kids (Ages 9–16)</a></li>
+            <li><a href="/web-pro">Advance AI Web Pro (13+)</a></li>
+            <li><a href="/professionals">AI for Working Professionals</a></li>
+            <li><a href="/competitive-exams">AI for Competitive Exams</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Institute</h4>
+          <ul>
+            <li><a href="/#about">About Founder</a></li>
+            <li><a href="/#why-us">Why Choose Us</a></li>
+            <li><a href="/blog.html">Blog & Insights</a></li>
+            <li><a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Review us on Google</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="margin-bottom: 8px; font-size: 13px; color: #CBD5E1;">
+            <strong>Studio Address:</strong><br>
+            B-9/8, Mahakal Vanijya Kendra,<br>
+            near Cosmos Mall, Ujjain,<br>
+            Madhya Pradesh 456010
+          </p>
+          <p style="margin-bottom: 6px; font-size: 13px; color: #CBD5E1;">
+            <strong>WhatsApp:</strong> <a href="https://wa.me/918308507820" style="color: #25D366; text-decoration: none;">+91 83085 07820</a>
+          </p>
+          <p style="margin-bottom: 0; font-size: 13px; color: #CBD5E1;">
+            <strong>Email:</strong> <a href="mailto:aismartkid@gmail.com" style="color: #94A3B8; text-decoration: none;">aismartkid@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 AI Smart Institute, Ujjain. All rights reserved.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- STICKY MOBILE CTA BAR -->
   <div class="sticky-bar">
@@ -1278,7 +1448,9 @@
         const seatsBanner = document.getElementById('seats-banner');
         
         if (data.seatsRemaining > 0 && registrationMode === 'open') {
-          seatsText.innerText = `Only ${data.seatsRemaining} of ${data.totalSeats} seats left for this Sunday`;
+          seatsText.innerText = (data.seatsRemaining < data.totalSeats)
+            ? `Only ${data.seatsRemaining} of ${data.totalSeats} seats left for this Sunday`
+            : `${data.totalSeats || 12} seats per batch`;
           seatsBanner.style.background = '#FEF2F2';
           seatsBanner.style.color = '#DC2626';
           seatsBanner.style.borderColor = '#FEE2E2';
@@ -1302,6 +1474,23 @@
     }
 
     loadSeatsCounter();
+
+    function toggleNavDropdown(e) {
+      e.stopPropagation();
+      const dropdown = e.currentTarget.closest('.nav-dropdown');
+      if (dropdown) dropdown.classList.toggle('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    function toggleMobileNav() {
+      const nav = document.querySelector('nav');
+      if (nav) nav.classList.toggle('mobile-open');
+    }
 
     // Toggle FAQ elements
     function toggleFaq(btn) {
@@ -1335,7 +1524,8 @@
         phone: document.getElementById('whatsapp-no').value.trim(),
         profession: document.getElementById('profession').value,
         city: document.getElementById('city').value.trim(),
-        source: document.getElementById('source').value
+        source: document.getElementById('source').value,
+        course: "Professionals Workshop"
       };
       
       try {
@@ -1351,6 +1541,11 @@
         
         if (!res.ok) {
           throw new Error(resData.message || "Failed to submit lead");
+        }
+
+        // Fire Meta Pixel & GA4
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'Professionals Workshop' });
         }
         
         // Trigger confetti
