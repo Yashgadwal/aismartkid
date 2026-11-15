@@ -1237,6 +1237,8 @@ function toggleMobileNav() {
   const nav = document.querySelector('header nav');
   if (nav) {
     nav.classList.toggle('active');
+    nav.classList.toggle('open');
+    nav.classList.toggle('mobile-open');
   }
 }
 
@@ -1246,20 +1248,38 @@ function toggleNavDropdown(e) {
     e.preventDefault();
     e.stopPropagation();
   }
-  const dropdown = document.querySelector('.nav-dropdown');
+  const dropdown = (e && e.currentTarget) ? e.currentTarget.closest('.nav-dropdown') : document.querySelector('.nav-dropdown');
   if (dropdown) {
     dropdown.classList.toggle('open');
+    dropdown.classList.toggle('active');
   }
 }
 
-// Auto close mobile nav drawer when link is clicked
+// Auto close mobile nav drawer when link is clicked or when clicking outside
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('header nav a').forEach(link => {
+  document.querySelectorAll('header nav a:not(.nav-dropdown-toggle)').forEach(link => {
     link.addEventListener('click', () => {
       const nav = document.querySelector('header nav');
       if (nav) {
-        nav.classList.remove('active');
+        nav.classList.remove('active', 'open', 'mobile-open');
+      }
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown) {
+        dropdown.classList.remove('open', 'active');
       }
     });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('header')) {
+      const nav = document.querySelector('header nav');
+      if (nav) {
+        nav.classList.remove('active', 'open', 'mobile-open');
+      }
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown) {
+        dropdown.classList.remove('open', 'active');
+      }
+    }
   });
 });

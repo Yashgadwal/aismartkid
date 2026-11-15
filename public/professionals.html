@@ -33,51 +33,7 @@
       color: #0F172A;
       font-weight: 700;
     }
-    
-    header {
-      background: #FFFFFF;
-      border-bottom: 1px solid #E2E8F0;
-      padding: 16px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    
-    .header-logo img {
-      height: 40px;
-      border-radius: 8px;
-    }
-    
-    .header-logo h1 {
-      font-size: 18px;
-      margin: 0;
-      letter-spacing: -0.01em;
-    }
-    
-    .header-logo span {
-      font-size: 10px;
-      color: #64748B;
-      font-weight: 700;
-      text-transform: uppercase;
-      display: block;
-    }
-    
+
     .btn-nav-back {
       font-size: 13px;
       color: #475569;
@@ -663,15 +619,6 @@
     }
     
     @media (max-width: 767px) {
-      header {
-        padding: 12px 0;
-      }
-      .nav-container {
-        flex-direction: column;
-        gap: 12px;
-        align-items: center;
-        text-align: center;
-      }
       .btn-nav-back {
         width: 100%;
         justify-content: center;
@@ -818,10 +765,10 @@
 
   <!-- HEADER -->
   <header>
-    <div class="nav-container">
-      <a href="/" class="header-logo">
-        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo">
-        <div>
+    <div class="container header-container">
+      <a href="/" class="logo-block">
+        <img src="/images/logoai.jpeg" alt="AI Smart Institute Logo" style="height: 38px; width: auto; border-radius: 8px; object-fit: contain;">
+        <div class="logo-text">
           <h1>AI SMART INSTITUTE</h1>
           <span>UJJAIN'S FIRST AI INSTITUTE</span>
         </div>
@@ -843,14 +790,15 @@
         <a href="/#projects">Student Projects</a>
         <a href="/#why-us">Why Us</a>
         <a href="/blog.html">Blog</a>
-        <a href="#faq">FAQs</a>
+        <a href="/#faq">FAQs</a>
       </nav>
       
-      <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle Navigation">
-        <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
-      </button>
-      
-      <a href="#enroll-section" class="btn btn-primary">Reserve Seat</a>
+      <div class="header-actions">
+        <a href="#enroll-section" class="btn btn-primary nav-enroll-btn">Reserve Seat</a>
+        <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle Navigation">
+          <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -1476,21 +1424,41 @@
     loadSeatsCounter();
 
     function toggleNavDropdown(e) {
-      e.stopPropagation();
-      const dropdown = e.currentTarget.closest('.nav-dropdown');
-      if (dropdown) dropdown.classList.toggle('active');
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const dropdown = (e && e.currentTarget) ? e.currentTarget.closest('.nav-dropdown') : document.querySelector('.nav-dropdown');
+      if (dropdown) {
+        dropdown.classList.toggle('active');
+        dropdown.classList.toggle('open');
+      }
+    }
+
+    function toggleMobileNav() {
+      const nav = document.querySelector('header nav');
+      if (nav) {
+        nav.classList.toggle('active');
+        nav.classList.toggle('open');
+        nav.classList.toggle('mobile-open');
+      }
     }
 
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
+      if (!e.target.closest('header')) {
+        const nav = document.querySelector('header nav');
+        if (nav) nav.classList.remove('active', 'open', 'mobile-open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active', 'open'));
       }
     });
 
-    function toggleMobileNav() {
-      const nav = document.querySelector('nav');
-      if (nav) nav.classList.toggle('mobile-open');
-    }
+    document.querySelectorAll('header nav a:not(.nav-dropdown-toggle)').forEach(link => {
+      link.addEventListener('click', () => {
+        const nav = document.querySelector('header nav');
+        if (nav) nav.classList.remove('active', 'open', 'mobile-open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active', 'open'));
+      });
+    });
 
     // Toggle FAQ elements
     function toggleFaq(btn) {
