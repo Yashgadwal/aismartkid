@@ -86,12 +86,20 @@
       letter-spacing: 0.05em;
     }
     
+    .hero-text-side {
+      text-align: left;
+    }
+
     .hero-title {
       font-size: 42px;
       line-height: 1.15;
       max-width: 800px;
       margin: 0 auto 20px auto;
       letter-spacing: -0.03em;
+    }
+
+    .hero-text-side .hero-title {
+      margin: 0 0 20px 0;
     }
     
     .hero-subtitle {
@@ -100,6 +108,10 @@
       max-width: 600px;
       margin: 0 auto 32px auto;
       font-weight: 400;
+    }
+
+    .hero-text-side .hero-subtitle {
+      margin: 0 0 28px 0;
     }
     
     .facts-strip {
@@ -116,6 +128,18 @@
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .hero-text-side .facts-strip {
+      max-width: 100%;
+      margin: 0 0 32px 0;
+      padding: 16px 20px;
+      gap: 20px;
+      justify-content: flex-start;
+    }
+
+    .hero-text-side .hero-actions {
+      justify-content: flex-start;
     }
     
     .fact-item {
@@ -563,17 +587,48 @@
       gap: 12px;
     }
     
+    /* Hero Poster Card */
+    .hero-poster-card,
+    .hero-image-side > div {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      background: #FFFFFF;
+      max-width: 340px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero-poster-card:hover,
+    .hero-image-side > div:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 35px -5px rgba(37, 99, 235, 0.15);
+    }
+
+    .hero-poster-img,
+    .hero-image-side img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 520px;
+      object-fit: contain;
+    }
+
     /* Responsive breakpoints */
     @media (max-width: 991px) {
       .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 32px;
+        gap: 28px;
       }
       .hero-text-side {
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
       }
       .seats-counter-box {
         text-align: center !important;
@@ -590,13 +645,18 @@
       .hero-image-side {
         justify-content: center;
       }
+      .hero-poster-card,
+      .hero-image-side > div {
+        max-width: 280px !important;
+        margin: 0 auto !important;
+      }
       .hero-title {
-        font-size: 34px;
-        padding: 0 16px;
+        font-size: 32px;
+        padding: 0;
       }
       .hero-subtitle {
-        font-size: 18px;
-        padding: 0 16px;
+        font-size: 17px;
+        padding: 0;
       }
       .who-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -605,13 +665,13 @@
       .trainer-card {
         flex-direction: column;
         text-align: center;
-        padding: 30px;
+        padding: 28px 20px;
         gap: 20px;
       }
       .details-box {
         grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 30px;
+        gap: 24px;
+        padding: 28px 20px;
       }
       .learn-grid {
         gap: 16px;
@@ -627,78 +687,129 @@
         border-radius: 8px;
       }
       .hero-section {
-        padding: 40px 0;
+        padding: 44px 0 36px 0;
       }
       .hero-title {
         font-size: 26px;
+        padding: 0;
       }
       .hero-subtitle {
         font-size: 15px;
+        padding: 0;
       }
       .facts-strip {
-        padding: 16px 12px;
-        gap: 16px;
-        margin: 0 16px 32px 16px;
+        padding: 14px 12px !important;
+        gap: 12px !important;
+        margin: 0 0 24px 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
       }
       .fact-item {
         font-size: 13px;
       }
       .learn-grid {
         grid-template-columns: 1fr;
-        padding: 0 16px;
+        padding: 0;
+        gap: 14px;
       }
       .learn-card {
-        padding: 24px;
-        gap: 16px;
+        padding: 20px 16px;
+        gap: 14px;
       }
       .who-grid {
         grid-template-columns: 1fr;
-        padding: 0 16px;
+        padding: 0;
+        gap: 14px;
       }
       .trainer-card {
-        padding: 24px;
-        margin: 0 16px;
+        padding: 22px 16px;
+        margin: 0;
+        width: 100%;
       }
       .trainer-img {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
       }
       .takehome-box {
-        padding: 24px;
-        margin: 0 16px;
+        padding: 22px 16px;
+        margin: 0;
+        width: 100%;
       }
       .takehome-list {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
       .details-box {
-        margin: 0 16px;
-        padding: 24px;
+        margin: 0;
+        width: 100%;
+        padding: 22px 16px;
       }
       .price-card {
-        padding: 20px;
+        padding: 20px 16px;
       }
       .faq-accordion {
-        padding: 0 16px;
+        padding: 0;
       }
       .faq-header {
-        padding: 16px;
+        padding: 16px 14px;
         font-size: 14px;
       }
       .faq-body {
-        padding: 0 16px 16px 16px;
+        padding: 0 14px 16px 14px;
       }
       .cta-container {
         padding: 40px 0;
       }
       .cta-box {
-        padding: 24px;
-        margin: 0 16px;
+        padding: 24px 18px;
+        margin: 0;
+        width: 100%;
       }
       .sticky-bar {
         display: flex;
       }
       body {
         padding-bottom: 70px;
+      }
+      section.page-section {
+        padding: 48px 0 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section {
+        padding: 32px 0 24px 0;
+      }
+      .hero-title {
+        font-size: 24px;
+        line-height: 1.22;
+      }
+      .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .hero-poster-card,
+      .hero-image-side > div {
+        max-width: 240px !important;
+        margin: 0 auto !important;
+      }
+      .trainer-card,
+      .takehome-box,
+      .details-box,
+      .cta-box,
+      .learn-card {
+        padding: 18px 14px;
+      }
+      .faq-header {
+        padding: 14px 12px;
+        font-size: 13px;
+      }
+      .faq-body {
+        padding: 0 12px 14px 12px;
+        font-size: 13px;
+      }
+      section.page-section {
+        padding: 36px 0 !important;
       }
     }
     
@@ -818,7 +929,7 @@
             </div>
           </div>
           
-          <div class="facts-strip" style="max-width: 100%; margin-left: 0; margin-right: 0; padding: 16px 20px; gap: 20px; justify-content: flex-start;">
+          <div class="facts-strip">
             <div class="fact-item">
               <i data-lucide="calendar" style="width: 18px; height: 18px;"></i>
               <span id="fact-date">Sunday, 3:00 PM – 6:00 PM</span>
@@ -837,7 +948,7 @@
             </div>
           </div>
           
-          <div class="hero-actions" style="justify-content: flex-start;">
+          <div class="hero-actions">
             <a href="#enroll-section" class="btn btn-primary" id="btn-reserve-hero">Reserve My Seat</a>
             <a href="https://wa.me/918308507820?text=SEAT%20-%20mujhe%20AI%20workshop%20ki%20jaankari%20chahiye" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background:#FFFFFF; color:#25D366; border: 1px solid #25D366; display:inline-flex; align-items:center; gap:8px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -847,8 +958,8 @@
           </div>
         </div>
         <div class="hero-image-side">
-          <div style="border-radius: 24px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 12px 30px rgba(0,0,0,0.06); background: #FFFFFF; max-width: 100%;">
-            <img src="/images/hero_prof.jpg" alt="AI Professionals Workshop Poster" style="width: 100%; height: auto; display: block; max-height: 520px; object-fit: contain;">
+          <div class="hero-poster-card">
+            <img src="/images/hero_prof.jpg" alt="AI Professionals Workshop Poster" class="hero-poster-img">
           </div>
         </div>
       </div>
@@ -856,7 +967,7 @@
   </section>
 
   <!-- WHAT YOU WILL LEARN -->
-  <section style="padding: 80px 0;">
+  <section class="page-section" style="padding: 80px 0;">
     <div class="container">
       <h2 class="section-title">What you will learn</h2>
       
@@ -906,7 +1017,7 @@
   </section>
 
   <!-- WHO IS THIS FOR -->
-  <section style="padding: 80px 0; background: #F1F5F9;">
+  <section class="page-section" style="padding: 80px 0; background: #F1F5F9;">
     <div class="container">
       <h2 class="section-title">Who is this for</h2>
       
@@ -940,7 +1051,7 @@
   </section>
 
   <!-- TRAINER SECTION -->
-  <section style="padding: 80px 0;">
+  <section class="page-section" style="padding: 80px 0;">
     <div class="container">
       <h2 class="section-title">Your Mentor</h2>
       
@@ -956,7 +1067,7 @@
   </section>
 
   <!-- WHAT YOU TAKE HOME -->
-  <section style="padding: 80px 0; background: #0F172A; border-top: 1px solid #1E293B;">
+  <section class="page-section" style="padding: 80px 0; background: #0F172A; border-top: 1px solid #1E293B;">
     <div class="container">
       <div class="takehome-box">
         <h3>What you take home</h3>
@@ -983,7 +1094,7 @@
   </section>
 
   <!-- WORKSHOP DETAILS BLOCK -->
-  <section style="padding: 80px 0;">
+  <section class="page-section" style="padding: 80px 0;">
     <div class="container">
       <h2 class="section-title">Workshop Details</h2>
       
@@ -1040,7 +1151,7 @@
   </section>
 
   <!-- FAQS -->
-  <section style="padding: 80px 0; background: #F1F5F9;">
+  <section class="page-section" style="padding: 80px 0; background: #F1F5F9;">
     <div class="container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       
@@ -1104,7 +1215,7 @@
   </section>
 
   <!-- LEAD CAPTURE FORM SECTION -->
-  <section class="cta-container" id="enroll-section">
+  <section class="page-section cta-container" id="enroll-section">
     <div class="container">
       <div class="cta-box">
         <h3 id="form-heading">Reserve Your Seat</h3>
@@ -1173,7 +1284,7 @@
   </section>
 
   <!-- EXPLORE OTHER COURSES STRIP -->
-  <section class="programs-section" style="padding: 64px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
+  <section class="page-section programs-section" style="padding: 64px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
     <div class="container">
       <div style="text-align: center; margin-bottom: 36px;">
         <h3 style="font-size: 24px; margin-bottom: 8px;">Explore Other Courses</h3>

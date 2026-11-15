@@ -393,19 +393,87 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .exams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
     @media (max-width: 768px) {
+      .hero-section {
+        padding: 44px 0 36px 0;
+      }
       .hero-title {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.22;
       }
       .hero-subtitle {
-        font-size: 16px;
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+      .fact-chips {
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .fact-chip {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .exams-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .subject-card,
+      .module-card {
+        padding: 20px 16px;
+      }
+      .details-card {
+        padding: 22px 16px;
       }
       .mentor-box {
         flex-direction: column;
         text-align: center;
+        padding: 24px 16px;
+        gap: 16px;
       }
       .booking-card {
-        padding: 28px 20px;
+        padding: 24px 18px;
+      }
+      .faq-header {
+        padding: 16px 18px;
+      }
+      .faq-body {
+        padding: 0 18px 16px 18px;
+      }
+      section.page-section {
+        padding: 48px 0 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section {
+        padding: 32px 0 24px 0;
+      }
+      .hero-title {
+        font-size: 24px;
+      }
+      .hero-subtitle {
+        font-size: 14px;
+      }
+      section.page-section {
+        padding: 36px 0 !important;
       }
     }
   </style>
@@ -481,14 +549,14 @@
   </section>
 
   <!-- WHAT YOU WILL LEARN -->
-  <section style="padding: 80px 0; background: #FFFFFF;">
+  <section class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 48px auto;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">What You Will Learn</h2>
         <p style="color: #64748B; font-size: 16px;">4 practical modules designed to save you 10+ hours of prep time every week.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+      <div class="subjects-grid">
         <!-- Module 1 -->
         <div class="module-card">
           <div class="module-badge">01</div>
@@ -521,9 +589,9 @@
   </section>
 
   <!-- WHO IS THIS FOR & WHAT YOU TAKE HOME -->
-  <section style="padding: 80px 0; background: #F8FAFC;">
+  <section class="page-section" style="padding: 80px 0; background: #F8FAFC;">
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; max-width: 900px; margin: 0 auto;">
+      <div class="exams-grid">
         
         <!-- Who is this for -->
         <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 20px; padding: 32px;">
@@ -562,7 +630,7 @@
   </section>
 
   <!-- MENTOR SECTION -->
-  <section style="padding: 80px 0; background: #FFFFFF;">
+  <section class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 40px auto;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">Workshop Mentor</h2>
@@ -583,7 +651,7 @@
   </section>
 
   <!-- WORKSHOP DETAILS & MAP -->
-  <section style="padding: 80px 0; background: #F8FAFC;">
+  <section class="page-section" style="padding: 80px 0; background: #F8FAFC;">
     <div class="container">
       <div class="details-card">
         <h3 style="font-size: 24px; margin-bottom: 24px; text-align: center;">Workshop Details</h3>
@@ -637,7 +705,7 @@
   </section>
 
   <!-- FAQS -->
-  <section id="faq" style="padding: 80px 0; background: #FFFFFF;">
+  <section id="faq" class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container" style="max-width: 800px;">
       <div style="text-align: center; margin-bottom: 40px;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">Frequently Asked Questions</h2>
@@ -709,7 +777,7 @@
   </section>
 
   <!-- BOOKING FORM SECTION -->
-  <section id="booking-section" style="padding: 80px 0; background: #F8FAFC;">
+  <section id="booking-section" class="page-section" style="padding: 80px 0; background: #F8FAFC;">
     <div class="container">
       <div class="booking-card">
         <div style="text-align: center; margin-bottom: 32px;">

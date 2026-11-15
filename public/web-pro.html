@@ -91,20 +91,14 @@
 
     .pro-hero {
       background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
-      padding: 64px 0 60px 0;
+      padding: 56px 0 52px 0;
       border-bottom: 1px solid #E2E8F0;
-    }
-
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
+      gap: 36px;
       align-items: center;
       text-align: left;
     }
@@ -123,23 +117,26 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(226, 232, 240, 0.8);
-      max-width: 440px;
+      box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(226, 232, 240, 0.8);
+      max-width: 340px;
       width: 100%;
       background: #0F172A;
+      margin: 0 auto;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .hero-poster-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 55px -10px rgba(37, 99, 235, 0.25), 0 0 0 1px rgba(37, 99, 235, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 45px -8px rgba(37, 99, 235, 0.22), 0 0 0 1px rgba(37, 99, 235, 0.3);
     }
 
     .hero-poster-img {
       width: 100%;
       height: auto;
+      max-height: 520px;
       display: block;
       border-radius: 20px;
+      object-fit: contain;
     }
 
     .badge-eyebrow {
@@ -228,7 +225,7 @@
     @media (max-width: 991px) {
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 36px;
+        gap: 28px;
         text-align: center;
       }
       .hero-text-side {
@@ -241,12 +238,26 @@
         justify-content: center;
       }
       .hero-poster-card {
-        max-width: 360px;
+        max-width: 280px;
         margin: 0 auto;
       }
     }
 
     /* Modules Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .mentors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
     .module-card {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
@@ -488,21 +499,78 @@
     }
 
     @media (max-width: 768px) {
+      .pro-hero {
+        padding: 44px 0 36px 0;
+      }
       .pro-hero-title {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.22;
       }
       .pro-hero-sub {
-        font-size: 16px;
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+      .fact-chips {
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .fact-chip {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .mentors-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .module-card {
+        padding: 20px 16px;
       }
       .details-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .details-box {
+        padding: 22px 16px;
       }
       .mentor-card {
         flex-direction: column;
         text-align: center;
+        padding: 24px 16px;
+        gap: 16px;
       }
       .enquiry-card {
-        padding: 28px 20px;
+        padding: 24px 18px;
+      }
+      .faq-header {
+        padding: 16px 18px;
+      }
+      .faq-body {
+        padding: 0 18px 16px 18px;
+      }
+      section.page-section {
+        padding: 48px 0 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pro-hero {
+        padding: 32px 0 24px 0;
+      }
+      .pro-hero-title {
+        font-size: 24px;
+      }
+      .pro-hero-sub {
+        font-size: 14px;
+      }
+      .hero-poster-card {
+        max-width: 240px;
+      }
+      section.page-section {
+        padding: 36px 0 !important;
       }
     }
   </style>
@@ -550,7 +618,7 @@
 
   <!-- HERO SECTION -->
   <section class="pro-hero">
-    <div class="hero-container">
+    <div class="container hero-container">
       <div class="hero-grid">
         <div class="hero-text-side">
           <div class="badge-eyebrow">
@@ -595,14 +663,14 @@
   </section>
 
   <!-- WHAT YOU'LL BUILD -->
-  <section style="padding: 80px 0; background: #FFFFFF;">
+  <section class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 48px auto;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">What You'll Build</h2>
         <p style="color: #64748B; font-size: 16px;">Hands-on creation of 4 complete web projects and foundational freelancing skills.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+      <div class="modules-grid">
         <!-- Project 1 -->
         <div class="module-card">
           <div class="module-num">01</div>
@@ -642,7 +710,7 @@
   </section>
 
   <!-- COURSE DETAILS -->
-  <section style="padding: 80px 0; background: #F8FAFC;">
+  <section class="page-section" style="padding: 80px 0; background: #F8FAFC;">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 48px auto;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">Course Details</h2>
@@ -720,14 +788,14 @@
   </section>
 
   <!-- MENTORS SECTION -->
-  <section style="padding: 80px 0; background: #FFFFFF;">
+  <section class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 48px auto;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">Learn from Industry Mentors</h2>
         <p style="color: #64748B; font-size: 16px;">Guidance from experienced engineers and tech specialists.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; max-width: 900px; margin: 0 auto;">
+      <div class="mentors-grid">
         <!-- Saurabh Singhal -->
         <div class="mentor-card">
           <img src="/images/saurabh.jpg" alt="Saurabh Singhal" class="mentor-photo" onerror="this.src='/images/logoai.jpeg'">
@@ -754,7 +822,7 @@
   </section>
 
   <!-- FAQS -->
-  <section id="faq" style="padding: 80px 0; background: #F8FAFC;">
+  <section id="faq" class="page-section" style="padding: 80px 0; background: #F8FAFC;">
     <div class="container" style="max-width: 800px;">
       <div style="text-align: center; margin-bottom: 40px;">
         <h2 style="font-size: 32px; margin-bottom: 12px;">Frequently Asked Questions</h2>
@@ -816,7 +884,7 @@
   </section>
 
   <!-- ENQUIRY FORM SECTION -->
-  <section id="enquiry-form" style="padding: 80px 0; background: #FFFFFF;">
+  <section id="enquiry-form" class="page-section" style="padding: 80px 0; background: #FFFFFF;">
     <div class="container">
       <div class="enquiry-card">
         <div style="text-align: center; margin-bottom: 32px;">
